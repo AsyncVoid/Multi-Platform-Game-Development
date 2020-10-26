@@ -884,6 +884,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 394e3d9fbcb798b49b18d04de0c8ddfb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerStateText: {fileID: 92703997}
+  playerCoolDownText: {fileID: 2038375131}
 --- !u!4 &2102238990
 Transform:
   m_ObjectHideFlags: 0
