@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public float speed;
+    //private Rigidbody2D rb2d; // For 2D models
+    private Rigidbody rb;
 
     private bool Liquified;
     private bool LiquifiedOffCooldown;
@@ -14,6 +17,9 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        rb = GetComponent<Rigidbody> ();
+        //rb2d = GetComponent<Rigidbody2D> ();
+
         Liquified = false;
         LiquifiedLength = 3;
         LiquifiedCooldown = 3;
@@ -30,6 +36,16 @@ public class PlayerController : MonoBehaviour
                 StartCoroutine(TimedStateChange()); 
             }
         }
+    }
+
+    void FixedUpdate() 
+    {
+        float moveHorizontal = Input.GetAxis("Horizontal");
+        float moveVertical = Input.GetAxis("Vertical");
+        Vector3 movement = new Vector3 (moveHorizontal, moveVertical);
+        //rb2d.AddForce(movement*speed);
+        rb.AddForce(movement*speed);
+
     }
 
     private void ChangeLiquidState() 
