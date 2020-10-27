@@ -14,12 +14,12 @@ public class PlayerController : MonoBehaviour
     private int LiquifiedLength;
     private int LiquifiedCooldown;
 
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody> ();
-        //rb2d = GetComponent<Rigidbody2D> ();
-
+        //rb2d = GetComponent<Rigidbody2D> ();        
         Liquified = false;
         LiquifiedLength = 3;
         LiquifiedCooldown = 3;
@@ -75,6 +75,7 @@ public class PlayerController : MonoBehaviour
     public bool ReturnCooldown() {
         return LiquifiedOffCooldown;
     }
+
 }
 
 

@@ -7,9 +7,9 @@ public class GameController : MonoBehaviour
 {
 
     private GameObject player;
-
     public Text playerStateText;
     public Text playerCoolDownText;
+    public Text playerSkillText;
 
 
     // Start is called before the first frame update
@@ -36,5 +36,18 @@ public class GameController : MonoBehaviour
         else {
             playerCoolDownText.text = "Cooldown Active";
         }
+        
+        if (player.GetComponent<Player>().allSkills.Count != 0){
+            List<Skill> currentSkills = player.GetComponent<Player>().allSkills;
+            string skills = "";
+            for(int i = 0;i<currentSkills.Count; i++){
+                skills += currentSkills[i].skillName + " - " + currentSkills[i].skillType + "\n";
+            }
+            playerSkillText.text = skills;
+        }
+        else{
+            playerSkillText.text = "No skills acquired.";
+        }
+
     }
 }
