@@ -5,6 +5,9 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
 
+    private float Speed;
+    private Rigidbody Rb;
+
     private bool Liquified;
     private bool LiquifiedOffCooldown;
 
@@ -14,8 +17,11 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Rb = GetComponent<Rigidbody>();
+        Speed = 5;
+
         Liquified = false;
-        LiquifiedLength = 3;
+        LiquifiedLength = 1;
         LiquifiedCooldown = 3;
         LiquifiedOffCooldown = true;
     }
@@ -29,6 +35,15 @@ public class PlayerController : MonoBehaviour
             {
                 StartCoroutine(TimedStateChange()); 
             }
+        }
+    }
+
+    void FixedUpdate() 
+    {
+        float translation = Input.GetAxis("Horizontal") * Speed;
+
+        if (translation != 0){
+            transform.Translate(translation * Time.deltaTime, 0, 0);
         }
     }
 

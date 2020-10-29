@@ -7,6 +7,7 @@ public class GameController : MonoBehaviour
 {
 
     private GameObject player;
+    public GameObject Entity;
 
     public Text playerStateText;
     public Text playerCoolDownText;
@@ -16,6 +17,7 @@ public class GameController : MonoBehaviour
     void Start()
     {
         player = GameObject.FindWithTag("Player");
+        StartCoroutine(SpawnEntities());
     }
 
     // Update is called once per frame
@@ -35,6 +37,16 @@ public class GameController : MonoBehaviour
         }
         else {
             playerCoolDownText.text = "Cooldown Active";
+        }
+    }
+
+    IEnumerator SpawnEntities() {
+        System.Random rand = new System.Random();
+
+        while (true) {
+            Instantiate(Entity, new Vector3((float)rand.Next(-50, 50), 1f, 0f), Quaternion.identity);
+
+            yield return new WaitForSeconds(3); 
         }
     }
 }
