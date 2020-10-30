@@ -22,8 +22,11 @@ public class SpawnFloorSprite : MonoBehaviour
     }
 
     void OnTriggerExit2D(Collider2D other) {
-        GameObject newFloor = Instantiate(FloorTile, new Vector3(13.5f, -1.5f, 0f), Quaternion.identity);
-        newFloor.GetComponent<TileMovement>().SetSpeed(EnvironmentController.GetMovementSpeed());
+        if (other.gameObject.tag == "Floor")
+        {
+            GameObject newFloor = Instantiate(FloorTile, new Vector3(14.4f, -1.5f, 0f), Quaternion.identity);
+            newFloor.GetComponent<TileMovement>().SetSpeed(EnvironmentController.GetMovementSpeed());
+        }
     }
 
 }
