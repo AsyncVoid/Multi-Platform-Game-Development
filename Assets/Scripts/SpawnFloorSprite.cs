@@ -21,6 +21,8 @@ public class SpawnFloorSprite : MonoBehaviour
         
     }
 
+
+    // When one floor tile leaves, spawn another to replace it. (Continous floor spawning)
     void OnTriggerExit2D(Collider2D other) {
         if (other.gameObject.tag == "Floor")
         {

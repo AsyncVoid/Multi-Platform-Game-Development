@@ -41,6 +41,7 @@ public class EnvironmentController : MonoBehaviour
         return MovementSpeed;
     }
 
+    // Methods for combat scene initiation (Pause scrolling and background gen).
     public void TriggerCombatScene() {
         CombatScene = true;
         MovementSpeed = 0f;
