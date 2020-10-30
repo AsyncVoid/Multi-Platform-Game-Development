@@ -17,7 +17,6 @@ public class GameController : MonoBehaviour
     void Start()
     {
         player = GameObject.FindWithTag("Player");
-        StartCoroutine(SpawnEntities());
     }
 
     // Update is called once per frame
@@ -27,7 +26,8 @@ public class GameController : MonoBehaviour
         {
             playerStateText.text = "State: Liquid";
         }
-        else {
+        else
+        {
             playerStateText.text = "State: Normal";
         }
 
@@ -35,18 +35,10 @@ public class GameController : MonoBehaviour
         {
             playerCoolDownText.text = "Cooldown Inactive";
         }
-        else {
+        else
+        {
             playerCoolDownText.text = "Cooldown Active";
         }
     }
 
-    IEnumerator SpawnEntities() {
-        System.Random rand = new System.Random();
-
-        while (true) {
-            Instantiate(Entity, new Vector3((float)rand.Next(-50, 50), 1f, 0f), Quaternion.identity);
-
-            yield return new WaitForSeconds(3); 
-        }
-    }
 }

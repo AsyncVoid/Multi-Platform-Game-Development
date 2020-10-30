@@ -17,9 +17,6 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Rb = GetComponent<Rigidbody>();
-        Speed = 5;
-
         Liquified = false;
         LiquifiedLength = 1;
         LiquifiedCooldown = 3;
@@ -29,35 +26,31 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown("space")) 
+        if (Input.GetKeyDown("space"))
         {
             if (LiquifiedOffCooldown)
             {
-                StartCoroutine(TimedStateChange()); 
+                StartCoroutine(TimedStateChange());
             }
         }
     }
 
-    void FixedUpdate() 
+    void FixedUpdate()
     {
-        float translation = Input.GetAxis("Horizontal") * Speed;
 
-        if (translation != 0){
-            transform.Translate(translation * Time.deltaTime, 0, 0);
-        }
     }
 
-    private void ChangeLiquidState() 
+    private void ChangeLiquidState()
     {
         Liquified ^= true;
     }
 
-    private void UpdateLiquifiedCooldown() 
+    private void UpdateLiquifiedCooldown()
     {
         LiquifiedOffCooldown ^= true;
     }
 
-    IEnumerator TimedStateChange() 
+    IEnumerator TimedStateChange()
     {
         ChangeLiquidState();
         UpdateLiquifiedCooldown();
@@ -67,13 +60,13 @@ public class PlayerController : MonoBehaviour
         UpdateLiquifiedCooldown();
     }
 
-    public bool ReturnState() {
+    public bool ReturnState()
+    {
         return Liquified;
     }
 
-    public bool ReturnCooldown() {
+    public bool ReturnCooldown()
+    {
         return LiquifiedOffCooldown;
     }
 }
-
-
