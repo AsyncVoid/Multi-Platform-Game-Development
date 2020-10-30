@@ -14,7 +14,7 @@ public class EnvironmentController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        MovementSpeed = 0.5f;
+        MovementSpeed = 0.8f;
         foreach (int value in Enumerable.Range(-10, 24)) {
             Instantiate(FloorTile, new Vector3((float) value + 0.5f, -1.5f, 0f), Quaternion.identity);
         }
@@ -28,5 +28,9 @@ public class EnvironmentController : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public float GetMovementSpeed() {
+        return MovementSpeed;
     }
 }
