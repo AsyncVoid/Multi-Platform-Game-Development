@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FoorGenerator : MonoBehaviour
+public class SpriteRemover : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -14,5 +14,11 @@ public class FoorGenerator : MonoBehaviour
     void Update()
     {
         
+    }
+
+    void OnTriggerEnter2D(Collider2D other) {
+        if (other.gameObject.tag != "Tilemap") { 
+            Destroy(other.gameObject); 
+        }
     }
 }
