@@ -1,37 +1,34 @@
-﻿
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Unit : MonoBehaviour
 {
-    public int maxHP;
-    public int currentHP { get; private set; }
-    public Stat damage;
-    public bool isDead;
+    public string unitName;
+	public int damage;
+	public int maxHP;
+	private int currentHP;
+	public bool isDead;
 
-    void Awake ()
-    {
-        currentHP = maxHP;
-    }
+	void Start(){
+		currentHP = maxHP;
+	}
 
-    public void TakeDamage (int damage)
-    {
-        damage = Mathf.Clamp(damage, 0, int.MaxValue);
-        currentHP -= damage;
-        if(currentHP <= 0)
-        {
-            isDead = true;
-        }
-    }
+	public bool TakeDamage(int dmg)
+	{
+		currentHP -= dmg;
 
-    public void SetMaxHP (int maxHP)
-    {
-        this.maxHP = maxHP;
-    }
+		if (currentHP <= 0){
+			isDead = true;
+            return true;			
+		}
+		else
+			return false;
+	}
 
-    public bool ReturnDeathState() {
-        return isDead;
-    }
-
-
+	public int ReturnHP()
+	{
+		return currentHP;
+	}
 
 }

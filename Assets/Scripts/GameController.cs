@@ -37,8 +37,8 @@ public class GameController : MonoBehaviour
             playerCoolDownText.text = "Cooldown Active";
         }
         
-        if (player.GetComponent<Player>().allSkills.Count != 0){
-            List<Skill> currentSkills = player.GetComponent<Player>().allSkills;
+        if (player.GetComponent<Player>().skills.Count != 0){
+            List<Skill> currentSkills = player.GetComponent<Player>().skills;
             string skills = "";
             for(int i = 0;i<currentSkills.Count; i++){
                 skills += currentSkills[i].skillName + " - " + currentSkills[i].skillType + "\n";

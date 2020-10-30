@@ -1,28 +1,37 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
-    public float speed;
-    //private Rigidbody2D rb2d; // For 2D models
-    private Rigidbody rb;
+
+    private float Speed;
+    private Rigidbody2D rb;
 
     private bool Liquified;
     private bool LiquifiedOffCooldown;
 
     private int LiquifiedLength;
     private int LiquifiedCooldown;
+    public GameObject player;
+    public GameObject entity;
+    private Renderer playerRender;
 
+    public CombatSystem combatSystem; 
+    public CombatState state;
 
     // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody> ();
-        //rb2d = GetComponent<Rigidbody2D> ();        
+        player = GameObject.FindWithTag("Player");
+        playerRender = player.GetComponent<Renderer>();
+        rb = GetComponent<Rigidbody2D>();
+        Speed = 5;
+        
         Liquified = false;
-        LiquifiedLength = 3;
-        LiquifiedCooldown = 3;
+        LiquifiedLength = 2;
+        LiquifiedCooldown = 5;
         LiquifiedOffCooldown = true;
     }
 
@@ -36,16 +45,22 @@ public class PlayerController : MonoBehaviour
                 StartCoroutine(TimedStateChange()); 
             }
         }
+
+        if(ReturnState()){
+            playerRender.material.SetColor("_Color",Color.green);
+        }
+        else{
+            playerRender.material.SetColor("_Color",Color.white);
+        }
     }
 
     void FixedUpdate() 
     {
-        float moveHorizontal = Input.GetAxis("Horizontal");
-        float moveVertical = Input.GetAxis("Vertical");
-        Vector3 movement = new Vector3 (moveHorizontal, moveVertical);
-        //rb2d.AddForce(movement*speed);
-        rb.AddForce(movement*speed);
+        float translation = Input.GetAxis("Horizontal") * Speed;
 
+        if (translation != 0){
+            transform.Translate(translation * Time.deltaTime, 0, 0);
+        }
     }
 
     private void ChangeLiquidState() 
@@ -76,6 +91,23 @@ public class PlayerController : MonoBehaviour
         return LiquifiedOffCooldown;
     }
 
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        CombatSystem combat = combatSystem.GetComponent<CombatSystem>();
+        entity = other.gameObject.gameObject;
+
+        // If player collides with enemy and enemy is dead
+        if(other.gameObject.tag == "Enemy" && entity.GetComponent<Unit>().isDead){
+            if(player.GetComponent<PlayerController>().ReturnState()){
+                Skill skill = entity.GetComponent<Enemy>().ReturnSkill();
+                player.GetComponent<Player>().skills.Add(skill);
+                GameObject.Destroy(entity);  
+            }
+        }
+        else{
+            combat.StartBattle(player.gameObject.GetComponent<Player>(), other.gameObject.GetComponent<Enemy>());
+        }
+
+
+    }
 }
-
-
