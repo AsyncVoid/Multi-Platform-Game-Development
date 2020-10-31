@@ -1,18 +1,28 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D))]
 public class PlayerController : MonoBehaviour
 {
 
     private float Speed;
-    private Rigidbody Rb;
+    private Rigidbody2D rb;
 
     private bool Liquified;
     private bool LiquifiedOffCooldown;
 
     private int LiquifiedLength;
     private int LiquifiedCooldown;
+
+    public Vector3 jump = new Vector2(0.0f, 1.0f);
+    public float jumpForce = 2.0f;
+    public bool isGrounded;
+    private Material material;
+    public float liquidTransparency = 0.2f;
+
+    private Dictionary<Skill, int> skillLevels = new Dictionary<Skill, int>();
 
     // Start is called before the first frame update
     void Start()
@@ -21,6 +31,9 @@ public class PlayerController : MonoBehaviour
         LiquifiedLength = 1;
         LiquifiedCooldown = 3;
         LiquifiedOffCooldown = true;
+        rb = GetComponent<Rigidbody2D>();
+        rb.freezeRotation = true;
+        material = GetComponent<SpriteRenderer>().material;
     }
 
     // Update is called once per frame
@@ -33,6 +46,11 @@ public class PlayerController : MonoBehaviour
                 StartCoroutine(TimedStateChange());
             }
         }
+        if ((Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W)) && isGrounded)
+        {
+            rb.AddForce(jump * jumpForce, ForceMode2D.Impulse);
+            isGrounded = false;
+        }
     }
 
     void FixedUpdate()
@@ -43,6 +61,12 @@ public class PlayerController : MonoBehaviour
     private void ChangeLiquidState()
     {
         Liquified ^= true;
+        Color color = material.color;
+        if (Liquified)
+            color.a = liquidTransparency;
+        else
+            color.a = 1.0f;
+        material.color = color;
     }
 
     private void UpdateLiquifiedCooldown()
@@ -68,5 +92,10 @@ public class PlayerController : MonoBehaviour
     public bool ReturnCooldown()
     {
         return LiquifiedOffCooldown;
+    }
+
+    public void OnCollisionStay2D()
+    {
+        isGrounded = true;
     }
 }
