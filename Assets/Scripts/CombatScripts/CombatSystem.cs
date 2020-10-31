@@ -92,7 +92,6 @@ public class CombatSystem : MonoBehaviour
             enemy.isDead = true;
             state = CombatState.Won;
             enemy.tag = "Untagged";
-            enemy.transform.rotation = new Quaternion(0f, 90f, 0f, 0f);
             StartCoroutine(EndBattle());
         }
         else
