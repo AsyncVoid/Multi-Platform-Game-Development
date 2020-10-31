@@ -26,6 +26,10 @@ public class EntityController : MonoBehaviour
         }
 
         if (collision.gameObject.GetComponent<PlayerController>().ReturnState()) {
+            Player player = collision.gameObject.GetComponent<Player>();
+            Enemy enemy = gameObject.GetComponent<Enemy>();
+            if(!player.skills.Contains(enemy.ReturnSkill()))
+                player.skills.Add(enemy.ReturnSkill());
             StartCoroutine(EntityEaten());
         }
     }

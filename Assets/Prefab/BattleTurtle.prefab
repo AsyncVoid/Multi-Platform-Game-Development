@@ -194,3 +194,4 @@ MonoBehaviour:
   damage: 5
   maxHP: 50
   isDead: 0
+  enemySkill: {fileID: 11400000, guid: ffd6cc8b5e1f747af86819cacb79f808, type: 2}

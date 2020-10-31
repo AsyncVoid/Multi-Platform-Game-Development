@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public enum CombatState { Start, PlayerTurn, EnemyTurn, Won, Lost }
 public class CombatSystem : MonoBehaviour
@@ -15,8 +16,9 @@ public class CombatSystem : MonoBehaviour
     public CombatState state;
     public Text dialogueText;
     public GameObject combatHUD;
-    public Button AttackButton;
-    public Button PlayerSkill;
+    public GameObject attackButton;
+    public GameObject[] skillButtons;
+    private int numSkills = 4;
 
     private EnvironmentController EnvironmentController;
 
@@ -35,6 +37,14 @@ public class CombatSystem : MonoBehaviour
         StartCoroutine(SetupCombat());
 
     }
+    public void SetSkills(List<Skill> skills) {
+        skillButtons = GameObject.FindGameObjectsWithTag("Skill");
+        for(int i =0;i<player.skills.Count; i++){
+            skillButtons[i].GetComponent<Image>().sprite = player.skills[i].skillSprite;
+            skillButtons[i].GetComponent<Image>().color = Color.white;
+            skillButtons[i].GetComponent<SkillButton>().skill = player.skills[i];
+        }
+    }
 
     IEnumerator SetupCombat()
     {
@@ -46,8 +56,9 @@ public class CombatSystem : MonoBehaviour
 
         playerHealth.SetHUD(player);
         enemyHealth.SetHUD(enemy);
+        SetSkills(player.skills);
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
 
         state = CombatState.PlayerTurn; // Start player turn
         PlayerTurn();
@@ -56,7 +67,6 @@ public class CombatSystem : MonoBehaviour
     void PlayerTurn()
     {
         dialogueText.text = "Player's turn: Choose an action!";
-        AttackButton.onClick.AddListener(OnAttackButton);
     }
 
     public void OnAttackButton()
@@ -67,17 +77,6 @@ public class CombatSystem : MonoBehaviour
         StartCoroutine(PlayerAttack());
     }
 
-    public void OnSkillButton()
-    {
-        int numSkills = player.skills.Count;
-
-        if (numSkills == 0)
-            dialogueText.text = "You have not acquired any skills.";
-        else
-        {
-        }
-    }
-
     IEnumerator PlayerAttack()
     {
         bool isDead = enemy.TakeDamage(player.damage);
@@ -85,7 +84,41 @@ public class CombatSystem : MonoBehaviour
         enemyHealth.SetHP(enemy.ReturnHP());
         dialogueText.text = player.unitName + " has attacked " + enemy.unitName;
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
+
+        if (isDead)
+        {
+            enemy.isDead = true;
+            state = CombatState.Won;
+            enemy.tag = "Untagged";
+            StartCoroutine(EndBattle());
+        }
+        else
+        {
+            state = CombatState.EnemyTurn;
+            StartCoroutine(EnemyTurn());
+        }
+    }
+
+    public void OnSkillButton()
+    {
+        if (state != CombatState.PlayerTurn)
+            return;
+        
+        StartCoroutine(PlayerSkill());
+
+    }
+
+    IEnumerator PlayerSkill()
+    {
+        SkillButton buttonClicked = EventSystem.current.currentSelectedGameObject.GetComponent<SkillButton>();
+        Skill skillUsed = buttonClicked.skill;
+
+        bool isDead = enemy.TakeDamage(skillUsed.skillDamage);
+        enemyHealth.SetHP(enemy.ReturnHP());
+        dialogueText.text = player.unitName + " used " + skillUsed.skillName + " on " + enemy.unitName;
+
+        yield return new WaitForSeconds(1f);
 
         if (isDead)
         {
@@ -133,7 +166,7 @@ public class CombatSystem : MonoBehaviour
         else if (state == CombatState.Lost)
             dialogueText.text = "You have been defeated";
 
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(1f);
 
 
         combatHUD.gameObject.SetActive(false);
