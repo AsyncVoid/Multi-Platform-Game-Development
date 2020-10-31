@@ -190,7 +190,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 989a03c10bfe70a4685eb8ab0a74a830, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unitName: 
-  damage: 0
-  maxHP: 0
+  unitName: Battle Turtle
+  damage: 1
+  maxHP: 3
   isDead: 0

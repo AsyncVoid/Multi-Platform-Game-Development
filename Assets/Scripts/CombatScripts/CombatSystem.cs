@@ -44,13 +44,10 @@ public class CombatSystem : MonoBehaviour
         playerHealth.SetHUD(player);
         enemyHealth.SetHUD(enemy);
 
-        enemy.transform.position = new Vector3(9.5f, -0.5f, 0);
-
         yield return new WaitForSeconds(2f);
 
         state = CombatState.PlayerTurn; // Start player turn
         PlayerTurn();
-
     }
 
     void PlayerTurn()
@@ -133,6 +130,7 @@ public class CombatSystem : MonoBehaviour
             dialogueText.text = "You have been defeated";
         combatHUD.gameObject.SetActive(false);
         player.GetComponent<PlayerController>().enabled = true;
+
     }
 
 }

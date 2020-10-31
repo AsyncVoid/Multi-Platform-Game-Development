@@ -18,7 +18,7 @@ public class EnvironmentController : MonoBehaviour
     private void OnEnable()
     {
         CombatScene = false;
-        InitialMovementSpeed = 0.8f;
+        InitialMovementSpeed = 1f;
         MovementSpeed = InitialMovementSpeed;
     }
 

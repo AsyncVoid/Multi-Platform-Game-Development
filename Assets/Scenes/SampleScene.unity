@@ -838,7 +838,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -250, y: 17}
+  m_AnchoredPosition: {x: -451, y: -57}
   m_SizeDelta: {x: 125, y: 10}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &406477788
@@ -903,7 +903,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f47c3b7f66e7b0c4c8b99b8a63dadb06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hpSlider: {fileID: 0}
+  hpSlider: {fileID: 1325975251373845817, guid: ffbeba88c78156341983392e5ce65688, type: 3}
 --- !u!1 &468359787
 GameObject:
   m_ObjectHideFlags: 0
@@ -1111,7 +1111,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SpawnPosition: {x: 13, y: 4, z: 0}
-  StandardTime: 5
+  StandardTime: 10
   RedGem: {fileID: 7784451606173225095, guid: 5292c078b439f914c80f517059b47e74, type: 3}
   BattleTurtle: {fileID: 989240728673969276, guid: a281eb5f194d8034c818ef1b0883c396, type: 3}
 --- !u!4 &609368488
@@ -1176,7 +1176,7 @@ TilemapCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_MaximumTileChangeCount: 5
+  m_MaximumTileChangeCount: 50
   m_ExtrusionFactor: 0.00001
 --- !u!483693784 &652619242
 TilemapRenderer:
@@ -1350,7 +1350,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 250, y: 17}
+  m_AnchoredPosition: {x: 285, y: -57}
   m_SizeDelta: {x: 125, y: 10}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &748574297
@@ -1415,7 +1415,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f47c3b7f66e7b0c4c8b99b8a63dadb06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hpSlider: {fileID: 0}
+  hpSlider: {fileID: 7149736228277689664, guid: fe3555762cea8f44ba6c89653cf06fe5, type: 3}
 --- !u!1 &771929472
 GameObject:
   m_ObjectHideFlags: 0
@@ -1895,7 +1895,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1391970013}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.39, y: -0.38, z: 0}
+  m_LocalPosition: {x: -8, y: -0.35, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1978,7 +1978,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9481e86640ed6243aac8f6026979955, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unitName: 
+  unitName: Slime
   damage: 1
   maxHP: 5
   isDead: 0
@@ -2284,7 +2284,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -250, y: 200}
+  m_AnchoredPosition: {x: -304, y: 115}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1828148573
@@ -2329,7 +2329,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1828148574}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 11500000, guid: 994412f8abe6b024095d95feb9ee5f75, type: 3}
+        m_TargetAssemblyTypeName: UnityEngine.Object, UnityEngine
+        m_MethodName: set_name
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: OnAttackButton
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1828148574
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2405,8 +2417,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 481, y: 272}
-  m_SizeDelta: {x: 962, y: 544}
+  m_AnchoredPosition: {x: 553.5, y: 278.5}
+  m_SizeDelta: {x: 1107, y: 557}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1868451408
 MonoBehaviour:
