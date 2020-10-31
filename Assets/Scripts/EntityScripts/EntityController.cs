@@ -22,7 +22,8 @@ public class EntityController : MonoBehaviour
     void OnCollisionEnter2D(Collision2D collision) {
         if (collision.gameObject.tag != "Player") { return; }
         else {
-            GetComponent<Rigidbody2D>().simulated = false; 
+            GetComponent<Rigidbody2D>().isKinematic = true;
+            GetComponent<Collider2D>().isTrigger = true;
         }
 
         if (collision.gameObject.GetComponent<PlayerController>().ReturnState()) {
@@ -30,13 +31,26 @@ public class EntityController : MonoBehaviour
         }
     }
 
-    IEnumerator EntityEaten() {
-        ItemVelocity = new Vector3(-0.2f, 0, 0);
+    void OnTriggerExit2D(Collider2D collider) {
+        if (collider.gameObject.tag != "Player") { return; }
+        else {
+            GetComponent<Rigidbody2D>().isKinematic = false;
+            GetComponent<Collider2D>().isTrigger = false;
+        }
+    }
 
-        while (transform.localScale.x > 0.45f)
+    IEnumerator EntityEaten() {
+        ItemVelocity = new Vector3(0f, 0f, 0f);
+
+        float timeElapsed = 0f;
+        float time = 2f;
+
+        while (timeElapsed < time)
         {
+            timeElapsed += Time.deltaTime;
+            transform.position = Vector3.Lerp(transform.position, GameObject.FindWithTag("Player").transform.position, timeElapsed / time);
             transform.localScale -= new Vector3(0.9f, 0.9f, 0.9f) * Time.deltaTime;
-            yield return new WaitForSeconds(0.01f);
+            yield return null;
         }
         yield return new WaitForSeconds(0.5f);
 

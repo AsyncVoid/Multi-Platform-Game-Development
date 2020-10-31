@@ -17,8 +17,6 @@ public class SpriteRemover : MonoBehaviour
     }
 
     void OnTriggerEnter2D(Collider2D other) {
-        if (other.gameObject.tag != "Tilemap") { 
-            Destroy(other.gameObject); 
-        }
+        Destroy(other.gameObject); 
     }
 }

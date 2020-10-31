@@ -92,6 +92,7 @@ public class CombatSystem : MonoBehaviour
             enemy.isDead = true;
             state = CombatState.Won;
             enemy.tag = "Untagged";
+            enemy.GetComponent<Animator>().Play("Base Layer.Death Animation");
             StartCoroutine(EndBattle());
         }
         else

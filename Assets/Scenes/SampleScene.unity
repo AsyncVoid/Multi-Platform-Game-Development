@@ -933,7 +933,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SpawnPosition: {x: 13, y: 4, z: 0}
-  StandardTime: 10
+  StandardTime: 5
   RedGem: {fileID: 7784451606173225095, guid: 5292c078b439f914c80f517059b47e74, type: 3}
   BattleTurtle: {fileID: 989240728673969276, guid: a281eb5f194d8034c818ef1b0883c396, type: 3}
 --- !u!4 &609368488
