@@ -29,7 +29,7 @@ public class EntitySpawner : MonoBehaviour
             {
                 timePassed = 0f;
                 float value = Random.Range(0f, 10f);
-                if (value < 2f)
+                if (value < 10f)
                 {
                     Instantiate(BattleTurtle, SpawnPosition, Quaternion.identity);
                 }

@@ -17,7 +17,6 @@ public class EnvironmentController : MonoBehaviour
 
     private void OnEnable()
     {
-        CombatScene = false;
         InitialMovementSpeed = 1f;
         MovementSpeed = InitialMovementSpeed;
     }
@@ -25,6 +24,7 @@ public class EnvironmentController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        CombatScene = false;
         CombatSystem = GameObject.FindWithTag("CombatSystem");
         Player = GameObject.FindWithTag("Player");
 

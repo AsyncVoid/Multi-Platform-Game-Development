@@ -18,9 +18,12 @@ public class CombatSystem : MonoBehaviour
     public Button AttackButton;
     public Button PlayerSkill;
 
+    private EnvironmentController EnvironmentController;
+
     void Start()
     {
         combatHUD.gameObject.SetActive(false);
+        EnvironmentController = GameObject.FindWithTag("EnvironmentController").GetComponent<EnvironmentController>();
     }
 
     public void StartBattle(Player player, Enemy enemy)
@@ -88,7 +91,9 @@ public class CombatSystem : MonoBehaviour
         {
             enemy.isDead = true;
             state = CombatState.Won;
-            EndBattle();
+            enemy.tag = "Untagged";
+            enemy.transform.rotation = new Quaternion(0f, 90f, 0f, 0f);
+            StartCoroutine(EndBattle());
         }
         else
         {
@@ -111,7 +116,7 @@ public class CombatSystem : MonoBehaviour
         if (isDead)
         {
             state = CombatState.Lost;
-            EndBattle();
+            StartCoroutine(EndBattle());
         }
         else
         {
@@ -122,14 +127,21 @@ public class CombatSystem : MonoBehaviour
     }
 
 
-    void EndBattle()
+    IEnumerator EndBattle()
     {
         if (state == CombatState.Won)
             dialogueText.text = "You've defeated the " + enemy.unitName;
         else if (state == CombatState.Lost)
             dialogueText.text = "You have been defeated";
+
+        yield return new WaitForSeconds(3f);
+
+
         combatHUD.gameObject.SetActive(false);
+
         player.GetComponent<PlayerController>().enabled = true;
+
+        EnvironmentController.EndCombatScene();
 
     }
 

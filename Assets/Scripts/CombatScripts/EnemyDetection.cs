@@ -19,9 +19,12 @@ public class EnemyDetection : MonoBehaviour
     {
         Vector3 distance = transform.position - player.transform.position;
 
-        if (distance.magnitude < 15 && !environmentController.GetComponent<EnvironmentController>().GetIsCombatScene())
+        if (!environmentController.GetComponent<EnvironmentController>().GetIsCombatScene() && gameObject.tag == "Enemy")
         {
-            environmentController.TriggerCombatScene(gameObject);
+            if (distance.magnitude < 15)
+            {
+                environmentController.TriggerCombatScene(gameObject);
+            }
         }
     }
 }
