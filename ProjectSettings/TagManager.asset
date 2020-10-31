@@ -9,6 +9,9 @@ TagManager:
   - Tilemap
   - CombatSystem
   - Enemy
+  - Combat
+  - SkillSlot
+  - Skill
   layers:
   - Default
   - TransparentFX

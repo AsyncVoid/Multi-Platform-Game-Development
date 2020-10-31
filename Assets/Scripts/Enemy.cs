@@ -4,12 +4,7 @@ using UnityEngine;
 
 public class Enemy : Unit
 {
-    private Skill enemySkill;
-    void Awake()
-    {
-        // Filler skill
-        enemySkill = new Skill("Fire", SkillType.Magical);
-    }
+    public Skill enemySkill;
 
     public Skill ReturnSkill()
     {
