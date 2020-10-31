@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EntityMovement : MonoBehaviour
+public class EntityController : MonoBehaviour
 {
     private float Speed;
     private Vector3 ItemVelocity;
@@ -62,6 +62,14 @@ public class EntityMovement : MonoBehaviour
     public void RestoreEntityMovement()
     {
         ItemVelocity = new Vector3(-1 * Speed, 0, 0);
+    }
+
+    public void DisableCollisions() {
+        GetComponent<Rigidbody2D>().simulated = false;
+    }
+
+    public void RestoreCollisions() {
+        GetComponent<Rigidbody2D>().simulated = true;
     }
 
 }
