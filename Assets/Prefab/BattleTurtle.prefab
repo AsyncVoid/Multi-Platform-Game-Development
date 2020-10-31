@@ -191,6 +191,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitName: Battle Turtle
-  damage: 1
-  maxHP: 3
+  damage: 5
+  maxHP: 50
   isDead: 0
