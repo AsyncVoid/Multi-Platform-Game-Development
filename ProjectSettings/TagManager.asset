@@ -7,6 +7,8 @@ TagManager:
   - Floor
   - EnvironmentController
   - Tilemap
+  - CombatSystem
+  - Enemy
   layers:
   - Default
   - TransparentFX
