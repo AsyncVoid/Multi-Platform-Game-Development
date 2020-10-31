@@ -26,11 +26,14 @@ public class EntityController : MonoBehaviour
             GetComponent<Collider2D>().isTrigger = true;
         }
 
-        if (collision.gameObject.GetComponent<PlayerController>().ReturnState()) {
+        if (collision.gameObject.GetComponent<PlayerController>().ReturnState() && gameObject.GetComponent<Enemy>()) {
             Player player = collision.gameObject.GetComponent<Player>();
             Enemy enemy = gameObject.GetComponent<Enemy>();
-            if(!player.skills.Contains(enemy.ReturnSkill()))
+            if (!player.skills.Contains(enemy.ReturnSkill()))
                 player.skills.Add(enemy.ReturnSkill());
+            StartCoroutine(EntityEaten());
+        }
+        else if (collision.gameObject.GetComponent<PlayerController>().ReturnState()) {
             StartCoroutine(EntityEaten());
         }
     }
