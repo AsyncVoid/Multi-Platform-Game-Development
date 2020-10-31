@@ -18,10 +18,10 @@ public class EnemyDetection : MonoBehaviour
     void Update()
     {
         Vector3 distance = transform.position - player.transform.position;
-        //Debug.Log("Distance: " + distance.magnitude);
+
         if (distance.magnitude < 15)
         {
-            environmentController.TriggerCombatScene();
+            environmentController.TriggerCombatScene(gameObject);
         }
     }
 }

@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 989240728673969216}
   - component: {fileID: 989240728673969222}
   - component: {fileID: 989240728673969223}
+  - component: {fileID: 3846963806940091536}
   m_Layer: 0
   m_Name: BattleTurtle
   m_TagString: Enemy
@@ -177,3 +178,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bb8061cbc184cc44a3c300d5a1d569d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3846963806940091536
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 989240728673969276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 989a03c10bfe70a4685eb8ab0a74a830, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unitName: 
+  damage: 0
+  maxHP: 0
+  isDead: 0

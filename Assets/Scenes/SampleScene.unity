@@ -1809,6 +1809,7 @@ GameObject:
   - component: {fileID: 1391970018}
   - component: {fileID: 1391970019}
   - component: {fileID: 1391970020}
+  - component: {fileID: 1391970021}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1965,6 +1966,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 985b11d9a1ebc5d47bfc1c4e6edf544c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1391970021
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1391970013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9481e86640ed6243aac8f6026979955, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unitName: 
+  damage: 1
+  maxHP: 5
+  isDead: 0
+  skills: []
 --- !u!1 &1403771597
 GameObject:
   m_ObjectHideFlags: 0
@@ -3834,12 +3852,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 994412f8abe6b024095d95feb9ee5f75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerHealth: {fileID: 0}
-  enemyHealth: {fileID: 0}
+  playerHealth: {fileID: 406477789}
+  enemyHealth: {fileID: 748574298}
   state: 0
-  dialogueText: {fileID: 0}
+  dialogueText: {fileID: 1209093266}
   combatHUD: {fileID: 2042284946}
-  AttackButton: {fileID: 0}
+  AttackButton: {fileID: 1828148573}
   PlayerSkill: {fileID: 0}
 --- !u!4 &2096711136
 Transform:

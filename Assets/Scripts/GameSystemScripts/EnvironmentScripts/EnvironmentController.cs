@@ -12,6 +12,8 @@ public class EnvironmentController : MonoBehaviour
     private List<GameObject> InitialFloorTiles;
 
     private bool CombatScene;
+    private GameObject CombatSystem;
+    private GameObject Player;
 
     private void OnEnable()
     {
@@ -23,6 +25,9 @@ public class EnvironmentController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        CombatSystem = GameObject.FindWithTag("CombatSystem");
+        Player = GameObject.FindWithTag("Player");
+
         // Create initial floor tiles.
         foreach (int value in Enumerable.Range(-10, 24)) {
             Instantiate(FloorTile, new Vector3((float) value + 0.5f, -1.5f, 0f), Quaternion.identity);
@@ -46,20 +51,23 @@ public class EnvironmentController : MonoBehaviour
     }
 
     // Methods for combat scene initiation (Pause scrolling and background gen).
-    public void TriggerCombatScene() {
+    public void TriggerCombatScene(GameObject enemy) {
         CombatScene = true;
         MovementSpeed = 0f;
 
-        /*foreach (GameObject floorTile in GameObject.FindGameObjectsWithTag("Floor")) {
-            floorTile.GetComponent<TileMovement>().HaltTileMovement();
-        }*/
+        CombatSystem combat = CombatSystem.GetComponent<CombatSystem>();
+        combat.StartBattle(Player.GetComponent<Player>(), enemy.GetComponent<Enemy>());
+
         foreach (TileMovement tileMovement in Object.FindObjectsOfType<TileMovement>()) {
             tileMovement.HaltTileMovement();
         }
+
         foreach (EntityController entityController in Object.FindObjectsOfType<EntityController>())
         {
             entityController.HaltEntityMovement();
-            entityController.DisableCollisions();
+            if (entityController.tag != "Enemy") { 
+                entityController.DisableCollisions();
+            }
         }
 
     }
@@ -68,10 +76,6 @@ public class EnvironmentController : MonoBehaviour
         CombatScene = false;
         MovementSpeed = InitialMovementSpeed;
 
-        /*foreach (GameObject floorTile in GameObject.FindGameObjectsWithTag("Floor"))
-        {
-            floorTile.GetComponent<TileMovement>().RestoreTileMovement();
-        }*/
 
         foreach (TileMovement tileMovement in Object.FindObjectsOfType<TileMovement>())
         {
