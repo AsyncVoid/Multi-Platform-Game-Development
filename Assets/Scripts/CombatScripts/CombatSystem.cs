@@ -18,7 +18,6 @@ public class CombatSystem : MonoBehaviour
     public GameObject combatHUD;
     public GameObject attackButton;
     public GameObject[] skillButtons;
-    private int numSkills = 4;
 
     private EnvironmentController EnvironmentController;
 
