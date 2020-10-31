@@ -56,7 +56,9 @@ public class EntityController : MonoBehaviour
         {
             timeElapsed += Time.deltaTime;
             transform.position = Vector3.Lerp(transform.position, GameObject.FindWithTag("Player").transform.position, timeElapsed / time);
-            transform.localScale -= new Vector3(0.9f, 0.9f, 0.9f) * Time.deltaTime;
+            if (transform.localScale.x > 0.25f) { 
+                transform.localScale -= new Vector3(0.9f, 0.9f, 0.9f) * Time.deltaTime; 
+            }
             yield return null;
         }
         yield return new WaitForSeconds(0.5f);
