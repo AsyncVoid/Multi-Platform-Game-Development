@@ -58,7 +58,7 @@ public class EnvironmentController : MonoBehaviour
         }
         foreach (EntityMovement entityMovement in Object.FindObjectsOfType<EntityMovement>())
         {
-            entityMovement.HaltTileMovement();
+            entityMovement.HaltEntityMovement();
         }
 
     }
@@ -78,7 +78,7 @@ public class EnvironmentController : MonoBehaviour
         }
         foreach (EntityMovement entityMovement in Object.FindObjectsOfType<EntityMovement>())
         {
-            entityMovement.RestoreTileMovement();
+            entityMovement.RestoreEntityMovement();
         }
     }
 
