@@ -14,7 +14,7 @@ public class TileMovement : MonoBehaviour
         TileVelocity = new Vector3(-1 * Speed, 0, 0);
     }
 
-    // Update is called once per frame
+    // Moves the sprite.
     void FixedUpdate()
     {
         transform.position += TileVelocity * Time.deltaTime;

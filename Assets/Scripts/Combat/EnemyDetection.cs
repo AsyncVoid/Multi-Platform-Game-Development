@@ -20,6 +20,7 @@ public class EnemyDetection : MonoBehaviour
     {
         Vector3 distance = transform.position - player.transform.position;
 
+        // Detects alive enemies on screen to initiate combat sequence.
         if (!environmentController.GetComponent<EnvironmentController>().GetIsCombatScene() && gameObject.tag == "Enemy")
         {
             if (distance.magnitude < 15)

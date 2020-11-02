@@ -7,6 +7,7 @@ public class HealthBar : MonoBehaviour
 {
 	public Slider hpSlider;
 
+	// Sets the Healthbar UI with the unit's health values.
 	public void SetHUD(Unit unit)
 	{
 		hpSlider.maxValue = unit.maxHP;

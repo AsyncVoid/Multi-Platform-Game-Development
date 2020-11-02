@@ -7,8 +7,6 @@ using UnityEngine.EventSystems;
 public enum CombatState { Start, PlayerTurn, EnemyTurn, Won, Lost }
 public class CombatSystem : MonoBehaviour
 {
-    //public Transform playerTransform;
-    //public Transform enemyTransform;
     Player player;
     Enemy enemy;
     public HealthBar playerHealth;
@@ -34,8 +32,8 @@ public class CombatSystem : MonoBehaviour
         player.GetComponent<PlayerController>().enabled = false;
         state = CombatState.Start;
         StartCoroutine(SetupCombat());
-
     }
+
     public void SetSkills(List<Skill> skills) {
         skillButtons = GameObject.FindGameObjectsWithTag("Skill");
         for(int i =0;i<player.skills.Count; i++){
@@ -70,6 +68,7 @@ public class CombatSystem : MonoBehaviour
 
     public void OnAttackButton()
     {
+        // Only allows attacks to go through on a player turn.
         if (state != CombatState.PlayerTurn)
             return;
 
@@ -85,6 +84,7 @@ public class CombatSystem : MonoBehaviour
 
         yield return new WaitForSeconds(1f);
 
+        // Checks for enemy death on hit.
         if (isDead)
         {
             enemy.isDead = true;
@@ -120,6 +120,7 @@ public class CombatSystem : MonoBehaviour
 
         yield return new WaitForSeconds(1f);
 
+        // Checks for enemy death oh hit.
         if (isDead)
         {
             enemy.isDead = true;
@@ -146,6 +147,7 @@ public class CombatSystem : MonoBehaviour
 
         yield return new WaitForSeconds(1f);
 
+        // Checks for player death.
         if (isDead)
         {
             state = CombatState.Lost;

@@ -22,6 +22,7 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        // Update debug UI texts.
         if (player.GetComponent<PlayerController>().ReturnState())
         {
             playerStateText.text = "State: Liquid";

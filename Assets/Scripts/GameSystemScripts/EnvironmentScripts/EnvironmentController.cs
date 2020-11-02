@@ -39,12 +39,6 @@ public class EnvironmentController : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     // Returns movement speed.
     public float GetMovementSpeed() {
         return MovementSpeed;
@@ -66,12 +60,14 @@ public class EnvironmentController : MonoBehaviour
         {
             entityController.HaltEntityMovement();
             if (entityController.tag != "Enemy") { 
+                // Ensures items on the floor do not interfere with combat.
                 entityController.DisableCollisions();
             }
         }
 
     }
 
+    // Method to reenable scrolling and ending of combat scene.
     public void EndCombatScene() {
         CombatScene = false;
         MovementSpeed = InitialMovementSpeed;

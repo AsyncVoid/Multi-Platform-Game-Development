@@ -15,6 +15,7 @@ public class Unit : MonoBehaviour
 		currentHP = maxHP;
 	}
 
+	// Unit health removal function.
 	public bool TakeDamage(int dmg)
 	{
 		currentHP -= dmg;

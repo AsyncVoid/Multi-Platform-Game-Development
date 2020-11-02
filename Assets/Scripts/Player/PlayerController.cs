@@ -39,6 +39,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Check for keyboard inputs and assign the correct player movements and state changes.
         if (Input.GetKeyDown("space"))
         {
             if (LiquifiedOffCooldown)
@@ -46,6 +47,7 @@ public class PlayerController : MonoBehaviour
                 StartCoroutine(TimedStateChange());
             }
         }
+
         if ((Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W)) && isGrounded)
         {
             rb.AddForce(jump * jumpForce, ForceMode2D.Impulse);
@@ -53,11 +55,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void FixedUpdate()
-    {
-
-    }
-
+    // Switch between Liquidfied and Non Liquified state.
     private void ChangeLiquidState()
     {
         Liquified ^= true;
@@ -69,11 +67,13 @@ public class PlayerController : MonoBehaviour
         material.color = color;
     }
 
+    // Activate / Deactivate Engulf cooldowns.
     private void UpdateLiquifiedCooldown()
     {
         LiquifiedOffCooldown ^= true;
     }
 
+    // Applies state changes and cooldowns.
     IEnumerator TimedStateChange()
     {
         ChangeLiquidState();
@@ -94,6 +94,7 @@ public class PlayerController : MonoBehaviour
         return LiquifiedOffCooldown;
     }
 
+    // Check for player on ground.
     public void OnCollisionStay2D()
     {
         isGrounded = true;

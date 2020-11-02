@@ -21,10 +21,14 @@ public class EntitySpawner : MonoBehaviour
 
     private void FixedUpdate()
     {
+
+        // Checks if player is in combat.
         if (!EnvironmentController.GetIsCombatScene())
         {
 
             timePassed += Time.deltaTime;
+
+            // Spawns new entity in accordance to time passed and rng values.
             if (timePassed > StandardTime)
             {
                 timePassed = 0f;
@@ -42,9 +46,4 @@ public class EntitySpawner : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

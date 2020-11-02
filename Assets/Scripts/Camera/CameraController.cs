@@ -24,6 +24,7 @@ public class CameraController : MonoBehaviour
         
     }
 
+    // Camera tracks player;
     private void LateUpdate()
     {
         cameraTransform.position = playerTransform.position + offset;
