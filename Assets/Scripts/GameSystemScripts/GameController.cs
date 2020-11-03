@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,12 +12,15 @@ public class GameController : MonoBehaviour
 
     public Text playerStateText;
     public Text playerCoolDownText;
+    public Text playerSkillsText;
 
+    private Player playerComponent;
 
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.FindWithTag("Player");
+        playerComponent = player.GetComponent<Player>();
     }
 
     // Update is called once per frame
@@ -40,6 +44,16 @@ public class GameController : MonoBehaviour
         {
             playerCoolDownText.text = "Cooldown Active";
         }
+
+        StringBuilder sb = new StringBuilder();
+        sb.Append("Skills: { ");
+        foreach(Skill skill in playerComponent.skills)
+        {
+            sb.Append(skill.skillName + ", ");
+        }
+        sb.Remove(sb.Length - 2, 2);
+        sb.Append(" }");
+        playerSkillsText.text = sb.ToString();
     }
 
 }
