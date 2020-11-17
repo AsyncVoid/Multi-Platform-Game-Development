@@ -27,16 +27,6 @@ public class EnvironmentController : MonoBehaviour
         CombatScene = false;
         CombatSystem = GameObject.FindWithTag("CombatSystem");
         Player = GameObject.FindWithTag("Player");
-
-        // Create initial floor tiles.
-        foreach (int value in Enumerable.Range(-10, 24)) {
-            Instantiate(FloorTile, new Vector3((float) value + 0.5f, -1.5f, 0f), Quaternion.identity);
-        }
-
-        // Give them movement speed to allow them to scroll.
-        foreach (GameObject floorTile in GameObject.FindGameObjectsWithTag("Floor")) {
-            floorTile.GetComponent<TileMovement>().SetSpeed(MovementSpeed);
-        }
     }
 
     // Returns movement speed.

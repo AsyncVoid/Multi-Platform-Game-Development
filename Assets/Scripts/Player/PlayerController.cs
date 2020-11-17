@@ -6,8 +6,6 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerController : MonoBehaviour
 {
-
-    private float Speed;
     private Rigidbody2D rb;
 
     private bool Liquified;
@@ -19,6 +17,11 @@ public class PlayerController : MonoBehaviour
     public Vector3 jump = new Vector2(0.0f, 1.0f);
     public float jumpForce = 2.0f;
     public bool isGrounded;
+    public bool isFacingRight;
+
+    public float playerMovementSpeed;
+    private float horizontalMovement = 0.0f;
+
     private Material material;
     public float liquidTransparency = 0.2f;
 
@@ -31,7 +34,10 @@ public class PlayerController : MonoBehaviour
         LiquifiedLength = 1;
         LiquifiedCooldown = 3;
         LiquifiedOffCooldown = true;
+
         rb = GetComponent<Rigidbody2D>();
+        playerMovementSpeed = 5f;
+
         rb.freezeRotation = true;
         material = GetComponent<SpriteRenderer>().material;
     }
@@ -53,6 +59,14 @@ public class PlayerController : MonoBehaviour
             rb.AddForce(jump * jumpForce, ForceMode2D.Impulse);
             isGrounded = false;
         }
+
+        horizontalMovement = Input.GetAxis("Horizontal");
+
+        if (horizontalMovement != 0) 
+        {
+            rb.velocity = new Vector2(horizontalMovement * playerMovementSpeed, rb.velocity.y);
+        }
+
     }
 
     // Switch between Liquidfied and Non Liquified state.
