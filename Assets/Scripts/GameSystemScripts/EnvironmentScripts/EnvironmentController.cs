@@ -34,46 +34,6 @@ public class EnvironmentController : MonoBehaviour
         return MovementSpeed;
     }
 
-    // Methods for combat scene initiation (Pause scrolling and background gen).
-    public void TriggerCombatScene(GameObject enemy) {
-        CombatScene = true;
-        MovementSpeed = 0f;
-
-        CombatSystem combat = CombatSystem.GetComponent<CombatSystem>();
-        combat.StartBattle(Player.GetComponent<Player>(), enemy.GetComponent<Enemy>());
-
-        foreach (TileMovement tileMovement in Object.FindObjectsOfType<TileMovement>()) {
-            tileMovement.HaltTileMovement();
-        }
-
-        foreach (EntityController entityController in Object.FindObjectsOfType<EntityController>())
-        {
-            entityController.HaltEntityMovement();
-            if (entityController.tag != "Enemy") { 
-                // Ensures items on the floor do not interfere with combat.
-                entityController.DisableCollisions();
-            }
-        }
-
-    }
-
-    // Method to reenable scrolling and ending of combat scene.
-    public void EndCombatScene() {
-        CombatScene = false;
-        MovementSpeed = InitialMovementSpeed;
-
-
-        foreach (TileMovement tileMovement in Object.FindObjectsOfType<TileMovement>())
-        {
-            tileMovement.RestoreTileMovement();
-        }
-        foreach (EntityController entityController in Object.FindObjectsOfType<EntityController>())
-        {
-            entityController.RestoreEntityMovement();
-            entityController.RestoreCollisions();
-        }
-    }
-
     public bool GetIsCombatScene() {
         return CombatScene;
     }

@@ -14,6 +14,11 @@ public class PlayerController : MonoBehaviour
     private int LiquifiedLength;
     private int LiquifiedCooldown;
 
+    private bool AttackOffCooldown;
+    private bool AttackState;
+
+    private int AttackCooldown;
+
     public Vector3 jump = new Vector2(0.0f, 1.0f);
     public float jumpForce = 2.0f;
     public bool isGrounded;
@@ -35,6 +40,10 @@ public class PlayerController : MonoBehaviour
         LiquifiedCooldown = 3;
         LiquifiedOffCooldown = true;
 
+        AttackState = false;
+        AttackOffCooldown = true;
+        AttackCooldown = 1;
+
         rb = GetComponent<Rigidbody2D>();
         playerMovementSpeed = 5f;
 
@@ -48,9 +57,16 @@ public class PlayerController : MonoBehaviour
         //Check for keyboard inputs and assign the correct player movements and state changes.
         if (Input.GetKeyDown("space"))
         {
-            if (LiquifiedOffCooldown)
+            if (LiquifiedOffCooldown && !AttackState)
             {
                 StartCoroutine(TimedStateChange());
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            if (AttackOffCooldown && !Liquified) {
+                StartCoroutine(PrimeAttackState());
             }
         }
 
@@ -87,6 +103,29 @@ public class PlayerController : MonoBehaviour
         LiquifiedOffCooldown ^= true;
     }
 
+    private void ChangeAttackState()
+    {
+        AttackState ^= true;
+        Color color = material.color;
+
+        if (AttackState)
+        {
+            color.b = 0.5f;
+            color.g = 0.5f;
+        }
+        else
+        {
+            color.b = 1f;
+            color.g = 1f;
+        }
+        material.color = color;
+    }
+
+    private void UpdateAttackCooldown() 
+    {
+        AttackOffCooldown ^= true;
+    }
+
     // Applies state changes and cooldowns.
     IEnumerator TimedStateChange()
     {
@@ -98,9 +137,23 @@ public class PlayerController : MonoBehaviour
         UpdateLiquifiedCooldown();
     }
 
+    IEnumerator PrimeAttackState() {
+        ChangeAttackState();
+        UpdateAttackCooldown();
+        yield return new WaitForSeconds(2);
+        ChangeAttackState();
+        yield return new WaitForSeconds(AttackCooldown);
+        UpdateAttackCooldown();
+    }
+
+
     public bool ReturnState()
     {
         return Liquified;
+    }
+
+    public bool GetAttackState() {
+        return AttackState;
     }
 
     public bool ReturnCooldown()

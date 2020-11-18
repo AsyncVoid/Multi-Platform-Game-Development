@@ -175,9 +175,6 @@ public class CombatSystem : MonoBehaviour
         combatHUD.gameObject.SetActive(false);
 
         player.GetComponent<PlayerController>().enabled = true;
-
-        EnvironmentController.EndCombatScene();
-
     }
 
 }

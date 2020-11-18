@@ -6,17 +6,22 @@ using UnityEngine;
 public class EntityController : MonoBehaviour
 {
     private float Speed;
-    private Vector3 ItemVelocity;
     private EnvironmentController environmentController;
+
+    private float PlayerHitCooldown;
+    private bool PlayerHitOffCooldown;
+
+    private Enemy enemy;
 
     // Start is called before the first frame update
     void Start()
     {
         GameObject environment = GameObject.FindGameObjectWithTag("EnvironmentController");
         environmentController = environment.GetComponent<EnvironmentController>();
-        Speed = environmentController.GetMovementSpeed();
-        Debug.Log("Speed: " + Speed);
-        ItemVelocity = new Vector3(-1 * Speed, 0, 0);
+
+        enemy = GetComponent<Enemy>();
+        PlayerHitCooldown = 2f;
+        PlayerHitOffCooldown = true;
     }
 
     void OnCollisionEnter2D(Collision2D collision) {
@@ -24,8 +29,17 @@ public class EntityController : MonoBehaviour
         // Disables all collisions with the player if player collides with object.
         if (collision.gameObject.tag != "Player") { return; }
         else {
-            GetComponent<Rigidbody2D>().isKinematic = true;
-            GetComponent<Collider2D>().isTrigger = true;
+            if (collision.gameObject.GetComponent<PlayerController>().GetAttackState() && PlayerHitOffCooldown)
+            {
+                enemy.TakeDamage(1);
+                Debug.Log(enemy.ReturnHP());
+
+                StartCoroutine(BasicAttackInvulnerability());
+            }
+            else {
+                GetComponent<Rigidbody2D>().isKinematic = true;
+                GetComponent<Collider2D>().isTrigger = true;
+            }
         }
 
         // Gives Entity Skills to the player upon touched if player is in liquid state.
@@ -54,7 +68,6 @@ public class EntityController : MonoBehaviour
     }
 
     IEnumerator EntityEaten() {
-        ItemVelocity = new Vector3(0f, 0f, 0f);
 
         float timeElapsed = 0f;
         float time = 2f;
@@ -74,19 +87,19 @@ public class EntityController : MonoBehaviour
         Destroy(gameObject);
     }
 
+    IEnumerator BasicAttackInvulnerability()
+    {
+        ChangeBasicInvulState();
+        yield return new WaitForSeconds(PlayerHitCooldown);
+        ChangeBasicInvulState();
+    }
+
+    private void ChangeBasicInvulState() {
+        PlayerHitOffCooldown ^= true;
+    }
+
     void FixedUpdate()
     {
-        transform.position += ItemVelocity * Time.deltaTime;
-    }
-
-    public void HaltEntityMovement()
-    {
-        ItemVelocity = new Vector3(0, 0, 0);
-    }
-
-    public void RestoreEntityMovement()
-    {
-        ItemVelocity = new Vector3(-1 * Speed, 0, 0);
     }
 
     public void DisableCollisions() {
