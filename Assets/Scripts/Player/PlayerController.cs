@@ -7,6 +7,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     private Rigidbody2D rb;
+    public Animator animator;
 
     private bool Liquified;
     private bool LiquifiedOffCooldown;
@@ -20,15 +21,22 @@ public class PlayerController : MonoBehaviour
     private int AttackCooldown;
 
     public Vector3 jump = new Vector2(0.0f, 1.0f);
-    public float jumpForce = 2.0f;
+    public float jumpForce = 5.0f;
     public bool isGrounded;
-    public bool isFacingRight;
 
-    public float playerMovementSpeed;
+    public bool isFacingRight;
+    private bool isMoving;
+
     private float horizontalMovement = 0.0f;
 
     private Material material;
     public float liquidTransparency = 0.2f;
+
+    private int IdleTimer;
+    private float LastInputTime;
+
+    public SpriteRenderer playerSprite;
+    private GameObject PlayerModel;
 
     private Dictionary<Skill, int> skillLevels = new Dictionary<Skill, int>();
 
@@ -45,10 +53,11 @@ public class PlayerController : MonoBehaviour
         AttackCooldown = 1;
 
         rb = GetComponent<Rigidbody2D>();
-        playerMovementSpeed = 5f;
 
         rb.freezeRotation = true;
-        material = GetComponent<SpriteRenderer>().material;
+        material = playerSprite.material;
+
+        PlayerModel = GameObject.FindWithTag("PlayerModel");
     }
 
     // Update is called once per frame
@@ -78,13 +87,23 @@ public class PlayerController : MonoBehaviour
 
         horizontalMovement = Input.GetAxis("Horizontal");
 
-        if (horizontalMovement != 0) 
+        if (horizontalMovement > 0)
         {
-            rb.velocity = new Vector2(horizontalMovement * playerMovementSpeed, rb.velocity.y);
+            StartCoroutine(RightHeld());
+            animator.SetBool("leftHeld", false);
+        }
+        else if (horizontalMovement < 0) 
+        {
+            animator.SetBool("rightHeld", false);
+            StartCoroutine(LeftHeld());
+        }
+        else
+        {
+            animator.SetBool("rightHeld", false);
+            animator.SetBool("leftHeld", false);
         }
 
     }
-
     // Switch between Liquidfied and Non Liquified state.
     private void ChangeLiquidState()
     {
@@ -94,7 +113,7 @@ public class PlayerController : MonoBehaviour
             color.a = liquidTransparency;
         else
             color.a = 1.0f;
-        material.color = color;
+       material.color = color;
     }
 
     // Activate / Deactivate Engulf cooldowns.
@@ -165,5 +184,23 @@ public class PlayerController : MonoBehaviour
     public void OnCollisionStay2D()
     {
         isGrounded = true;
+    }
+
+    IEnumerator RightHeld() 
+    {
+        while (animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f)
+        {
+            yield return null;
+        }
+        animator.SetBool("rightHeld", true);
+    }
+
+    IEnumerator LeftHeld() 
+    {
+        while (animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f)
+        {
+            yield return null;
+        }
+        animator.SetBool("leftHeld", true);
     }
 }

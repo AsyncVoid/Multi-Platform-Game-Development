@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    public Vector3 offset = new Vector3(0, 3, -5);
+    public Vector3 offset = new Vector3(0, 0, -5);
     public GameObject player;
 
     private Transform cameraTransform;
@@ -27,6 +27,6 @@ public class CameraController : MonoBehaviour
     // Camera tracks player;
     private void LateUpdate()
     {
-        cameraTransform.position = playerTransform.position + offset;
+        cameraTransform.position = new Vector3(playerTransform.position.x, 0, playerTransform.position.z) + offset;
     }
 }
