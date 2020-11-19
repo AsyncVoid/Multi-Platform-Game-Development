@@ -189,6 +189,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 989240728673969222, guid: a281eb5f194d8034c818ef1b0883c396, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 989240728673969223, guid: a281eb5f194d8034c818ef1b0883c396, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -197,7 +201,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: BattleTurtle
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 989240728673969222, guid: a281eb5f194d8034c818ef1b0883c396, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: a281eb5f194d8034c818ef1b0883c396, type: 3}
 --- !u!1 &96669303
 GameObject:
