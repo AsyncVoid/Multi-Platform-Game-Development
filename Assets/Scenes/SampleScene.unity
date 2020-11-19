@@ -238,6 +238,7 @@ GameObject:
   - component: {fileID: 222155489}
   - component: {fileID: 222155488}
   - component: {fileID: 222155487}
+  - component: {fileID: 222155490}
   m_Layer: 0
   m_Name: EnvironmentFloor
   m_TagString: Tilemap
@@ -2151,6 +2152,27 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!114 &222155490
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 222155485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2eaf57f737648464c96ab873979f2650, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  seed: 1337
+  frequency: 0.01
+  min: -15
+  max: 5
+  floorComponent: {fileID: 222155485}
+  trackingObject: {fileID: 1391970013}
+  groundM: {fileID: 11400000, guid: 475f07e43f745b249a4f96f460c1ecfe, type: 2}
+  groundT: {fileID: 11400000, guid: d26337cf2fc3dff4d9bed217dcb6f6a9, type: 2}
+  screenTileWidth: 30
 --- !u!1 &468359787
 GameObject:
   m_ObjectHideFlags: 0
