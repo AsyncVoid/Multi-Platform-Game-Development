@@ -590,7 +590,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   seed: 1337
   frequency: 0.01
-  min: -5
+  min: -20
   max: 2
   floorComponent: {fileID: 222155485}
   trackingObject: {fileID: 96669303}
@@ -715,7 +715,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f055bae724680bd45b0806d869ec62db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  offset: {x: 9, y: 3.5, z: -5}
   player: {fileID: 1391970013}
 --- !u!20 &519420031
 Camera:
