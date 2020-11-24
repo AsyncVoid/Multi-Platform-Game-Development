@@ -20,7 +20,10 @@ public class Walking : StateMachineBehaviour
         player = GameObject.FindWithTag("Player");
         playerModel = GameObject.FindWithTag("PlayerModel");
 
-        player.transform.position = playerModel.transform.position;
+        // player.transform.position = playerModel.transform.position;
+
+        player.transform.position += playerModel.transform.localPosition;
+        playerModel.transform.localPosition -= playerModel.transform.localPosition;
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
