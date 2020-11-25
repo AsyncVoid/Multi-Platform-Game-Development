@@ -103,6 +103,7 @@ public class PlayerController : MonoBehaviour
             animator.SetBool("leftHeld", false);
         }
 
+
     }
     // Switch between Liquidfied and Non Liquified state.
     private void ChangeLiquidState()

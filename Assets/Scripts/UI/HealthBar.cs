@@ -6,16 +6,17 @@ using UnityEngine.UI;
 public class HealthBar : MonoBehaviour
 {
 	public Slider hpSlider;
+	private Player player;
 
-	// Sets the Healthbar UI with the unit's health values.
-	public void SetHUD(Unit unit)
-	{
-		hpSlider.maxValue = unit.maxHP;
-		hpSlider.value = unit.ReturnHP();
+	void Start() {
+		player = GameObject.FindWithTag("Player").GetComponent<Player>();
+
+		hpSlider.maxValue = player.ReturnMaxHP();
+		hpSlider.value = player.ReturnHP();
 	}
 
-	public void SetHP(int hp)
-	{
-		hpSlider.value = hp;
+	void FixedUpdate() {
+		hpSlider.maxValue = player.ReturnMaxHP();
+		hpSlider.value = player.ReturnHP();
 	}
 }

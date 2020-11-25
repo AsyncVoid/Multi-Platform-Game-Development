@@ -11,7 +11,10 @@ public class EnemyController : MonoBehaviour
     private float PlayerHitCooldown;
     private bool PlayerHitOffCooldown;
 
+    private bool isDmged;
+
     private Enemy enemy;
+    private Animator animator;
 
     // Start is called before the first frame update
     void Start()
@@ -22,21 +25,29 @@ public class EnemyController : MonoBehaviour
         enemy = GetComponent<Enemy>();
         PlayerHitCooldown = 2f;
         PlayerHitOffCooldown = true;
+
+        animator = GetComponent<Animator>();
     }
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-
         // Damage and kb applied when attacked.
         if (collision.gameObject.tag != "Player") { return; }
         else
         {
             if (collision.gameObject.GetComponent<PlayerController>().GetAttackState() && PlayerHitOffCooldown)
             {
-                enemy.TakeDamage(1);
-                Debug.Log(enemy.ReturnHP());
-                GetComponent<Rigidbody2D>().AddForce(new Vector2(5f, 0f), ForceMode2D.Impulse);
+                GameObject player = collision.gameObject;
 
+                enemy.TakeDamage(collision.gameObject.GetComponent<Player>().ReturnDmg());
+                Debug.Log(enemy.ReturnHP());
+
+                Vector3 playerDirection = (player.transform.position - transform.position).normalized;
+                float direction = Vector3.Dot(playerDirection, Vector3.right);
+
+                collision.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector3(5f * direction, 0f, 0f), ForceMode2D.Impulse);
+
+                animator.SetTrigger("Hurt");
                 StartCoroutine(BasicAttackInvulnerability());
             }
         }
@@ -57,16 +68,6 @@ public class EnemyController : MonoBehaviour
         else if (collision.gameObject.GetComponent<PlayerController>().ReturnState())
         {
             StartCoroutine(EntityEaten());
-        }
-    }
-
-    void OnTriggerExit2D(Collider2D collider)
-    {
-        if (collider.gameObject.tag != "Player") { return; }
-        else
-        {
-            GetComponent<Rigidbody2D>().isKinematic = false;
-            GetComponent<Collider2D>().isTrigger = false;
         }
     }
 
@@ -104,7 +105,7 @@ public class EnemyController : MonoBehaviour
         PlayerHitOffCooldown ^= true;
     }
 
-    void FixedUpdate()
+    void Update()
     {
     }
 
