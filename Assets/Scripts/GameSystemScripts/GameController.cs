@@ -49,6 +49,8 @@ public class GameController : MonoBehaviour
         sb.Append("Skills: { ");
         foreach(Skill skill in playerComponent.skills)
         {
+            if (skill == null || skill.skillName == null) // Why tf is this happening lol
+                continue; 
             sb.Append(skill.skillName + ", ");
         }
         sb.Remove(sb.Length - 2, 2);
