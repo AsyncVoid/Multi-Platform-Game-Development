@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour
     public bool isFacingRight;
     private bool isMoving;
 
-    private float horizontalMovement = 0.0f;
+    private float horizontalMovement = 1.0f;
 
     private Material material;
     public float liquidTransparency = 0.2f;

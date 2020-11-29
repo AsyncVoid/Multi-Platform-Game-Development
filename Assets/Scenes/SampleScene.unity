@@ -528,7 +528,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   seed: 1337
   frequency: 0.0056
-  min: -20
+  min: -50
   max: 2
   floorComponent: {fileID: 222155485}
   trackingObject: {fileID: 96669303}
