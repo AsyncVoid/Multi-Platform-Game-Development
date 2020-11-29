@@ -7,6 +7,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     private Rigidbody2D rb;
+    public Animator animator;
 
     private bool Liquified;
     private bool LiquifiedOffCooldown;
@@ -14,16 +15,28 @@ public class PlayerController : MonoBehaviour
     private int LiquifiedLength;
     private int LiquifiedCooldown;
 
-    public Vector3 jump = new Vector2(0.0f, 1.0f);
-    public float jumpForce = 2.0f;
-    public bool isGrounded;
-    public bool isFacingRight;
+    private bool AttackOffCooldown;
+    private bool AttackState;
 
-    public float playerMovementSpeed;
+    private int AttackCooldown;
+
+    public Vector3 jump = new Vector2(0.0f, 1.0f);
+    public float jumpForce = 5.0f;
+    public bool isGrounded;
+
+    public bool isFacingRight;
+    private bool isMoving;
+
     private float horizontalMovement = 0.0f;
 
     private Material material;
     public float liquidTransparency = 0.2f;
+
+    private int IdleTimer;
+    private float LastInputTime;
+
+    public SpriteRenderer playerSprite;
+    private GameObject PlayerModel;
 
     private Dictionary<Skill, int> skillLevels = new Dictionary<Skill, int>();
 
@@ -35,11 +48,16 @@ public class PlayerController : MonoBehaviour
         LiquifiedCooldown = 3;
         LiquifiedOffCooldown = true;
 
+        AttackState = false;
+        AttackOffCooldown = true;
+        AttackCooldown = 1;
+
         rb = GetComponent<Rigidbody2D>();
-        playerMovementSpeed = 5f;
 
         rb.freezeRotation = true;
-        material = GetComponent<SpriteRenderer>().material;
+        material = playerSprite.material;
+
+        PlayerModel = GameObject.FindWithTag("PlayerModel");
     }
 
     // Update is called once per frame
@@ -48,9 +66,16 @@ public class PlayerController : MonoBehaviour
         //Check for keyboard inputs and assign the correct player movements and state changes.
         if (Input.GetKeyDown("space"))
         {
-            if (LiquifiedOffCooldown)
+            if (LiquifiedOffCooldown && !AttackState)
             {
                 StartCoroutine(TimedStateChange());
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            if (AttackOffCooldown && !Liquified) {
+                StartCoroutine(PrimeAttackState());
             }
         }
 
@@ -62,13 +87,24 @@ public class PlayerController : MonoBehaviour
 
         horizontalMovement = Input.GetAxis("Horizontal");
 
-        if (horizontalMovement != 0) 
+        if (horizontalMovement > 0)
         {
-            rb.velocity = new Vector2(horizontalMovement * playerMovementSpeed, rb.velocity.y);
+            StartCoroutine(RightHeld());
+            animator.SetBool("leftHeld", false);
+        }
+        else if (horizontalMovement < 0) 
+        {
+            animator.SetBool("rightHeld", false);
+            StartCoroutine(LeftHeld());
+        }
+        else
+        {
+            animator.SetBool("rightHeld", false);
+            animator.SetBool("leftHeld", false);
         }
 
-    }
 
+    }
     // Switch between Liquidfied and Non Liquified state.
     private void ChangeLiquidState()
     {
@@ -78,13 +114,36 @@ public class PlayerController : MonoBehaviour
             color.a = liquidTransparency;
         else
             color.a = 1.0f;
-        material.color = color;
+       material.color = color;
     }
 
     // Activate / Deactivate Engulf cooldowns.
     private void UpdateLiquifiedCooldown()
     {
         LiquifiedOffCooldown ^= true;
+    }
+
+    private void ChangeAttackState()
+    {
+        AttackState ^= true;
+        Color color = material.color;
+
+        if (AttackState)
+        {
+            color.b = 0.5f;
+            color.g = 0.5f;
+        }
+        else
+        {
+            color.b = 1f;
+            color.g = 1f;
+        }
+        material.color = color;
+    }
+
+    private void UpdateAttackCooldown() 
+    {
+        AttackOffCooldown ^= true;
     }
 
     // Applies state changes and cooldowns.
@@ -98,9 +157,23 @@ public class PlayerController : MonoBehaviour
         UpdateLiquifiedCooldown();
     }
 
+    IEnumerator PrimeAttackState() {
+        ChangeAttackState();
+        UpdateAttackCooldown();
+        yield return new WaitForSeconds(2);
+        ChangeAttackState();
+        yield return new WaitForSeconds(AttackCooldown);
+        UpdateAttackCooldown();
+    }
+
+
     public bool ReturnState()
     {
         return Liquified;
+    }
+
+    public bool GetAttackState() {
+        return AttackState;
     }
 
     public bool ReturnCooldown()
@@ -112,5 +185,23 @@ public class PlayerController : MonoBehaviour
     public void OnCollisionStay2D()
     {
         isGrounded = true;
+    }
+
+    IEnumerator RightHeld() 
+    {
+        while (animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f)
+        {
+            yield return null;
+        }
+        animator.SetBool("rightHeld", true);
+    }
+
+    IEnumerator LeftHeld() 
+    {
+        while (animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f)
+        {
+            yield return null;
+        }
+        animator.SetBool("leftHeld", true);
     }
 }

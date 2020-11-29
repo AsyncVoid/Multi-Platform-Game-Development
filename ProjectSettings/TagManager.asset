@@ -12,6 +12,7 @@ TagManager:
   - Combat
   - SkillSlot
   - Skill
+  - PlayerModel
   layers:
   - Default
   - TransparentFX

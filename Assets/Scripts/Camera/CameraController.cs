@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    public Vector3 offset = new Vector3(0, 3, -5);
     public GameObject player;
 
     private Transform cameraTransform;
@@ -15,7 +14,7 @@ public class CameraController : MonoBehaviour
     {
         cameraTransform = this.GetComponent<Transform>();
         playerTransform = player.GetComponent<Transform>();
-        cameraTransform.position = playerTransform.position + offset;
+        cameraTransform.position = playerTransform.position;
     }
 
     // Update is called once per frame
@@ -27,6 +26,6 @@ public class CameraController : MonoBehaviour
     // Camera tracks player;
     private void LateUpdate()
     {
-        cameraTransform.position = playerTransform.position + offset;
+        cameraTransform.position = new Vector3(playerTransform.position.x, playerTransform.position.y + 3, playerTransform.position.z - 5f);
     }
 }

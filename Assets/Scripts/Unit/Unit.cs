@@ -10,7 +10,7 @@ public class Unit : MonoBehaviour
 	private int currentHP;
 	public bool isDead;
 
-	void Start()
+	void Awake()
 	{
 		currentHP = maxHP;
 	}
@@ -34,4 +34,17 @@ public class Unit : MonoBehaviour
 		return currentHP;
 	}
 
+	public bool returnDeathStatus() {
+		return isDead;
+	}
+
+	public int ReturnDmg()
+	{
+		return damage;
+	}
+
+	public int ReturnMaxHP()
+	{
+		return maxHP;
+	}
 }
