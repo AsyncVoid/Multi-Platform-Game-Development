@@ -5,10 +5,11 @@ using UnityEngine;
 public class Player : Unit
 
 {
-    public List<Skill> skills;
     public int maxMatter;
     public int matter;
     public float matterRegenRate;
+
+    public SkillList skills;
 
     void Start() 
     {

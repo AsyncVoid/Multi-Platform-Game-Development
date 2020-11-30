@@ -58,8 +58,8 @@ public class EnemyController : MonoBehaviour
             Player player = collision.gameObject.GetComponent<Player>();
             Enemy enemy = gameObject.GetComponent<Enemy>();
 
-            if (!player.skills.Contains(enemy.ReturnSkill()))
-                player.skills.Add(enemy.ReturnSkill());
+            // if (!player.skills.Contains(enemy.ReturnSkill()))
+                // player.skills.Add(enemy.ReturnSkill());
 
             StartCoroutine(EntityEaten());
         }

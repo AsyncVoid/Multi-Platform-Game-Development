@@ -12,7 +12,6 @@ public class EntityController : MonoBehaviour
     private bool PlayerHitOffCooldown;
 
     private Enemy enemy;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -47,8 +46,8 @@ public class EntityController : MonoBehaviour
             Player player = collision.gameObject.GetComponent<Player>();
             Enemy enemy = gameObject.GetComponent<Enemy>();
 
-            if (!player.skills.Contains(enemy.ReturnSkill()))
-                player.skills.Add(enemy.ReturnSkill());
+            // if (!player.skills.Contains(enemy.ReturnSkill()))
+               // player.skills.Add(enemy.ReturnSkill());
 
             StartCoroutine(EntityEaten());
         }

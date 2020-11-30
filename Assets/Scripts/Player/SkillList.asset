@@ -9,10 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c078654036ef5014a95d74574ac89b29, type: 3}
-  m_Name: IceSkill
+  m_Script: {fileID: 11500000, guid: 8a90c26a5650a634aa0054dedc7e6c2f, type: 3}
+  m_Name: SkillList
   m_EditorClassIdentifier: 
-  skillName: Ice
-  skillType: 0
-  skillSprite: {fileID: 21300000, guid: 622488b11b55440a685a490c881d1454, type: 3}
-  skillDamage: 7
+  skills: []

@@ -47,15 +47,15 @@ public class GameController : MonoBehaviour
 
         StringBuilder sb = new StringBuilder();
         sb.Append("Skills: { ");
-        foreach(Skill skill in playerComponent.skills)
-        {
-            if (skill == null || skill.skillName == null) // Why tf is this happening lol
-                continue; 
-            sb.Append(skill.skillName + ", ");
-        }
+        // foreach(Skill skill in playerComponent.skills)
+       // {
+           // if (skill == null || skill.skillName == null) // Why tf is this happening lol
+           //     continue; 
+            // sb.Append(skill.skillName + ", ");
+        //}
         sb.Remove(sb.Length - 2, 2);
         sb.Append(" }");
-        playerSkillsText.text = sb.ToString();
+        // playerSkillsText.text = sb.ToString();
     }
 
 }
