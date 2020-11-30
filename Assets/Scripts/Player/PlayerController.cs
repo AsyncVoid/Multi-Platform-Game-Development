@@ -24,10 +24,8 @@ public class PlayerController : MonoBehaviour
     public float jumpForce = 5.0f;
     public bool isGrounded;
 
-    public bool isFacingRight;
-    private bool isMoving;
-
-    private float horizontalMovement = 1.0f;
+    private bool rightToggle;
+    private bool leftToggle;
 
     private Material material;
     public float liquidTransparency = 0.2f;
@@ -38,7 +36,7 @@ public class PlayerController : MonoBehaviour
     public SpriteRenderer playerSprite;
     private GameObject PlayerModel;
 
-    private Dictionary<Skill, int> skillLevels = new Dictionary<Skill, int>();
+    public GameObject skillFab;
 
     // Start is called before the first frame update
     void Start()
@@ -58,11 +56,19 @@ public class PlayerController : MonoBehaviour
         material = playerSprite.material;
 
         PlayerModel = GameObject.FindWithTag("PlayerModel");
+
+        rightToggle = false;
+        leftToggle = false;
     }
 
     // Update is called once per frame
     void Update()
     {
+
+        if (Input.GetKeyDown(KeyCode.Alpha2)) {
+            Instantiate(skillFab, transform.position, Quaternion.identity);
+        }
+
         //Check for keyboard inputs and assign the correct player movements and state changes.
         if (Input.GetKeyDown("space"))
         {
@@ -85,14 +91,22 @@ public class PlayerController : MonoBehaviour
             isGrounded = false;
         }
 
-        horizontalMovement = Input.GetAxis("Horizontal");
+        if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D))
+        {
+            rightToggle ^= true;
+            leftToggle = false;
+        }
+        else if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A)) {
+            leftToggle ^= true;
+            rightToggle = false;
+        }
 
-        if (horizontalMovement > 0)
+        if (rightToggle)
         {
             StartCoroutine(RightHeld());
             animator.SetBool("leftHeld", false);
         }
-        else if (horizontalMovement < 0) 
+        else if (leftToggle) 
         {
             animator.SetBool("rightHeld", false);
             StartCoroutine(LeftHeld());
