@@ -192,7 +192,9 @@ MonoBehaviour:
   isGrounded: 0
   liquidTransparency: 0.2
   playerSprite: {fileID: 1391970015}
-  skillFab: {fileID: 1342855627116521414, guid: 4e8d8ac62cdfd5242a72b1ce8eda0e80, type: 3}
+  player: {fileID: 0}
+  skill: {fileID: 11400000, guid: c49335a01d9ed42329809ed9d278faa9, type: 2}
+  skillPrefab: {fileID: 0}
 --- !u!70 &96669306
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
