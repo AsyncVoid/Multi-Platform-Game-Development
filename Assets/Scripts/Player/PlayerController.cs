@@ -35,8 +35,10 @@ public class PlayerController : MonoBehaviour
 
     public SpriteRenderer playerSprite;
     private GameObject PlayerModel;
+    public Player player;
 
-    public GameObject skillFab;
+    public Skill skill;
+    public GameObject skillPrefab;
 
     // Start is called before the first frame update
     void Start()
@@ -51,11 +53,11 @@ public class PlayerController : MonoBehaviour
         AttackCooldown = 1;
 
         rb = GetComponent<Rigidbody2D>();
-
         rb.freezeRotation = true;
         material = playerSprite.material;
 
         PlayerModel = GameObject.FindWithTag("PlayerModel");
+        player = GetComponent<Player>();
 
         rightToggle = false;
         leftToggle = false;
@@ -66,7 +68,27 @@ public class PlayerController : MonoBehaviour
     {
 
         if (Input.GetKeyDown(KeyCode.Alpha2)) {
-            Instantiate(skillFab, transform.position, Quaternion.identity);
+
+            if (player.UseMatter(skill.GetMatterUsage())){
+
+                skillPrefab = skill.GetPrefab();
+
+                GameObject skillUsed = Instantiate(skillPrefab, transform.position, Quaternion.identity);
+                Projectile tempName = skillUsed.GetComponent<Projectile>();
+                tempName.sourceObject = gameObject;
+
+                Vector2 screenPosition = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+                Vector2 worldPosition = Camera.main.ScreenToWorldPoint(screenPosition);
+
+                Vector3 targetPosition = new Vector3(worldPosition.x, worldPosition.y, 0.0f);
+
+                tempName.projectileDirection = (targetPosition - transform.position).normalized;
+                tempName.skill = skill;
+            }
+            else {
+                Debug.Log("Out of matter!");
+            }
+            
         }
 
         //Check for keyboard inputs and assign the correct player movements and state changes.

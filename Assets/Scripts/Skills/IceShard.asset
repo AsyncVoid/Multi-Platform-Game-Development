@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c078654036ef5014a95d74574ac89b29, type: 3}
   m_Name: IceShard
   m_EditorClassIdentifier: 
-  skillName: Ice
-  skillTier: 0
-  skillProgression: 0
+  skillName: IceShard
+  skillTier: 1
+  skillProgression: 1
   skillType: 0
   skillSprite: {fileID: 21300000, guid: 622488b11b55440a685a490c881d1454, type: 3}
-  skillBase: 0
+  skillBase: 1
   skillPrefab: {fileID: 1342855627116521414, guid: 4e8d8ac62cdfd5242a72b1ce8eda0e80, type: 3}

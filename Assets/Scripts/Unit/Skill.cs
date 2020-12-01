@@ -15,6 +15,7 @@ public class Skill : ScriptableObject
     public Sprite skillSprite;
     public int skillBase;
 
+    public int matterUsage;
 
     public GameObject skillPrefab;
 
@@ -58,7 +59,13 @@ public class Skill : ScriptableObject
         return skillBase * skillTier;
     }
 
+    public GameObject GetPrefab() {
+        return skillPrefab;
+    }
+
+    public int GetMatterUsage() {
+        return matterUsage;
+    }
 }
 
 public enum SkillType { Magical, Physical, Recovery, Passive, Status }
-

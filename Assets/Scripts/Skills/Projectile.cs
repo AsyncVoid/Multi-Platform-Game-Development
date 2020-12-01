@@ -7,12 +7,16 @@ public class Projectile : MonoBehaviour
     // Start is called before the first frame update
     public float projectileSpeed;
     public float projectileDuration;
-    private Vector3 projectileDirection;
+    public Vector3 projectileDirection;
 
     private Vector3 previousPos;
     private bool charged;
 
     private Animator animator;
+    public GameObject sourceObject;
+
+    private DamageController damageController;
+    public Skill skill;
 
     void Start()
     {
@@ -20,14 +24,9 @@ public class Projectile : MonoBehaviour
         projectileDuration = 3.2f;
         animator = GetComponent<Animator>();
 
+        damageController = GameObject.FindWithTag("DamageController").GetComponent<DamageController>();
+
         StartCoroutine(DestroySelf());
-
-        Vector2 screenPosition = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
-        Vector2 worldPosition = Camera.main.ScreenToWorldPoint(screenPosition);
-
-        Vector3 targetPosition = new Vector3(worldPosition.x, worldPosition.y, 0.0f);
-
-        projectileDirection = (targetPosition - transform.position).normalized;
 
         charged = false;
     }
@@ -81,16 +80,26 @@ public class Projectile : MonoBehaviour
     }
 
     private void OnCollisionEnter2D(Collision2D other) {
-        string entityHit = other.gameObject.tag;
+        GameObject entityHit = other.gameObject;
 
-        if (entityHit == "Player") { return; }
-        else {
+        if (entityHit == sourceObject) { return; }
+        else if (entityHit.tag == "Tilemap")
+        {
             StartCoroutine(DestroySelfCollision());
+        }
+        else if (entityHit.tag == "Player") {
+            StartCoroutine(DestroySelfCollision());
+            damageController.DamagePlayer(sourceObject.GetComponent<Enemy>());
+        }
+        else if (entityHit.tag == "Enemy")
+        {
+            StartCoroutine(DestroySelfCollision());
+            damageController.DamageEnemy(skill, entityHit.GetComponent<Enemy>());
         }
     }
 
     private void OnTriggerExit2D(Collider2D other) {
-        if (other.gameObject.tag == "Player") {
+        if (other.gameObject == sourceObject) {
             GetComponent<Rigidbody2D>().isKinematic = false;
             GetComponent<Collider2D>().isTrigger = false;
         }

@@ -28,6 +28,17 @@ public class Player : Unit
         return matter;
     }
 
+    public bool UseMatter(int matterUsage) {
+        if (matter < matterUsage)
+        {
+            return false;
+        }
+        else {
+            matter -= matterUsage;
+            return true;
+        }
+    }
+
     IEnumerator MatterRegeneration()
     {
         if (matter < maxMatter){
