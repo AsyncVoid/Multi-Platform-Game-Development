@@ -28,6 +28,7 @@ public class Player : Unit
         return matter;
     }
 
+    // For using skills, matter is consumed. Returns false if not enough matter is present.
     public bool UseMatter(int matterUsage) {
         if (matter < matterUsage)
         {
@@ -39,6 +40,7 @@ public class Player : Unit
         }
     }
 
+    // Passive matter regeneration coroutine.
     IEnumerator MatterRegeneration()
     {
         if (matter < maxMatter){
