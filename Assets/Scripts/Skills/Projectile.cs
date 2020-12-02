@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Projectile : MonoBehaviour
+public class Projectile : MonoBehaviour, ISkill
 {
     // Start is called before the first frame update
     public float projectileSpeed;
@@ -14,16 +14,15 @@ public class Projectile : MonoBehaviour
 
     private Animator animator;
     public GameObject sourceObject;
+    private Skill skill;
 
     private DamageController damageController;
-    public Skill skill;
 
-    void Start()
-    {
+    void Start() {
         projectileSpeed = 8.0f;
         projectileDuration = 3.2f;
-        animator = GetComponent<Animator>();
 
+        animator = GetComponent<Animator>();
         damageController = GameObject.FindWithTag("DamageController").GetComponent<DamageController>();
 
         StartCoroutine(DestroySelf());
@@ -34,16 +33,23 @@ public class Projectile : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!charged) {
-            transform.position = GameObject.FindWithTag("Player").transform.position;
-        }
 
-        if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1.0f)
+        Debug.Log(sourceObject);
+
+        if (!(sourceObject is null))
         {
-            previousPos = transform.position;
-            transform.position = transform.position + projectileDirection * Time.deltaTime * projectileSpeed;
-            projectileDirection = new Vector3(projectileDirection.x, projectileDirection.y - 0.25f * Time.deltaTime, projectileDirection.z);
-            charged = true;
+            if (!charged)
+            {
+                transform.position = sourceObject.transform.position;
+            }
+
+            if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1.0f)
+            {
+                previousPos = transform.position;
+                transform.position = transform.position + projectileDirection * Time.deltaTime * projectileSpeed;
+                projectileDirection = new Vector3(projectileDirection.x, projectileDirection.y - 0.25f * Time.deltaTime, projectileDirection.z);
+                charged = true;
+            }
         }
     }
 
@@ -77,6 +83,14 @@ public class Projectile : MonoBehaviour
         }
 
         Destroy(gameObject);
+    }
+
+    public void UseSkill(Skill skillUsed, GameObject entity, Vector3 targetDirection) {
+        sourceObject = entity;
+        Projectile selfRef = Instantiate(this, entity.transform.position, Quaternion.identity);
+
+        selfRef.GetComponent<Projectile>().skill = skillUsed;
+        selfRef.GetComponent<Projectile>().projectileDirection = targetDirection;
     }
 
     private void OnCollisionEnter2D(Collision2D other) {

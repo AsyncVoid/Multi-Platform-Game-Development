@@ -28,7 +28,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1342855627116521414}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0.825734, w: -0.5640598}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -119,6 +119,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectileSpeed: 0
   projectileDuration: 0
+  projectileDirection: {x: 0.399056, y: 0.91692656, z: 0}
+  sourceObject: {fileID: 0}
 --- !u!50 &9104930351365167848
 Rigidbody2D:
   serializedVersion: 4
