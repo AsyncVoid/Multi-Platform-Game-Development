@@ -5,6 +5,7 @@ using UnityEngine;
 public class DamageController : MonoBehaviour
 {
     private Player player;
+    public DamageIndicator dmgIndicator;
 
     // Start is called before the first frame update
     void Start()
@@ -20,11 +21,18 @@ public class DamageController : MonoBehaviour
 
     public void DamageEnemy(Skill skill, Enemy enemy)
     {
-        enemy.TakeDamage(skill.skillTierBase());
+
+        int calcNum = skill.skillTierBase();
+        enemy.TakeDamage(calcNum);
+        DamageIndicator dmg = Instantiate(dmgIndicator, enemy.transform.position, Quaternion.identity);
+        dmg.GetComponent<DamageIndicator>().SetText(calcNum.ToString());
     }
 
     public void DamagePlayer(Enemy enemy)
     {
-        player.TakeDamage(enemy.ReturnDmg());
+        int calcDmg = enemy.ReturnDmg();
+        player.TakeDamage(calcDmg);
+        DamageIndicator dmg = Instantiate(dmgIndicator, player.transform.position, Quaternion.identity);
+        dmg.GetComponent<DamageIndicator>().SetText(calcDmg.ToString());
     }
 }
