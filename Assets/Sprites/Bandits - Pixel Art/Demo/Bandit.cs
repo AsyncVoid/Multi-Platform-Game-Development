@@ -72,7 +72,7 @@ public class Bandit : MonoBehaviour
                         inputX = 0.2f;
                     }
                 }
-                if (direction < -0.1f)
+                else if (direction < -0.1f)
                 {
                     if (playerDistance > 3)
                     {
@@ -138,16 +138,6 @@ public class Bandit : MonoBehaviour
         {
             m_animator.SetTrigger("Recover");
         }
-
-        //Attack
-        //else if(Input.GetMouseButtonDown(0)) {
-        // m_animator.SetTrigger("Attack");
-        //}
-
-        //Change between idle and combat idle
-        //else if (Input.GetKeyDown("f"))
-        // m_combatIdle = !m_combatIdle;
-
         //Jump
         //else if (Input.GetKeyDown("space") && m_grounded) {
         //m_animator.SetTrigger("Jump");
