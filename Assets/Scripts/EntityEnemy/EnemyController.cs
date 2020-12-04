@@ -31,7 +31,7 @@ public class EnemyController : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        // Damage and kb applied when attacked.
+        // Damage and kb applied when basic attacked.
         if (collision.gameObject.tag != "Player") { return; }
         else
         {
@@ -45,6 +45,7 @@ public class EnemyController : MonoBehaviour
                 Vector3 playerDirection = (player.transform.position - transform.position).normalized;
                 float direction = Vector3.Dot(playerDirection, Vector3.right);
 
+                // Basic attack impact causes player to bounce back after impact.
                 collision.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector3(5f * direction, 0f, 0f), ForceMode2D.Impulse);
 
                 animator.SetTrigger("Hurt");
@@ -86,6 +87,9 @@ public class EnemyController : MonoBehaviour
             {
                 transform.localScale -= new Vector3(0.9f, 0.9f, 0.9f) * Time.deltaTime;
             }
+            else if (transform.localScale.x < -0.25f) {
+                transform.localScale -= new Vector3(-0.9f, 0.9f, 0.9f) * Time.deltaTime;
+            }
             yield return null;
         }
         yield return new WaitForSeconds(0.5f);
@@ -93,6 +97,7 @@ public class EnemyController : MonoBehaviour
         Destroy(gameObject);
     }
 
+    // Prevents multiple attacks from one attack.
     IEnumerator BasicAttackInvulnerability()
     {
         ChangeBasicInvulState();
