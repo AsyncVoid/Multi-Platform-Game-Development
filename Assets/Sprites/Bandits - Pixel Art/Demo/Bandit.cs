@@ -10,6 +10,7 @@ public class Bandit : MonoBehaviour
     private Animator m_animator;
     private Rigidbody2D m_body2d;
     private Sensor_Bandit m_groundSensor;
+    private AttackSensor attackSensor;
 
     private bool m_grounded = false;
     private bool m_combatIdle = false;
@@ -18,6 +19,7 @@ public class Bandit : MonoBehaviour
     private GameObject player;
     private Enemy enemy;
     private EnemyController enemyController;
+    private DamageController damageController;
     private float inputX;
     private RaycastHit2D hit;
 
@@ -30,6 +32,8 @@ public class Bandit : MonoBehaviour
         enemyController = GetComponent<EnemyController>();
 
         m_groundSensor = transform.Find("GroundSensor").GetComponent<Sensor_Bandit>();
+        attackSensor = transform.Find("AttackSensor").GetComponent<AttackSensor>();
+        damageController = GameObject.FindWithTag("DamageController").GetComponent<DamageController>();
 
         player = GameObject.FindWithTag("Player");
         enemy = GetComponent<Enemy>();
@@ -74,7 +78,7 @@ public class Bandit : MonoBehaviour
                     }
                     else
                     {
-                        inputX = 0.2f;
+                        inputX = 0.3f;
                     }
                 }
                 else if (direction < -0.1f)
@@ -85,7 +89,7 @@ public class Bandit : MonoBehaviour
                     }
                     else
                     {
-                        inputX = -0.2f;
+                        inputX = -0.3f;
                     }
                 }
                 else
@@ -184,6 +188,19 @@ public class Bandit : MonoBehaviour
                 m_body2d.velocity = new Vector2(m_body2d.velocity.x * 0.8f, m_jumpForce);
                 m_groundSensor.Disable(0.2f);
             }
+        }
+    }
+
+    public void Attack() {
+        if (attackSensor.AttackConfirm())
+        {
+            damageController.DamagePlayer(enemy);
+
+            float playerDistance = Vector3.Distance(transform.position, player.transform.position);
+            Vector3 playerDirection = (player.transform.position - transform.position).normalized;
+            float direction = Vector3.Dot(playerDirection, Vector3.right);
+
+            player.GetComponent<Rigidbody2D>().AddForce(new Vector3(5f * direction, 0f, 0f), ForceMode2D.Impulse);
         }
     }
 

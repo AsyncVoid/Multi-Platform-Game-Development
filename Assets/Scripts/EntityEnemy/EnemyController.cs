@@ -110,10 +110,6 @@ public class EnemyController : MonoBehaviour
         PlayerHitOffCooldown ^= true;
     }
 
-    void Update()
-    {
-    }
-
     public void DisableCollisions()
     {
         GetComponent<Rigidbody2D>().simulated = false;
