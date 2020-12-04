@@ -87,9 +87,12 @@ public class EnemyController : MonoBehaviour
             {
                 transform.localScale -= new Vector3(0.9f, 0.9f, 0.9f) * Time.deltaTime;
             }
+            else if (transform.localScale.x < -0.25f) {
+                transform.localScale -= new Vector3(-0.9f, 0.9f, 0.9f) * Time.deltaTime;
+            }
             yield return null;
         }
-        yield return new WaitForSeconds(0.25f);
+        yield return new WaitForSeconds(0.5f);
 
         Destroy(gameObject);
     }
