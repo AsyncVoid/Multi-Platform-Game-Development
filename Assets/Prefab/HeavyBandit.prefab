@@ -151,7 +151,7 @@ MonoBehaviour:
   damage: 2
   maxHP: 10
   isDead: 0
-  enemySkill: {fileID: 11400000, guid: c49335a01d9ed42329809ed9d278faa9, type: 2}
+  enemySkill: {fileID: 11400000, guid: dc710a05e8bf3d740b7c58706c33f3a0, type: 2}
 --- !u!95 &95734438044755836
 Animator:
   serializedVersion: 3
