@@ -39,4 +39,23 @@ public class DamageController : MonoBehaviour
         DamageIndicator dmg = Instantiate(dmgIndicator, player.transform.position, Quaternion.identity);
         dmg.GetComponent<DamageIndicator>().SetText(calcDmg.ToString());
     }
+
+    public void HealEnemy(Enemy enemy) {
+        int calcNum = enemy.ReturnDmg();
+        enemy.Heal(calcNum);
+
+        // Damage indicator.
+        DamageIndicator dmg = Instantiate(dmgIndicator, enemy.transform.position, Quaternion.identity);
+        dmg.GetComponent<DamageIndicator>().SetText(calcNum.ToString());
+        dmg.GetComponent<DamageIndicator>().HealColour();
+    }
+
+    public void HealPlayer(Skill skill) {
+        int calcNum = skill.skillTierBase();
+        player.Heal(calcNum);
+
+        DamageIndicator dmg = Instantiate(dmgIndicator, player.transform.position, Quaternion.identity);
+        dmg.GetComponent<DamageIndicator>().SetText(calcNum.ToString());
+        dmg.GetComponent<DamageIndicator>().HealColour();
+    }
 }

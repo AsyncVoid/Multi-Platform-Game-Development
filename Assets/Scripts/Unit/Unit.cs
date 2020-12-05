@@ -30,6 +30,14 @@ public class Unit : MonoBehaviour
 			return false;
 	}
 
+	public void Heal(int health) {
+		currentHP += health;
+
+		if (currentHP > maxHP) {
+			currentHP = maxHP;
+		}
+	}
+
 	public int ReturnHP()
 	{
 		return currentHP;
