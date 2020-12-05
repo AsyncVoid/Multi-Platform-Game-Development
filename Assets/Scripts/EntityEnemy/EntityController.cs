@@ -11,7 +11,7 @@ public class EntityController : MonoBehaviour
     private float PlayerHitCooldown;
     private bool PlayerHitOffCooldown;
 
-    private Enemy enemy;
+    private Enemy enemy = null;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,19 +26,18 @@ public class EntityController : MonoBehaviour
     void OnCollisionEnter2D(Collision2D collision) {
 
         // Disables all collisions with the player if player collides with object.
-        if (collision.gameObject.tag != "Player") { return; }
-        else {
-            if (collision.gameObject.GetComponent<PlayerController>().GetAttackState() && PlayerHitOffCooldown)
-            {
-                enemy.TakeDamage(1);
-                Debug.Log(enemy.ReturnHP());
+        if (!collision.gameObject.CompareTag("Player")) 
+            return;
+        if (collision.gameObject.GetComponent<PlayerController>().GetAttackState() && PlayerHitOffCooldown && enemy != null)
+        {
+            enemy.TakeDamage(1);
+            Debug.Log(enemy.ReturnHP());
 
-                StartCoroutine(BasicAttackInvulnerability());
-            }
-            else {
-                GetComponent<Rigidbody2D>().isKinematic = true;
-                GetComponent<Collider2D>().isTrigger = true;
-            }
+            StartCoroutine(BasicAttackInvulnerability());
+        }
+        else {
+            GetComponent<Rigidbody2D>().isKinematic = true;
+            GetComponent<Collider2D>().isTrigger = true;
         }
 
         // Gives Entity Skills to the player upon touched if player is in liquid state.

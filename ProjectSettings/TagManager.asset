@@ -15,6 +15,7 @@ TagManager:
   - PlayerModel
   - DamageController
   - SkillUsageController
+  - Treasure
   layers:
   - Default
   - TransparentFX
