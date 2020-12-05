@@ -24,10 +24,8 @@ public class PlayerController : MonoBehaviour
     public float jumpForce = 5.0f;
     public bool isGrounded;
 
-    public bool isFacingRight;
-    private bool isMoving;
-
-    private float horizontalMovement = 1.0f;
+    private bool rightToggle;
+    private bool leftToggle;
 
     private Material material;
     public float liquidTransparency = 0.2f;
@@ -37,8 +35,10 @@ public class PlayerController : MonoBehaviour
 
     public SpriteRenderer playerSprite;
     private GameObject PlayerModel;
+    public Player player;
 
-    private Dictionary<Skill, int> skillLevels = new Dictionary<Skill, int>();
+    public Skill skill;
+    public GameObject skillPrefab;
 
     // Start is called before the first frame update
     void Start()
@@ -53,16 +53,53 @@ public class PlayerController : MonoBehaviour
         AttackCooldown = 1;
 
         rb = GetComponent<Rigidbody2D>();
-
         rb.freezeRotation = true;
         material = playerSprite.material;
 
         PlayerModel = GameObject.FindWithTag("PlayerModel");
+        player = GetComponent<Player>();
+
+        rightToggle = false;
+        leftToggle = false;
     }
 
     // Update is called once per frame
     void Update()
     {
+        // Basic Attack
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            if (AttackOffCooldown && !Liquified)
+            {
+                StartCoroutine(PrimeAttackState());
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha2)) {
+
+            // Prep on click to fire skill slotted into slot 2. aka skill = skill inside slot 2.
+
+            // Move this code onto an onclick event.
+            if (player.UseMatter(skill.GetMatterUsage())){
+                // Get component which contains the interface for using a skill.
+                ISkill skillInterface = skill.GetPrefab().GetComponent<ISkill>();
+
+                // Get mouse pointer position.
+                Vector2 screenPosition = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+                Vector2 worldPosition = Camera.main.ScreenToWorldPoint(screenPosition);
+
+                Vector3 targetPosition = new Vector3(worldPosition.x, worldPosition.y, 0.0f);
+                Vector3 targetDirection = (targetPosition - transform.position).normalized;
+
+                // Calls the interface method to trigger using a skill. If there's no target just send a random vector3 into the last parameter.
+                skillInterface.UseSkill(skill, gameObject, targetDirection);
+            }
+            else {
+                // No matter left so can't use skill.
+                Debug.Log("Out of matter!");
+            }
+        }
+
         //Check for keyboard inputs and assign the correct player movements and state changes.
         if (Input.GetKeyDown("space"))
         {
@@ -72,27 +109,31 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            if (AttackOffCooldown && !Liquified) {
-                StartCoroutine(PrimeAttackState());
-            }
-        }
-
+        // Player Jumping
         if ((Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W)) && isGrounded)
         {
             rb.AddForce(jump * jumpForce, ForceMode2D.Impulse);
             isGrounded = false;
         }
 
-        horizontalMovement = Input.GetAxis("Horizontal");
+        // Player Toggle right and left movement.
+        if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D))
+        {
+            rightToggle ^= true;
+            leftToggle = false;
+        }
+        else if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A)) {
+            leftToggle ^= true;
+            rightToggle = false;
+        }
 
-        if (horizontalMovement > 0)
+        // If right or left movement toggled, it will play the animation which also controls the movement.
+        if (rightToggle)
         {
             StartCoroutine(RightHeld());
             animator.SetBool("leftHeld", false);
         }
-        else if (horizontalMovement < 0) 
+        else if (leftToggle) 
         {
             animator.SetBool("rightHeld", false);
             StartCoroutine(LeftHeld());
@@ -123,6 +164,7 @@ public class PlayerController : MonoBehaviour
         LiquifiedOffCooldown ^= true;
     }
 
+    // Change attack state and indicators of attacking.
     private void ChangeAttackState()
     {
         AttackState ^= true;
@@ -141,6 +183,7 @@ public class PlayerController : MonoBehaviour
         material.color = color;
     }
 
+    // Updates the attack cooldown.
     private void UpdateAttackCooldown() 
     {
         AttackOffCooldown ^= true;
@@ -157,6 +200,7 @@ public class PlayerController : MonoBehaviour
         UpdateLiquifiedCooldown();
     }
 
+    // Allows the user to trigger an attack in the time frame of attackcooldown.
     IEnumerator PrimeAttackState() {
         ChangeAttackState();
         UpdateAttackCooldown();
@@ -187,6 +231,7 @@ public class PlayerController : MonoBehaviour
         isGrounded = true;
     }
 
+    // Ensures the animation plays out fully before triggering same animation.
     IEnumerator RightHeld() 
     {
         while (animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f)
@@ -195,6 +240,7 @@ public class PlayerController : MonoBehaviour
         }
         animator.SetBool("rightHeld", true);
     }
+
 
     IEnumerator LeftHeld() 
     {

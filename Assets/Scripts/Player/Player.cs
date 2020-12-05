@@ -5,10 +5,11 @@ using UnityEngine;
 public class Player : Unit
 
 {
-    public List<Skill> skills;
     public int maxMatter;
     public int matter;
     public float matterRegenRate;
+
+    public SkillList skills;
 
     void Start() 
     {
@@ -27,6 +28,19 @@ public class Player : Unit
         return matter;
     }
 
+    // For using skills, matter is consumed. Returns false if not enough matter is present.
+    public bool UseMatter(int matterUsage) {
+        if (matter < matterUsage)
+        {
+            return false;
+        }
+        else {
+            matter -= matterUsage;
+            return true;
+        }
+    }
+
+    // Passive matter regeneration coroutine.
     IEnumerator MatterRegeneration()
     {
         if (matter < maxMatter){
