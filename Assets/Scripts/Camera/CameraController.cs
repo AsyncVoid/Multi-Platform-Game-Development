@@ -26,6 +26,8 @@ public class CameraController : MonoBehaviour
     // Camera tracks player;
     private void LateUpdate()
     {
-        cameraTransform.position = new Vector3(playerTransform.position.x, playerTransform.position.y + 3, playerTransform.position.z - 5f);
+        cameraTransform.position = new Vector3(playerTransform.position.x,
+            playerTransform.position.y + 3f, 
+            playerTransform.position.z - 5f);
     }
 }
