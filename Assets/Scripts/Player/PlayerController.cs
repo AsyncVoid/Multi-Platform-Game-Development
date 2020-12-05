@@ -225,9 +225,12 @@ public class PlayerController : MonoBehaviour
     }
 
     // Check for player on ground.
-    public void OnCollisionStay2D()
+    public void OnCollisionStay2D(Collision2D collision)
     {
-        isGrounded = true;
+        if (collision.gameObject.tag == "Tilemap")
+        {
+            isGrounded = true;
+        }
     }
 
     // Ensures the animation plays out fully before triggering same animation.

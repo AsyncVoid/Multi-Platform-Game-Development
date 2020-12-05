@@ -5,22 +5,12 @@ using UnityEngine;
 
 public class EntityController : MonoBehaviour
 {
-    private float Speed;
-    private EnvironmentController environmentController;
-
-    private float PlayerHitCooldown;
-    private bool PlayerHitOffCooldown;
-
-    private Enemy enemy;
+    public Skill skill;
+    private Player player;
     // Start is called before the first frame update
     void Start()
     {
-        GameObject environment = GameObject.FindGameObjectWithTag("EnvironmentController");
-        environmentController = environment.GetComponent<EnvironmentController>();
-
-        enemy = GetComponent<Enemy>();
-        PlayerHitCooldown = 2f;
-        PlayerHitOffCooldown = true;
+        player = GameObject.FindWithTag("Player").GetComponent<Player>();
     }
 
     void OnCollisionEnter2D(Collision2D collision) {
@@ -35,8 +25,8 @@ public class EntityController : MonoBehaviour
     }
 
     // Trigger if player is one item and in state to eat.
-    void onTriggerStay2D(Collider2D collider) {
-        if (collider.gameObject.tag != "Player") { return; }
+    void OnTriggerStay2D(Collider2D collider) {
+        if (collider.gameObject.tag != "Player") {            return; }
         else if (collider.gameObject.GetComponent<PlayerController>().ReturnState())
         {
             StartCoroutine(EntityEaten());
@@ -57,6 +47,7 @@ public class EntityController : MonoBehaviour
         float timeElapsed = 0f;
         float time = 2f;
 
+        player.UpdateSkill(skill);
         // Moves entity towards center of player whilst reducing it's scale.
         while (timeElapsed < time)
         {
@@ -70,17 +61,6 @@ public class EntityController : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
 
         Destroy(gameObject);
-    }
-
-    IEnumerator BasicAttackInvulnerability()
-    {
-        ChangeBasicInvulState();
-        yield return new WaitForSeconds(PlayerHitCooldown);
-        ChangeBasicInvulState();
-    }
-
-    private void ChangeBasicInvulState() {
-        PlayerHitOffCooldown ^= true;
     }
 
     void FixedUpdate()
