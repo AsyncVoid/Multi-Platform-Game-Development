@@ -938,6 +938,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerController
       objectReference: {fileID: 0}
+    - target: {fileID: 3834196451490226922, guid: 9787173785da9f74cb1fb45386e85a82, type: 3}
+      propertyPath: skill
+      value: 
+      objectReference: {fileID: 11400000, guid: 5bed6c171fcdbbd4eb71d881fda69d05, type: 2}
     - target: {fileID: 3834196451490226923, guid: 9787173785da9f74cb1fb45386e85a82, type: 3}
       propertyPath: maxHP
       value: 10

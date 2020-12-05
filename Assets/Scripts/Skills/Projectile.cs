@@ -98,12 +98,12 @@ public class Projectile : MonoBehaviour, ISkill
 
     // Method for the interface ISkill, Put logic to start up a prefab of the skill.
     public void UseSkill(Skill skillUsed, GameObject entity, Vector3 targetDirection) {
-        sourceObject = entity;
         Projectile selfRef = Instantiate(this, entity.transform.position, Quaternion.identity);
 
-        // Needs to assign variables this way to the initialised prefab. No idea why sourceObject doesn't need to do it...
+        // Needs to assign variables this way to the initialised prefab.
         selfRef.GetComponent<Projectile>().skill = skillUsed;
         selfRef.GetComponent<Projectile>().projectileDirection = targetDirection;
+        selfRef.GetComponent<Projectile>().sourceObject = entity;
     }
 
     // Projectile hit method.
