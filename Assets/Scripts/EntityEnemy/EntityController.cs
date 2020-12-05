@@ -5,58 +5,37 @@ using UnityEngine;
 
 public class EntityController : MonoBehaviour
 {
-    private float Speed;
-    private EnvironmentController environmentController;
+    public Skill skill;
+    private Player player;
 
-    private float PlayerHitCooldown;
-    private bool PlayerHitOffCooldown;
-
-    private Enemy enemy = null;
     // Start is called before the first frame update
     void Start()
     {
-        GameObject environment = GameObject.FindGameObjectWithTag("EnvironmentController");
-        environmentController = environment.GetComponent<EnvironmentController>();
-
-        enemy = GetComponent<Enemy>();
-        PlayerHitCooldown = 2f;
-        PlayerHitOffCooldown = true;
+        player = GameObject.FindWithTag("Player").GetComponent<Player>();
     }
 
     void OnCollisionEnter2D(Collision2D collision) {
 
-        // Disables all collisions with the player if player collides with object.
-        if (!collision.gameObject.CompareTag("Player")) 
-            return;
-        if (collision.gameObject.GetComponent<PlayerController>().GetAttackState() && PlayerHitOffCooldown && enemy != null)
+        // Disables all collisions with the player if player collides with object. Allows player to move over object.
+        if (collision.gameObject.tag != "Player") { return; }
+        else 
         {
-            enemy.TakeDamage(1);
-            Debug.Log(enemy.ReturnHP());
-
-            StartCoroutine(BasicAttackInvulnerability());
-        }
-        else {
             GetComponent<Rigidbody2D>().isKinematic = true;
             GetComponent<Collider2D>().isTrigger = true;
+
         }
+    }
 
-        // Gives Entity Skills to the player upon touched if player is in liquid state.
-        if (collision.gameObject.GetComponent<PlayerController>().ReturnState() && gameObject.GetComponent<Enemy>()) {
-            Player player = collision.gameObject.GetComponent<Player>();
-            Enemy enemy = gameObject.GetComponent<Enemy>();
-
-            // if (!player.skills.Contains(enemy.ReturnSkill()))
-               // player.skills.Add(enemy.ReturnSkill());
-
-            StartCoroutine(EntityEaten());
-        }
-
-        // Begins the Destruction of the entity.
-        else if (collision.gameObject.GetComponent<PlayerController>().ReturnState()) {
+    // Trigger if player is one item and in state to eat.
+    void OnTriggerStay2D(Collider2D collider) {
+        if (collider.gameObject.tag != "Player") {            return; }
+        else if (collider.gameObject.GetComponent<PlayerController>().ReturnState())
+        {
             StartCoroutine(EntityEaten());
         }
     }
 
+    // Returns item into it's hittable state.
     void OnTriggerExit2D(Collider2D collider) {
         if (collider.gameObject.tag != "Player") { return; }
         else {
@@ -70,6 +49,7 @@ public class EntityController : MonoBehaviour
         float timeElapsed = 0f;
         float time = 2f;
 
+        player.UpdateSkill(skill);
         // Moves entity towards center of player whilst reducing it's scale.
         while (timeElapsed < time)
         {
@@ -83,17 +63,6 @@ public class EntityController : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
 
         Destroy(gameObject);
-    }
-
-    IEnumerator BasicAttackInvulnerability()
-    {
-        ChangeBasicInvulState();
-        yield return new WaitForSeconds(PlayerHitCooldown);
-        ChangeBasicInvulState();
-    }
-
-    private void ChangeBasicInvulState() {
-        PlayerHitOffCooldown ^= true;
     }
 
     void FixedUpdate()

@@ -10,7 +10,7 @@ public class SkillList : ScriptableObject
     public List<Skill> skills;
 
     // Method to be called when entity is eaten for skill unlocking / progression.
-    public void addSkill(Skill skill) {
+    public void AddSkill(Skill skill) {
 
         // If skill already unlocked, increase skill progression.
         if (skills.Contains(skill)) {
@@ -22,5 +22,9 @@ public class SkillList : ScriptableObject
             skills.Add(skill);
             skill.IncrementSkillProgression();
         }
+
+        Debug.Log(skill);
     }
+
+
 }

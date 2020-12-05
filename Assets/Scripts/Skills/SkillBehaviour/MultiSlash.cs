@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Slash : MonoBehaviour, ISkill
+public class MultiSlash : MonoBehaviour, ISkill
 {
     // Start is called before the first frame update
     private Skill skill;
@@ -20,12 +20,14 @@ public class Slash : MonoBehaviour, ISkill
         StartCoroutine(DestroySelfAfterTime());
     }
 
-    void Update() {
+    void Update()
+    {
         if (leftOrRight < 0)
         {
             transform.localScale = new Vector3(-0.3f, 0.3f, 1.0f);
         }
-        else {
+        else
+        {
             transform.localScale = new Vector3(0.3f, 0.3f, 1.0f);
         }
     }
@@ -40,19 +42,21 @@ public class Slash : MonoBehaviour, ISkill
         {
             slashPlacement = new Vector3(entity.transform.position.x + 1.3f, entity.transform.position.y, entity.transform.position.z);
         }
-        else {
+        else
+        {
             slashPlacement = new Vector3(entity.transform.position.x - 1.3f, entity.transform.position.y, entity.transform.position.z);
         }
 
         // Instantiate the slash collider prefabs and assign variables.
-        Slash selfRef = Instantiate(this, slashPlacement, Quaternion.identity);
+        MultiSlash selfRef = Instantiate(this, slashPlacement, Quaternion.identity);
 
-        selfRef.GetComponent<Slash>().skill = skillUsed;
-        selfRef.GetComponent<Slash>().sourceObject = entity;
-        selfRef.GetComponent<Slash>().leftOrRight = leftOrRight;
+        selfRef.GetComponent<MultiSlash>().skill = skillUsed;
+        selfRef.GetComponent<MultiSlash>().sourceObject = entity;
+        selfRef.GetComponent<MultiSlash>().leftOrRight = leftOrRight;
     }
 
-    private void OnTriggerEnter2D(Collider2D other) {
+    private void OnTriggerEnter2D(Collider2D other)
+    {
         GameObject entityHit = other.gameObject;
 
         if (!hitConfirm)
@@ -64,19 +68,29 @@ public class Slash : MonoBehaviour, ISkill
             else if (entityHit.tag == "Enemy")
             {
                 Enemy enemy = entityHit.GetComponent<Enemy>();
-                Debug.Log(enemy);
-                damageController.DamageEnemy(skill, enemy);
+                int hits = Random.Range(1, 5);
+
+                for (int i = 0; i < hits; i++) {
+                    damageController.DamageEnemy(skill, enemy); 
+                }
+
                 hitConfirm = true;
             }
             else if (entityHit.tag == "Player")
             {
-                damageController.DamagePlayer(sourceObject.GetComponent<Enemy>());
+                int hits = Random.Range(1, 5);
+
+                for (int i = 0; i < hits; i++){
+                    damageController.DamagePlayer(sourceObject.GetComponent<Enemy>());
+                }
+
                 hitConfirm = true;
             }
         }
     }
 
-    IEnumerator DestroySelfAfterTime() {
+    IEnumerator DestroySelfAfterTime()
+    {
         yield return new WaitForSeconds(0.3f);
         Destroy(gameObject);
     }

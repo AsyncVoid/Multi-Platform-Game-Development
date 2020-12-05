@@ -69,7 +69,7 @@ MonoBehaviour:
   damage: 1
   maxHP: 5
   isDead: 0
-  enemySkill: {fileID: 11400000, guid: c49335a01d9ed42329809ed9d278faa9, type: 2}
+  enemySkill: {fileID: 11400000, guid: 5bed6c171fcdbbd4eb71d881fda69d05, type: 2}
 --- !u!114 &4769792464544838902
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -212,7 +212,7 @@ GameObject:
   - component: {fileID: 61368513597639598}
   m_Layer: 0
   m_Name: GroundSensor
-  m_TagString: Enemy
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -35,10 +35,9 @@ public class PlayerController : MonoBehaviour
 
     public SpriteRenderer playerSprite;
     private GameObject PlayerModel;
-    public Player player;
+    private Player player;
 
     public Skill skill;
-    public GameObject skillPrefab;
 
     // Start is called before the first frame update
     void Start()
@@ -143,8 +142,6 @@ public class PlayerController : MonoBehaviour
             animator.SetBool("rightHeld", false);
             animator.SetBool("leftHeld", false);
         }
-
-
     }
     // Switch between Liquidfied and Non Liquified state.
     private void ChangeLiquidState()
@@ -226,9 +223,12 @@ public class PlayerController : MonoBehaviour
     }
 
     // Check for player on ground.
-    public void OnCollisionStay2D()
+    public void OnCollisionStay2D(Collision2D collision)
     {
-        isGrounded = true;
+        if (collision.gameObject.tag == "Tilemap")
+        {
+            isGrounded = true;
+        }
     }
 
     // Ensures the animation plays out fully before triggering same animation.

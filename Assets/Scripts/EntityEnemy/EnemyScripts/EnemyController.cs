@@ -21,12 +21,11 @@ public class EnemyController : MonoBehaviour
     {
         GameObject environment = GameObject.FindGameObjectWithTag("EnvironmentController");
         environmentController = environment.GetComponent<EnvironmentController>();
+        animator = GetComponent<Animator>();
 
         enemy = GetComponent<Enemy>();
         PlayerHitCooldown = 2f;
         PlayerHitOffCooldown = true;
-
-        animator = GetComponent<Animator>();
     }
 
     void OnCollisionEnter2D(Collision2D collision)
@@ -40,7 +39,6 @@ public class EnemyController : MonoBehaviour
                 GameObject player = collision.gameObject;
 
                 enemy.TakeDamage(collision.gameObject.GetComponent<Player>().ReturnDmg());
-                Debug.Log(enemy.ReturnHP());
 
                 Vector3 playerDirection = (player.transform.position - transform.position).normalized;
                 float direction = Vector3.Dot(playerDirection, Vector3.right);
@@ -53,30 +51,34 @@ public class EnemyController : MonoBehaviour
             }
         }
 
-        // Gives Entity Skills to the player upon touched if player is in liquid state.
-        if (collision.gameObject.GetComponent<PlayerController>().ReturnState() && gameObject.GetComponent<Enemy>())
-        {
-            Player player = collision.gameObject.GetComponent<Player>();
-            Enemy enemy = gameObject.GetComponent<Enemy>();
-
-            // if (!player.skills.Contains(enemy.ReturnSkill()))
-                // player.skills.Add(enemy.ReturnSkill());
-
-            StartCoroutine(EntityEaten());
-        }
-
-        // Begins the Destruction of the entity.
-        else if (collision.gameObject.GetComponent<PlayerController>().ReturnState())
+        // Checks if enemy is dead and player in eatable state.
+        if (collision.gameObject.GetComponent<PlayerController>().ReturnState() && enemy.ReturnDeathStatus())
         {
             StartCoroutine(EntityEaten());
         }
     }
 
+    // Eats if player is still colliding (prevents soft locking if trapped on both sides)
+    void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag != "Player") { return; }
+        else
+        {
+            if (collision.gameObject.GetComponent<PlayerController>().ReturnState() && enemy.ReturnDeathStatus())
+            {
+                StartCoroutine(EntityEaten());
+            }
+        }
+    }
+
     IEnumerator EntityEaten()
     {
-
         float timeElapsed = 0f;
         float time = 2f;
+
+        // Gains skill.
+        Player player = GameObject.FindWithTag("Player").GetComponent<Player>();
+        player.UpdateSkill(enemy.ReturnSkill());
 
         // Moves entity towards center of player whilst reducing it's scale.
         while (timeElapsed < time)

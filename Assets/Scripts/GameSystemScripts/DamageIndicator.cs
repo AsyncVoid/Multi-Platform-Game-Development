@@ -14,7 +14,7 @@ public class DamageIndicator : MonoBehaviour
 
     void Start() {
         StartCoroutine(DestroySelf());
-        transform.position += new Vector3(0.0f, 1.0f, 0.0f);
+        transform.position += new Vector3(Random.Range(0.0f, 1.0f), 1.0f, 0.0f);
     }
 
     // Update is called once per frame
@@ -27,8 +27,12 @@ public class DamageIndicator : MonoBehaviour
         damageInd.text = text;
     }
 
+    public void HealColour() {
+        damageInd.color = Color.green;
+    }
+
     IEnumerator DestroySelf() {
-        yield return new WaitForSeconds(3.0f);
+        yield return new WaitForSeconds(1.5f);
         Destroy(gameObject);
     }
 

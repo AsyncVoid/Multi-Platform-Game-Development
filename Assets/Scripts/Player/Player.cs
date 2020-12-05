@@ -40,6 +40,10 @@ public class Player : Unit
         }
     }
 
+    public void UpdateSkill(Skill skill) {
+        skills.AddSkill(skill);
+    }
+
     // Passive matter regeneration coroutine.
     IEnumerator MatterRegeneration()
     {

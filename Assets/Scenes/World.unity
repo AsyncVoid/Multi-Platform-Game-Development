@@ -523,7 +523,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &222155485
 GameObject:
@@ -3414,7 +3414,7 @@ PrefabInstance:
     - target: {fileID: 3834196451490226922, guid: 9787173785da9f74cb1fb45386e85a82, type: 3}
       propertyPath: skill
       value: 
-      objectReference: {fileID: 11400000, guid: 5bed6c171fcdbbd4eb71d881fda69d05, type: 2}
+      objectReference: {fileID: 11400000, guid: 10d2a6d4ddf9e8f43ad139768b4cd6d5, type: 2}
     - target: {fileID: 3834196451490226923, guid: 9787173785da9f74cb1fb45386e85a82, type: 3}
       propertyPath: maxHP
       value: 10
@@ -3500,6 +3500,10 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 519420031}
+    - target: {fileID: 9117630088198315968, guid: 818b6892dc58d47b3a498fc93d253941, type: 3}
+      propertyPath: m_PixelPerfect
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9117630088198315971, guid: 818b6892dc58d47b3a498fc93d253941, type: 3}
       propertyPath: m_Pivot.x
       value: 0

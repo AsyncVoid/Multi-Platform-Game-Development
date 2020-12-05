@@ -16,6 +16,8 @@ public class Projectile : MonoBehaviour, ISkill
     public GameObject sourceObject;
     private Skill skill;
 
+    private bool hitConfirm;
+
     private DamageController damageController;
 
     
@@ -30,6 +32,7 @@ public class Projectile : MonoBehaviour, ISkill
         StartCoroutine(DestroySelf());
 
         charged = false;
+        hitConfirm = false;
     }
 
     // Update is called once per frame
@@ -111,27 +114,33 @@ public class Projectile : MonoBehaviour, ISkill
         GameObject entityHit = other.gameObject;
 
         // Different effects for hitting different objects.
-        
+
         // Ensures object doesn't die when being fired from the entity.
-        if (entityHit == sourceObject) { return; }
-
-        // Destroy on ground collision.
-        else if (entityHit.tag == "Tilemap")
+        if (!hitConfirm)
         {
-            StartCoroutine(DestroySelfCollision());
-        }
+            if (entityHit == sourceObject) { return; }
 
-        // If an enemy uses this skill and hits a player, following is ran.
-        else if (entityHit.tag == "Player") {
-            StartCoroutine(DestroySelfCollision());
-            damageController.DamagePlayer(sourceObject.GetComponent<Enemy>());
-        }
+            // Destroy on ground collision.
+            else if (entityHit.tag == "Tilemap")
+            {
+                StartCoroutine(DestroySelfCollision());
+            }
 
-        // If player hits enemy (potential enemy friendly fire).
-        else if (entityHit.tag == "Enemy")
-        {
-            StartCoroutine(DestroySelfCollision());
-            damageController.DamageEnemy(skill, entityHit.GetComponent<Enemy>());
+            // If an enemy uses this skill and hits a player, following is ran.
+            else if (entityHit.tag == "Player")
+            {
+                StartCoroutine(DestroySelfCollision());
+                damageController.DamagePlayer(sourceObject.GetComponent<Enemy>());
+                hitConfirm = true;
+            }
+
+            // If player hits enemy (potential enemy friendly fire).
+            else if (entityHit.tag == "Enemy")
+            {
+                StartCoroutine(DestroySelfCollision());
+                damageController.DamageEnemy(skill, entityHit.GetComponent<Enemy>());
+                hitConfirm = true;
+            }
         }
     }
 
