@@ -7,6 +7,7 @@ public class EntityController : MonoBehaviour
 {
     public Skill skill;
     private Player player;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,6 +22,7 @@ public class EntityController : MonoBehaviour
         {
             GetComponent<Rigidbody2D>().isKinematic = true;
             GetComponent<Collider2D>().isTrigger = true;
+
         }
     }
 

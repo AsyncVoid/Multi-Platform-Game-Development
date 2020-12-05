@@ -3,10 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using Object = System.Object;
 
 public class MapGenerator : MonoBehaviour
 {
     public int seed = 1337;
+    [Range(0, 1)]
     public float frequency = 0.01f;
     public int min = 0;
     public int max = 10;
@@ -15,9 +17,20 @@ public class MapGenerator : MonoBehaviour
     public TileBase groundM;
     public TileBase groundT;
     public int screenTileWidth = 30;
+    [Range(0, 1)]
+    public float enemyChance = 0.5f;
+    public int enemyEvery = 16;
+    public GameObject[] enemies = new GameObject[0];
+    [Range(0, 1)]
+    public float treasureChance = 0.5f;
+    public int treasureEvery = 16;
+    public GameObject[] treasures = new GameObject[0];
+    public Dictionary<float, float> test;
     private FastNoiseLite groundNoise = null;
     private FastNoiseLite caveNoise = null;
     private FastNoiseLite biomeNoise = null;
+    private FastNoiseLite treasureNoise = null;
+    private FastNoiseLite enemyNoise = null;
     private Tilemap tileMap;
     private Transform trackingTransform;
 
@@ -38,15 +51,30 @@ public class MapGenerator : MonoBehaviour
         caveNoise.SetFractalLacunarity(2f);
         caveNoise.SetFractalGain(0.5f);
         biomeNoise = new FastNoiseLite(~seed - seed);
-        //biomeNoise.SetNoiseType(FastNoiseLite.NoiseType.Cellular);
         biomeNoise.SetNoiseType(FastNoiseLite.NoiseType.OpenSimplex2S);
         biomeNoise.SetFrequency(0.005f);
         biomeNoise.SetFractalType(FastNoiseLite.FractalType.FBm);
         biomeNoise.SetFractalOctaves(1);
         biomeNoise.SetFractalLacunarity(2f);
         biomeNoise.SetFractalGain(0.5f);
+        //Could also have the biomes be cellular noise
+        //biomeNoise.SetNoiseType(FastNoiseLite.NoiseType.Cellular);
         //biomeNoise.SetCellularDistanceFunction(FastNoiseLite.CellularDistanceFunction.Hybrid);
         //biomeNoise.SetCellularReturnType(FastNoiseLite.CellularReturnType.CellValue);
+        treasureNoise = new FastNoiseLite(seed);
+        treasureNoise.SetNoiseType(FastNoiseLite.NoiseType.Value);
+        treasureNoise.SetFractalType(FastNoiseLite.FractalType.None);
+        treasureNoise.SetFrequency(0.2f);
+        treasureNoise.SetFractalOctaves(2);
+        treasureNoise.SetFractalLacunarity(2f);
+        treasureNoise.SetFractalGain(0.5f);
+        enemyNoise = new FastNoiseLite(~seed);
+        enemyNoise.SetNoiseType(FastNoiseLite.NoiseType.Value);
+        treasureNoise.SetFractalType(FastNoiseLite.FractalType.None);
+        enemyNoise.SetFrequency(0.2f);
+        enemyNoise.SetFractalOctaves(2);
+        enemyNoise.SetFractalLacunarity(2f);
+        enemyNoise.SetFractalGain(0.5f);
     }
 
     // Start is called before the first frame update
@@ -61,29 +89,11 @@ public class MapGenerator : MonoBehaviour
 
     void GenerateColumn(int x)
     {
-        /*int height = getHeight(x);
-        float hP = (height + min) / max;
-
-        for (int y = min; y <= max; y++)
-        {
-            float caveNoiseF = (caveNoise.GetNoise(x, y)+1f)/2f;
-            float yP = (min + y) / max;
-            caveNoiseF *= (float)hP/yP;
-            //Debug.Log("x: " + x + " y: " + y + " caveNoise: " + caveNoiseF);
-            if (y < height && caveNoiseF > 0.6f)
-                tileMap.SetTile(new Vector3Int(x, y, 0), null);
-            else if (y < height)
-                tileMap.SetTile(new Vector3Int(x, y, 0), groundM);
-            else if (y == height)
-                tileMap.SetTile(new Vector3Int(x, y, 0), groundT);
-            else
-                tileMap.SetTile(new Vector3Int(x, y, 0), null);
-        }*/
-
+        int height = getHeight(x);
         for(int y = min; y <= max; y++)
         {
             Vector3Int pos = new Vector3Int(x, y, 0);
-            BlockType blockType = getBlockType(x, y);
+            BlockType blockType = getBlockType(height, x, y);
             switch(blockType)
             {
                 case BlockType.NOTHING:
@@ -123,18 +133,19 @@ public class MapGenerator : MonoBehaviour
             }
             tileMap.SetTileFlags(pos, TileFlags.LockColor);
         }
+        doTreasure(x, height + 1);
+        doEnemySpawn(x, height + 1);
     }
 
-    enum BlockType
+    public enum BlockType
     {
         TOP,
         GROUND,
         NOTHING
     }
 
-    private BlockType getBlockType(int x, int y)
+    private BlockType getBlockType(int height, int x, int y)
     {
-        int height = getHeight(x);
         float hP = (height + min) / max;
         float caveNoiseF = (caveNoise.GetNoise(x, y) + 1f) / 2f;
         float yP = (min + y) / max;
@@ -152,7 +163,7 @@ public class MapGenerator : MonoBehaviour
 
     //Put the biomes in order from coldest to hottest
     //then reserve some at the end to stop them being surface biomes
-    enum BiomeType
+    public enum BiomeType
     {
         TAIGA,
         PLAINS,
@@ -165,7 +176,7 @@ public class MapGenerator : MonoBehaviour
     private static readonly Array biomeTypeValues = Enum.GetValues(typeof(BiomeType));
     private static readonly int biomeTypeValuesLength = biomeTypeValues.Length - 1; //-1 to remove caves
 
-    private BiomeType GetBiomeType(int x, int y)
+    public BiomeType GetBiomeType(int x, int y)
     {
         int height = getHeight(x);
         if (y < height - 3)
@@ -198,14 +209,80 @@ public class MapGenerator : MonoBehaviour
         return (int) (normal * (max - min)) + min;
     }
 
+    void doTreasure(int x, int y) {
+        bool doTreasure = treasures.Length > 0 && x % treasureEvery == 0;
+        if(doTreasure)
+        {
+            int scope = (int) (treasures.Length / treasureChance);
+            float normalised = ((treasureNoise.GetNoise(x, y) + 1f) / 2f); //0-1
+            int treasureResult = (int)(normalised * scope);
+            if(treasureResult < 0 || treasureResult >= treasures.Length)
+                return;
+            int treasureId = treasureResult;
+            GameObject treasureItem = treasures[treasureId];
+            if(treasureItem != null)
+                Instantiate(treasureItem, new Vector3(x+0.5f, y+0.5f, 0), Quaternion.identity);
+        }
+    }
+    
+    void doEnemySpawn(int x, int y)
+    {
+        if(enemies.Length > 0 && (x+6) % enemyEvery == 0) //offset x
+        {
+            int scope = (int) (enemies.Length / enemyChance);
+            float normalised = ((enemyNoise.GetNoise(x, y) + 1f) / 2f); //0-1
+            int enemyResult = (int)(normalised * scope);
+            if(enemyResult < 0 || enemyResult >= enemies.Length)
+                return;
+            int enemyId = enemyResult;
+            GameObject enemy = enemies[enemyId];
+            if(enemy != null)
+                Instantiate(enemy, new Vector3(x+0.5f, y+1.5f, 0), Quaternion.identity);
+        }
+    }
+
+    private int lastX = 0;
+    private float lastRemove = 0;
+
     // Update is called once per frame
     void Update()
     {
+        lastRemove += Time.deltaTime;
         Vector3 playerPos = trackingTransform.position;
-        int playerX = (int)playerPos.x;
-        ClearColumn(playerX + screenTileWidth + 1);
-        ClearColumn(playerX - screenTileWidth - 1);
-        GenerateColumn(playerX + screenTileWidth);
-        GenerateColumn(playerX - screenTileWidth);
+        int playerX = (int) playerPos.x;
+        if (playerX != lastX)
+        {
+            ClearColumn(playerX + screenTileWidth + 1);
+            ClearColumn(playerX - screenTileWidth - 1);
+            GenerateColumn(playerX + screenTileWidth);
+            GenerateColumn(playerX - screenTileWidth);
+        }
+
+        lastX = playerX;
+        if (lastRemove > 2f) //every 2s
+        {
+            removeFallen();
+            lastRemove = 0;
+        }
+    }
+
+    void removeFallen()
+    {
+        GameObject[] treasureItems = GameObject.FindGameObjectsWithTag("Treasure");
+        foreach (var tI in treasureItems)
+        {
+            Transform tra = tI.GetComponent<Transform>();
+            if(tra.position.y < min - 10) {
+                Destroy(tI);
+            }
+        }
+        GameObject[] allEnemies = GameObject.FindGameObjectsWithTag("Enemy");
+        foreach (var enemy in allEnemies)
+        {
+            Transform tra = enemy.GetComponent<Transform>();
+            if(tra.position.y < min - 10) {
+                Destroy(enemy);
+            }
+        }
     }
 }
