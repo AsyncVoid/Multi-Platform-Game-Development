@@ -52,9 +52,22 @@ public class EnemyController : MonoBehaviour
         }
 
         // Checks if enemy is dead and player in eatable state.
-        if (collision.gameObject.GetComponent<PlayerController>().ReturnState())
+        if (collision.gameObject.GetComponent<PlayerController>().ReturnState() && enemy.ReturnDeathStatus())
         {
             StartCoroutine(EntityEaten());
+        }
+    }
+
+    // Eats if player is still colliding (prevents soft locking if trapped on both sides)
+    void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag != "Player") { return; }
+        else
+        {
+            if (collision.gameObject.GetComponent<PlayerController>().ReturnState() && enemy.ReturnDeathStatus())
+            {
+                StartCoroutine(EntityEaten());
+            }
         }
     }
 

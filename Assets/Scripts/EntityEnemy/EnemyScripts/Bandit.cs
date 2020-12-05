@@ -134,7 +134,7 @@ public class Bandit : MonoBehaviour
 
         // -- Handle Animations --
         //Death
-        if (enemy.returnDeathStatus())
+        if (enemy.ReturnDeathStatus())
         {
             m_isDead = true;
         }

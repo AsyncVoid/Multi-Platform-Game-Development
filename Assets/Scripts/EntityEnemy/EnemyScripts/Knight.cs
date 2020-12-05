@@ -135,7 +135,7 @@ public class Knight : MonoBehaviour
 
         // -- Handle Animations --
         //Death
-        if (enemy.returnDeathStatus())
+        if (enemy.ReturnDeathStatus())
         {
             m_isDead = true;
         }

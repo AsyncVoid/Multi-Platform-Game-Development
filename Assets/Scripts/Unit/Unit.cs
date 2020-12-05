@@ -13,6 +13,7 @@ public class Unit : MonoBehaviour
 	void Awake()
 	{
 		currentHP = maxHP;
+		isDead = false;
 	}
 
 	// Unit health removal function.
@@ -34,7 +35,7 @@ public class Unit : MonoBehaviour
 		return currentHP;
 	}
 
-	public bool returnDeathStatus() {
+	public bool ReturnDeathStatus() {
 		return isDead;
 	}
 
