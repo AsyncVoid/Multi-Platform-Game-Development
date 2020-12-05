@@ -64,7 +64,6 @@ public class Slash : MonoBehaviour, ISkill
             else if (entityHit.tag == "Enemy")
             {
                 Enemy enemy = entityHit.GetComponent<Enemy>();
-                Debug.Log(enemy);
                 damageController.DamageEnemy(skill, enemy);
                 hitConfirm = true;
             }
