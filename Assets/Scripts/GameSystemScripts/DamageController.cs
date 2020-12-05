@@ -22,7 +22,6 @@ public class DamageController : MonoBehaviour
     // Method to be used if skill hits an enemy.
     public void DamageEnemy(Skill skill, Enemy enemy)
     {
-
         int calcNum = skill.skillTierBase();
         enemy.TakeDamage(calcNum);
 
