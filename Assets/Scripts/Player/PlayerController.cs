@@ -35,10 +35,9 @@ public class PlayerController : MonoBehaviour
 
     public SpriteRenderer playerSprite;
     private GameObject PlayerModel;
-    public Player player;
+    private Player player;
 
     public Skill skill;
-    public GameObject skillPrefab;
 
     // Start is called before the first frame update
     void Start()
