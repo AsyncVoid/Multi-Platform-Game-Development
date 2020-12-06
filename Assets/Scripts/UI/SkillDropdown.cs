@@ -1,3 +1,4 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -25,6 +26,16 @@ public class SkillDropdown : MonoBehaviour
 
         skillDropdown = GetComponent<Dropdown>();
 
+        UpdateDropdown();
+    }
+
+    void Update()
+    {
+        UpdateDropdown();
+    }
+
+    public void UpdateDropdown()
+    {
         skillDropdown.options.Clear();
 
         // Placeholder label

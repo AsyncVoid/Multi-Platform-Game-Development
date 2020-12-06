@@ -8,6 +8,8 @@ public class HotkeyMenu : MonoBehaviour
     private GameObject[] dropdownObjects;
     private SkillDropdown[] skillDropdowns; // Array of dropdowns which contains list of player skills (Options)
     private MenuController menuController;
+    private Player player;
+
 
     void Start()
     {
@@ -19,6 +21,11 @@ public class HotkeyMenu : MonoBehaviour
         }
     }
 
+    void Update()
+    {
+        for(int i = 0;i<dropdownObjects.Length;i++){
+            skillDropdowns[i] = dropdownObjects[i].GetComponent<SkillDropdown>();
+        } 
+    }
+
 }
-
-

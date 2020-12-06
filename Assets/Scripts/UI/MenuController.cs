@@ -35,10 +35,11 @@ public class MenuController : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.M)){
             if(!SkillsMenu.gameObject.activeSelf && !HotkeyMenu.gameObject.activeSelf){
-            SkillsMenu.gameObject.SetActive(true);
-            HotkeyMenu.gameObject.SetActive(true);
-
                 PauseGame();
+                SkillsMenu.gameObject.SetActive(true);
+                HotkeyMenu.gameObject.SetActive(true);
+                
+                
             }
                 
             else{
@@ -50,7 +51,7 @@ public class MenuController : MonoBehaviour
         
     }
 
-    private void PauseGame()
+    void PauseGame()
     {
         isPaused = true;
         Time.timeScale = 0;
@@ -58,7 +59,7 @@ public class MenuController : MonoBehaviour
         //Disable scripts that still work while timescale is set to 0
     } 
 
-    private void ContinueGame()
+    void ContinueGame()
     {
         isPaused = false;
         Time.timeScale = 1;
