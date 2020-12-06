@@ -16,8 +16,8 @@ public class EntityController : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision) {
 
-        // Disables all collisions with the player if player collides with object. Allows player to move over object.
-        if (collision.gameObject.tag != "Player") { return; }
+        // Disables all collisions with the player / enemy if player collides with object. Allows player to move over object.
+        if (collision.gameObject.tag != "Player" && collision.gameObject.tag != "Enemy" && collision.gameObject.tag != "EntityIgnore") { return; }
         else 
         {
             GetComponent<Rigidbody2D>().isKinematic = true;
@@ -28,7 +28,7 @@ public class EntityController : MonoBehaviour
 
     // Trigger if player is one item and in state to eat.
     void OnTriggerStay2D(Collider2D collider) {
-        if (collider.gameObject.tag != "Player") {            return; }
+        if (collider.gameObject.tag != "Player") { return; }
         else if (collider.gameObject.GetComponent<PlayerController>().ReturnState())
         {
             StartCoroutine(EntityEaten());
@@ -37,7 +37,7 @@ public class EntityController : MonoBehaviour
 
     // Returns item into it's hittable state.
     void OnTriggerExit2D(Collider2D collider) {
-        if (collider.gameObject.tag != "Player") { return; }
+        if (collider.gameObject.tag != "Player" && collider.gameObject.tag != "Enemy" && collider.gameObject.tag != "EntityIgnore") { return; }
         else {
             GetComponent<Rigidbody2D>().isKinematic = false;
             GetComponent<Collider2D>().isTrigger = false;
