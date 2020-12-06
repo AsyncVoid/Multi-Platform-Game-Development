@@ -3504,6 +3504,10 @@ PrefabInstance:
       propertyPath: m_PixelPerfect
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9117630088198315969, guid: 818b6892dc58d47b3a498fc93d253941, type: 3}
+      propertyPath: m_ScaleFactor
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 9117630088198315971, guid: 818b6892dc58d47b3a498fc93d253941, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -3591,6 +3595,22 @@ PrefabInstance:
     - target: {fileID: 9117630088198315975, guid: 818b6892dc58d47b3a498fc93d253941, type: 3}
       propertyPath: m_Name
       value: BattleHUD
+      objectReference: {fileID: 0}
+    - target: {fileID: 9117630088552669438, guid: 818b6892dc58d47b3a498fc93d253941, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 9117630088552669438, guid: 818b6892dc58d47b3a498fc93d253941, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 9117630088552669438, guid: 818b6892dc58d47b3a498fc93d253941, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -16.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 9117630088552669438, guid: 818b6892dc58d47b3a498fc93d253941, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 18.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 818b6892dc58d47b3a498fc93d253941, type: 3}
