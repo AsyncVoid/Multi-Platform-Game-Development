@@ -15,10 +15,15 @@ public class MenuController : MonoBehaviour
     void Start()
     {
         Dictionary<string, Skill> hotkeyDict = new Dictionary<string, Skill>();
+
+        for (int i = 2; i <= 4; i++) {
+            hotkeyDict.Add(i.ToString(), null);
+        }
+
         isPaused = false;
 
         SkillsMenu = GameObject.FindGameObjectWithTag("SkillsMenu").GetComponent<SkillsMenu>();
-        HotkeyMenu = GameObject.FindGameObjectWithTag("HotkeyMenu").GetComponent<HotkeyMenu>();
+        HotkeyMenu = GameObject.FindGameObjectWithTag("HotKeyMenu").GetComponent<HotkeyMenu>();
         playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
 
         SkillsMenu.gameObject.SetActive(false);
@@ -52,6 +57,7 @@ public class MenuController : MonoBehaviour
         playerController.enabled = false;
         //Disable scripts that still work while timescale is set to 0
     } 
+
     private void ContinueGame()
     {
         isPaused = false;

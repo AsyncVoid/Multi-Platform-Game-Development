@@ -11461,7 +11461,7 @@ GameObject:
   - component: {fileID: 2511870165625609602}
   m_Layer: 5
   m_Name: HotkeyMenu
-  m_TagString: HotkeyMenu
+  m_TagString: HotKeyMenu
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -13566,6 +13566,10 @@ PrefabInstance:
     - target: {fileID: 3834196451490226916, guid: 9787173785da9f74cb1fb45386e85a82, type: 3}
       propertyPath: m_Name
       value: PlayerController
+      objectReference: {fileID: 0}
+    - target: {fileID: 3834196451490226922, guid: 9787173785da9f74cb1fb45386e85a82, type: 3}
+      propertyPath: hotkeys.Array.size
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3834196451490226922, guid: 9787173785da9f74cb1fb45386e85a82, type: 3}
       propertyPath: skill

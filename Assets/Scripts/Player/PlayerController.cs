@@ -40,9 +40,6 @@ public class PlayerController : MonoBehaviour
     public Skill skill;
     private MenuController menuController;
     public Dictionary<string, Skill> hm;
-    public List<string> hotkeys; 
-
-
 
     // Start is called before the first frame update
     void Start()
@@ -68,9 +65,6 @@ public class PlayerController : MonoBehaviour
         
         menuController = GameObject.FindGameObjectWithTag("MenuController").GetComponent<MenuController>();
         hm = menuController.hotkeyDict;
-        hotkeys = new List<string>(hm.Keys);
-
-
     }
 
     // Update is called once per frame
@@ -85,13 +79,27 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        // Use Skill
-        for(int i = 0;i<hotkeys.Count;i++){
-            if(Input.GetKeyDown(hotkeys[i])){
-                skill = hm[hotkeys[i]];
-                // Prep on click to fire skill slotted into slot 2. aka skill = skill inside slot 2.
-                // Move this code onto an onclick event.
-                if (player.UseMatter(skill.GetMatterUsage())){
+        else if (Input.GetKeyDown(KeyCode.Alpha2)) {
+            skill = hm["2"];
+        }
+
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            skill = hm["3"];
+        }
+
+        else if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            skill = hm["4"];
+        }
+
+        //Check for mouse click to use skill.
+
+        if (Input.GetMouseButtonDown(0)) {
+            if (!(skill is null))
+            {
+                if (player.UseMatter(skill.GetMatterUsage()))
+                {
                     // Get component which contains the interface for using a skill.
                     ISkill skillInterface = skill.GetPrefab().GetComponent<ISkill>();
 
@@ -105,7 +113,8 @@ public class PlayerController : MonoBehaviour
                     // Calls the interface method to trigger using a skill. If there's no target just send a random vector3 into the last parameter.
                     skillInterface.UseSkill(skill, gameObject, targetDirection);
                 }
-                else {
+                else
+                {
                     // No matter left so can't use skill.
                     Debug.Log("Out of matter!");
                 }
