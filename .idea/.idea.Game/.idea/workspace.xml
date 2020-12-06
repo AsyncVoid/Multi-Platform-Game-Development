@@ -20,27 +20,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="247ca1ea-a101-4552-9246-83c3417ad6ff" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/Assets/Prefab/HeavyBandit.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefab/HeavyBandit.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefab/LightBandit.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefab/LightBandit.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefab/RedGem.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefab/RedGem.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/EntityEnemy/EntityController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/EntityEnemy/EntityController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameSystemScripts/DamageController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameSystemScripts/DamageController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Map/MapGenerator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Map/MapGenerator.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Sprites/CoinsGems/Gem.controller" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Sprites/CoinsGems/Gem.controller.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Sprites/CoinsGems/MonedaD.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/CoinsGems/MonedaD.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Sprites/CoinsGems/MonedaP.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/CoinsGems/MonedaP.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Sprites/CoinsGems/Red Gem Animation.anim" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Sprites/CoinsGems/Red Gem Animation.anim.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Sprites/CoinsGems/spr_coin_ama.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/CoinsGems/spr_coin_ama.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Sprites/CoinsGems/spr_coin_azu.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/CoinsGems/spr_coin_azu.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Sprites/CoinsGems/spr_coin_gri.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/CoinsGems/spr_coin_gri.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Sprites/CoinsGems/spr_coin_strip4.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/CoinsGems/spr_coin_strip4.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Game/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Game/.idea/contentModel.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Game/.idea/indexLayout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Game/.idea/indexLayout.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Game/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Game/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Camera/Parallax.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Camera/Parallax.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Packages/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/manifest.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Packages/packages-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/packages-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectVersion.txt" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectVersion.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,9 +46,9 @@
       <list>
         <option value="$PROJECT_DIR$/Assets/Scripts/EntityEnemy/EntityController.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/GameSystemScripts/DamageController.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Camera/Parallax.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Map/MapGenerator.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Camera/BackgroundSwitcher.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Camera/Parallax.cs" />
       </list>
     </option>
   </component>

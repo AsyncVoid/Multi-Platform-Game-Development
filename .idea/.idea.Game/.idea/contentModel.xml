@@ -14,7 +14,6 @@
             <e p="Readme.txt" t="Include" />
           </e>
         </e>
-        <e p="DamageIndicator.cs" t="Include" />
         <e p="Materials" t="Include">
           <e p="Font" t="Include">
             <e p="press-start" t="Include">
@@ -23,20 +22,26 @@
           </e>
         </e>
         <e p="Scripts" t="Include">
-          <e p="Bandit.cs" t="Include" />
           <e p="Camera" t="Include">
             <e p="BackgroundSwitcher.cs" t="Include" />
             <e p="CameraController.cs" t="Include" />
             <e p="Parallax.cs" t="Include" />
           </e>
           <e p="EntityEnemy" t="Include">
-            <e p="AttackSensor.cs" t="Include" />
-            <e p="EnemyController.cs" t="Include" />
+            <e p="EnemyScripts" t="Include">
+              <e p="AttackSensor.cs" t="Include" />
+              <e p="Bandit.cs" t="Include" />
+              <e p="EnemyController.cs" t="Include" />
+              <e p="Knight.cs" t="Include" />
+              <e p="Sensor_Bandit.cs" t="Include" />
+            </e>
             <e p="EntityController.cs" t="Include" />
             <e p="EntitySpawner.cs" t="Include" />
+            <e p="HealingWheat.cs" t="Include" />
           </e>
           <e p="GameSystemScripts" t="Include">
             <e p="DamageController.cs" t="Include" />
+            <e p="DamageIndicator.cs" t="Include" />
             <e p="EnvironmentScripts" t="Include">
               <e p="EnvironmentController.cs" t="Include" />
               <e p="SpawnFloorSprite.cs" t="Include" />
@@ -56,11 +61,14 @@
             <e p="SkillList.cs" t="Include" />
             <e p="Walking.cs" t="Include" />
           </e>
-          <e p="Sensor_Bandit.cs" t="Include" />
           <e p="Skills" t="Include">
-            <e p="ISkill.cs" t="Include" />
-            <e p="Projectile.cs" t="Include" />
-            <e p="Slash.cs" t="Include" />
+            <e p="SkillBehaviour" t="Include">
+              <e p="ISkill.cs" t="Include" />
+              <e p="MultiSlash.cs" t="Include" />
+              <e p="Projectile.cs" t="Include" />
+              <e p="Rejuvenate.cs" t="Include" />
+              <e p="Slash.cs" t="Include" />
+            </e>
           </e>
           <e p="UI" t="Include">
             <e p="HealthBar.cs" t="Include" />
