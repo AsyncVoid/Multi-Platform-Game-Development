@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,6 +10,7 @@ public class SkillsMenu : MonoBehaviour
     private Player player;
     private SkillList playerSkills;
     private SkillItem[] skillItems;
+    private GameObject[] itemObj;
     private Scrollbar scrollbar; 
     private ScrollRect scrollRect;
 
@@ -18,8 +20,16 @@ public class SkillsMenu : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         playerSkills = player.skills;   
 
-        GameObject[] itemObj = GameObject.FindGameObjectsWithTag("SkillItem");
+        itemObj = GameObject.FindGameObjectsWithTag("SkillItem");
         skillItems = new SkillItem[itemObj.Length];
+
+        scrollbar = GameObject.Find("Scrollbar").GetComponent<Scrollbar>();
+        scrollRect = GameObject.Find("ScrollArea").GetComponent<ScrollRect>();
+
+        UpdateMenu();
+    }
+    
+    void UpdateMenu(){
 
         for(int i = 0;i<skillItems.Length;i++){
             skillItems[i] = itemObj[i].GetComponent<SkillItem>();
@@ -34,15 +44,16 @@ public class SkillsMenu : MonoBehaviour
             string skillName = playerSkills.skills[i].skillName;
             int skillTier = playerSkills.skills[i].skillTier;
             skillItems[i].UpdateSkillTier(skillName, skillTier);
-        }
+        }    
+    }
 
-
+    void Update()
+    {
+        UpdateMenu();
     }
 
     void enableScroll(bool requireScroll)
     {
-        scrollbar = GameObject.Find("Scrollbar").GetComponent<Scrollbar>();
-        scrollRect = GameObject.Find("ScrollArea").GetComponent<ScrollRect>();
         if(requireScroll){
             scrollbar.gameObject.SetActive(true);
             scrollRect.enabled = true;

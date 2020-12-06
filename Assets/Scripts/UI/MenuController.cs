@@ -14,7 +14,12 @@ public class MenuController : MonoBehaviour
 
     void Start()
     {
-        Dictionary<string, Skill> hotkeyDict = new Dictionary<string, Skill>();
+        hotkeyDict = new Dictionary<string, Skill>();
+
+        for (int i = 2; i <= 4; i++) {
+            hotkeyDict.Add(i.ToString(), null);
+        }
+
         isPaused = false;
 
         SkillsMenu = GameObject.FindGameObjectWithTag("SkillsMenu").GetComponent<SkillsMenu>();
@@ -30,10 +35,11 @@ public class MenuController : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.M)){
             if(!SkillsMenu.gameObject.activeSelf && !HotkeyMenu.gameObject.activeSelf){
-            SkillsMenu.gameObject.SetActive(true);
-            HotkeyMenu.gameObject.SetActive(true);
-
                 PauseGame();
+                SkillsMenu.gameObject.SetActive(true);
+                HotkeyMenu.gameObject.SetActive(true);
+                
+                
             }
                 
             else{
@@ -45,14 +51,15 @@ public class MenuController : MonoBehaviour
         
     }
 
-    private void PauseGame()
+    void PauseGame()
     {
         isPaused = true;
         Time.timeScale = 0;
         playerController.enabled = false;
         //Disable scripts that still work while timescale is set to 0
     } 
-    private void ContinueGame()
+
+    void ContinueGame()
     {
         isPaused = false;
         Time.timeScale = 1;
