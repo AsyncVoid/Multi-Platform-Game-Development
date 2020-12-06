@@ -12,4 +12,5 @@ Assets/Sprites/GameFXexport - https://ppeldo.itch.io/2d-pixel-art-game-spellmagi
 Skill Images - https://assetstore.unity.com/packages/2d/gui/icons/basic-rpg-icons-181301
 <br/><br/>
 Assets/Sounds/Slash - https://freesound.org/people/LukeSharples/sounds/209125/<br/>
-Assets/Sounds/CampFire - https://www.freesoundslibrary.com/fire-sound/
+Assets/Sounds/CampFire - https://www.freesoundslibrary.com/fire-sound/<br/>
+Assets/Sounds/Fire/fireStart - https://freesound.org/people/SilverIllusionist/sounds/472688/<br/>
