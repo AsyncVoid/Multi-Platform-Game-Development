@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5159495795980040662}
   - component: {fileID: -5861230819900668222}
   - component: {fileID: -8533372644187461577}
+  - component: {fileID: 7406141733260836704}
   m_Layer: 0
   m_Name: HealingWheat
   m_TagString: Untagged
@@ -127,5 +128,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2e986212fe859d74283367d2516c249f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7406141733260836704
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6490728059214817827}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 985b11d9a1ebc5d47bfc1c4e6edf544c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
