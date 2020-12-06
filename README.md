@@ -14,3 +14,4 @@ Skill Images - https://assetstore.unity.com/packages/2d/gui/icons/basic-rpg-icon
 Assets/Sounds/Slash - https://freesound.org/people/LukeSharples/sounds/209125/<br/>
 Assets/Sounds/CampFire - https://www.freesoundslibrary.com/fire-sound/<br/>
 Assets/Sounds/Fire/fireStart - https://freesound.org/people/SilverIllusionist/sounds/472688/<br/>
+Assets/Sounds/Fire/fireMove - https://www.zapsplat.com/sound-effect-category/fire/page/8/<br/>
