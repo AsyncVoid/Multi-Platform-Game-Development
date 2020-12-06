@@ -68,22 +68,8 @@ public class EntityController : MonoBehaviour
                 }
                 yield return null;
             }
-            yield return new WaitForSeconds(0.5f);
 
             Destroy(gameObject);
         }
     }
-
-    void FixedUpdate()
-    {
-    }
-
-    public void DisableCollisions() {
-        GetComponent<Rigidbody2D>().simulated = false;
-    }
-
-    public void RestoreCollisions() {
-        GetComponent<Rigidbody2D>().simulated = true;
-    }
-
 }

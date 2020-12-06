@@ -54,10 +54,19 @@ public class EnemyController : MonoBehaviour
             }
         }
 
-        // Checks if enemy is dead and player in eatable state.
-        if (collision.gameObject.GetComponent<PlayerController>().ReturnState() && enemy.ReturnDeathStatus())
+        // Checks if enemy is dead.
+        if (enemy.ReturnDeathStatus())
         {
-            DisableCollisions();
+            GetComponent<Rigidbody2D>().isKinematic = true;
+            GetComponent<Collider2D>().isTrigger = true;
+        }
+    }
+
+    void OnTriggerStay2D(Collider2D collider)
+    {
+        if (collider.gameObject.tag != "Player") { return; }
+        else if (collider.gameObject.GetComponent<PlayerController>().ReturnState())
+        {
             StartCoroutine(EntityEaten());
         }
     }
@@ -120,15 +129,4 @@ public class EnemyController : MonoBehaviour
     {
         PlayerHitOffCooldown ^= true;
     }
-
-    public void DisableCollisions()
-    {
-        GetComponent<Rigidbody2D>().simulated = false;
-    }
-
-    public void RestoreCollisions()
-    {
-        GetComponent<Rigidbody2D>().simulated = true;
-    }
-
 }
