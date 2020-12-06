@@ -6,4 +6,6 @@ Assets/Sprites/Enemies - https://craftpix.net/freebies/free-swamp-bosses-pixel-a
 Assets/Sprites/CoinsGems - https://laredgames.itch.io/gems-coins-free <br/>
 Assets/Sprites/Bandits-Pixel Art - https://assetstore.unity.com/packages/2d/characters/bandits-pixel-art-104130<br/>
 Assets/Sprites/Skills/IceShard - https://kvsr.itch.io/ice-shard<br/>
+Assets/Backgrounds/Grassy_Mountains_Parallax_Background - https://vnitti.itch.io/grassy-mountains-parallax-background<br/>
+Assets/Backgrounds/Taiga-Asset-Pack_v2_vnitti - https://vnitti.itch.io/taiga-asset-pack<br/>
 Skill Images - https://assetstore.unity.com/packages/2d/gui/icons/basic-rpg-icons-181301
