@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour
 
     public Skill skill;
     private MenuController menuController;
-    public Dictionary<string, Skill> hm;
+    private Dictionary<string, Skill> hm;
 
     // Start is called before the first frame update
     void Start()
@@ -64,12 +64,12 @@ public class PlayerController : MonoBehaviour
         leftToggle = false;
         
         menuController = GameObject.FindGameObjectWithTag("MenuController").GetComponent<MenuController>();
-        hm = menuController.hotkeyDict;
     }
 
     // Update is called once per frame
     void Update()
     {
+        hm = menuController.hotkeyDict;
         // Basic Attack
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {

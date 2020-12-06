@@ -14,7 +14,7 @@ public class MenuController : MonoBehaviour
 
     void Start()
     {
-        Dictionary<string, Skill> hotkeyDict = new Dictionary<string, Skill>();
+        hotkeyDict = new Dictionary<string, Skill>();
 
         for (int i = 2; i <= 4; i++) {
             hotkeyDict.Add(i.ToString(), null);
