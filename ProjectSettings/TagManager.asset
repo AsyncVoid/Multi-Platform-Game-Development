@@ -17,6 +17,7 @@ TagManager:
   - SkillUsageController
   - Treasure
   - EntityIgnore
+  - MenuController
   layers:
   - Default
   - TransparentFX
@@ -24,32 +25,32 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
+  -
+  -
   - Ground
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
   m_SortingLayers:
   - name: Default
     uniqueID: 0
