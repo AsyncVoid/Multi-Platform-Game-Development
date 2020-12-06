@@ -112,7 +112,6 @@ public class PlayerController : MonoBehaviour
 
                     // Calls the interface method to trigger using a skill. If there's no target just send a random vector3 into the last parameter.
                     skillInterface.UseSkill(skill, gameObject, targetDirection);
-                    skill = null;
                 }
                 else
                 {

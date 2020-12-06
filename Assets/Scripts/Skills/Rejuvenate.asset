@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Rejuvenate
   m_EditorClassIdentifier: 
   skillName: Rejuvenate
-  skillTier: 1
-  skillProgression: 1
+  skillTier: 0
+  skillProgression: 0
   skillType: 2
   skillSprite: {fileID: -3253330834931219228, guid: 1b28bbb384f1642bc892e7e20120d3e8, type: 3}
   skillBase: 1
