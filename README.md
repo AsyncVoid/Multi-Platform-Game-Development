@@ -15,3 +15,4 @@ Assets/Sounds/Slash - https://freesound.org/people/LukeSharples/sounds/209125/<b
 Assets/Sounds/CampFire - https://www.freesoundslibrary.com/fire-sound/<br/>
 Assets/Sounds/Fire/fireStart - https://freesound.org/people/SilverIllusionist/sounds/472688/<br/>
 Assets/Sounds/Fire/fireMove - https://www.zapsplat.com/sound-effect-category/fire/page/8/<br/>
+Assets/Sounds/IceShard/IceCharge - https://freesound.org/people/northern87/sounds/369982/
