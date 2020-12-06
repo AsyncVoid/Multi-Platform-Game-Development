@@ -18,7 +18,6 @@ public class IceShard : MonoBehaviour
     }
 
     public void BreakSound() {
-        Debug.Log("No");
         audioSource.PlayOneShot(iceBreak, 0.6f);
     }
 }
