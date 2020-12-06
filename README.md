@@ -11,4 +11,5 @@ Assets/Backgrounds/Taiga-Asset-Pack_v2_vnitti - https://vnitti.itch.io/taiga-ass
 Assets/Sprites/GameFXexport - https://ppeldo.itch.io/2d-pixel-art-game-spellmagic-fx<br/>
 Skill Images - https://assetstore.unity.com/packages/2d/gui/icons/basic-rpg-icons-181301
 <br/><br/>
-Assets/Sounds/Slash - https://freesound.org/people/LukeSharples/sounds/209125/
+Assets/Sounds/Slash - https://freesound.org/people/LukeSharples/sounds/209125/<br/>
+Assets/Sounds/CampFire - https://www.freesoundslibrary.com/fire-sound/
