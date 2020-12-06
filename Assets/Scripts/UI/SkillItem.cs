@@ -12,7 +12,7 @@ public class SkillItem : MonoBehaviour
     public Image tierTwo;
     public Image tierThree;
 
-    void Start()
+    void Awake() 
     {
         skillName = transform.Find("Skill_text").GetComponent<Text>();
 
@@ -26,7 +26,11 @@ public class SkillItem : MonoBehaviour
 
         tierOne.color = Color.clear;
         tierTwo.color = Color.clear;
-        tierThree.color = Color.clear;   
+        tierThree.color = Color.clear;
+    }
+
+    void Start()
+    { 
     }
 
     public void UpdateSkillTier(string skillname, int skilltier)
@@ -37,19 +41,16 @@ public class SkillItem : MonoBehaviour
         skillName.text = skillname;
 
         if(skilltier == 1){
-            Debug.Log(skillname+": Tier 1");
             tierOne.color = Color.white;
             tierTwo.color = Color.clear;
             tierThree.color = Color.clear;
         }
         else if(skilltier == 2){
-            Debug.Log(skillname+": Tier 2");
             tierOne.color = Color.white;
             tierTwo.color = c1;
             tierThree.color = Color.clear;
         }
         else if(skilltier == 3){
-            Debug.Log(skillname+": Tier 3");
             tierOne.color = Color.white;
             tierTwo.color = c1;
             tierThree.color = c2;
@@ -59,7 +60,5 @@ public class SkillItem : MonoBehaviour
             tierTwo.color = Color.clear;
             tierThree.color = Color.clear;     
         }
-
-        
     }
 }

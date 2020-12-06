@@ -21,9 +21,11 @@ public class SkillDropdown : MonoBehaviour
         menuController = GameObject.FindGameObjectWithTag("MenuController").GetComponent<MenuController>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         activeSkills = GameObject.FindGameObjectWithTag("ActiveSkills").GetComponent<ActiveSkills>();
+        
         playerSkills = player.skills;
 
         skillDropdown = GetComponent<Dropdown>();
+
         UpdateDropdown();
     }
 
@@ -56,7 +58,7 @@ public class SkillDropdown : MonoBehaviour
 
     void OnValueChanged(Dropdown dropdown)
     {
-        string skillname = dropdown.captionText.text;        
+        string skillname = dropdown.captionText.text;
         dropdown.RefreshShownValue();
 
         Text text = transform.Find("Text").GetComponent<Text>();
@@ -67,13 +69,7 @@ public class SkillDropdown : MonoBehaviour
         
         // Change hotkey values in dictionary 
         Dictionary<string, Skill> dict = menuController.hotkeyDict;
-        if(dict.ContainsKey(hotkey)){
-            dict[hotkey] = chosenSkill;
-        }
-        else{
-            dict.Add(hotkey, chosenSkill);
-        }
 
+        dict[hotkey] = chosenSkill;
     }
-
 }

@@ -23,7 +23,7 @@ public class MenuController : MonoBehaviour
         isPaused = false;
 
         SkillsMenu = GameObject.FindGameObjectWithTag("SkillsMenu").GetComponent<SkillsMenu>();
-        HotkeyMenu = GameObject.FindGameObjectWithTag("HotkeyMenu").GetComponent<HotkeyMenu>();
+        HotkeyMenu = GameObject.FindGameObjectWithTag("HotKeyMenu").GetComponent<HotkeyMenu>();
         playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
 
         SkillsMenu.gameObject.SetActive(false);

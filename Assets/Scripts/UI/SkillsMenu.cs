@@ -40,7 +40,7 @@ public class SkillsMenu : MonoBehaviour
         else 
             enableScroll(false);
 
-        for(int i = 0; i<playerSkills.skills.Count; i++){
+        for(int i = 0; i < playerSkills.skills.Count; i++){
             string skillName = playerSkills.skills[i].skillName;
             int skillTier = playerSkills.skills[i].skillTier;
             skillItems[i].UpdateSkillTier(skillName, skillTier);
@@ -64,6 +64,4 @@ public class SkillsMenu : MonoBehaviour
         }
 
     }
-
-
 }

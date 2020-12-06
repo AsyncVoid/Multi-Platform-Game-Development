@@ -7,6 +7,7 @@ public class Projectile : MonoBehaviour, ISkill
     // Start is called before the first frame update
     public float projectileSpeed;
     public float projectileDuration;
+    public float projectileDropOff;
     public Vector3 projectileDirection;
 
     private Vector3 previousPos;
@@ -22,9 +23,6 @@ public class Projectile : MonoBehaviour, ISkill
 
     
     void Start() {
-        projectileSpeed = 8.0f;
-        projectileDuration = 3.2f;
-
         animator = GetComponent<Animator>();
         damageController = GameObject.FindWithTag("DamageController").GetComponent<DamageController>();
 
@@ -56,7 +54,7 @@ public class Projectile : MonoBehaviour, ISkill
                 transform.position = transform.position + projectileDirection * Time.deltaTime * projectileSpeed;
 
                 // Ensures the projectile keeps facing the right direction.
-                projectileDirection = new Vector3(projectileDirection.x, projectileDirection.y - 0.25f * Time.deltaTime, projectileDirection.z);
+                projectileDirection = new Vector3(projectileDirection.x, projectileDirection.y - -projectileDropOff * Time.deltaTime, projectileDirection.z);
 
                 // Tells us the animation has ended.
                 charged = true;

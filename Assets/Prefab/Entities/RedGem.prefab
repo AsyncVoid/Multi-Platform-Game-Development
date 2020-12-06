@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7784451606173225093}
   - component: {fileID: 7784451606173225094}
   - component: {fileID: 7784451606173225113}
+  - component: {fileID: -184244197180582994}
   m_Layer: 0
   m_Name: RedGem
   m_TagString: Treasure
@@ -165,3 +166,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skill: {fileID: 11400000, guid: c49335a01d9ed42329809ed9d278faa9, type: 2}
+--- !u!114 &-184244197180582994
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7784451606173225095}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 985b11d9a1ebc5d47bfc1c4e6edf544c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
