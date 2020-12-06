@@ -12,6 +12,7 @@ public class EnemyController : MonoBehaviour
     private bool PlayerHitOffCooldown;
 
     private bool isDmged;
+    private bool beingEaten;
 
     private Enemy enemy;
     private Animator animator;
@@ -26,6 +27,8 @@ public class EnemyController : MonoBehaviour
         enemy = GetComponent<Enemy>();
         PlayerHitCooldown = 2f;
         PlayerHitOffCooldown = true;
+
+        beingEaten = false;
     }
 
     void OnCollisionEnter2D(Collision2D collision)
@@ -74,30 +77,35 @@ public class EnemyController : MonoBehaviour
 
     IEnumerator EntityEaten()
     {
-        float timeElapsed = 0f;
-        float time = 2f;
-
-        // Gains skill.
-        Player player = GameObject.FindWithTag("Player").GetComponent<Player>();
-        player.UpdateSkill(enemy.ReturnSkill());
-
-        // Moves entity towards center of player whilst reducing it's scale.
-        while (timeElapsed < time)
+        if (!beingEaten)
         {
-            timeElapsed += Time.deltaTime;
-            transform.position = Vector3.Lerp(transform.position, GameObject.FindWithTag("Player").transform.position, timeElapsed / time);
-            if (transform.localScale.x > 0.25f)
-            {
-                transform.localScale -= new Vector3(0.9f, 0.9f, 0.9f) * Time.deltaTime;
-            }
-            else if (transform.localScale.x < -0.25f) {
-                transform.localScale -= new Vector3(-0.9f, 0.9f, 0.9f) * Time.deltaTime;
-            }
-            yield return null;
-        }
-        yield return new WaitForSeconds(0.1f);
+            beingEaten = true;
+            float timeElapsed = 0f;
+            float time = 2f;
 
-        Destroy(gameObject);
+            // Gains skill.
+            Player player = GameObject.FindWithTag("Player").GetComponent<Player>();
+            player.UpdateSkill(enemy.ReturnSkill());
+
+            // Moves entity towards center of player whilst reducing it's scale.
+            while (timeElapsed < time)
+            {
+                timeElapsed += Time.deltaTime;
+                transform.position = Vector3.Lerp(transform.position, GameObject.FindWithTag("Player").transform.position, timeElapsed / time);
+                if (transform.localScale.x > 0.25f)
+                {
+                    transform.localScale -= new Vector3(0.9f, 0.9f, 0.9f) * Time.deltaTime;
+                }
+                else if (transform.localScale.x < -0.25f)
+                {
+                    transform.localScale -= new Vector3(-0.9f, 0.9f, 0.9f) * Time.deltaTime;
+                }
+                yield return null;
+            }
+            yield return new WaitForSeconds(0.1f);
+
+            Destroy(gameObject);
+        }
     }
 
     // Prevents multiple attacks from one attack.

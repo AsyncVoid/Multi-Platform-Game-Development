@@ -7,11 +7,13 @@ public class EntityController : MonoBehaviour
 {
     public Skill skill;
     private Player player;
+    private bool beingEaten;
 
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.FindWithTag("Player").GetComponent<Player>();
+        beingEaten = false;
     }
 
     void OnCollisionEnter2D(Collision2D collision) {
@@ -46,23 +48,29 @@ public class EntityController : MonoBehaviour
 
     IEnumerator EntityEaten() {
 
-        float timeElapsed = 0f;
-        float time = 2f;
-
-        player.UpdateSkill(skill);
-        // Moves entity towards center of player whilst reducing it's scale.
-        while (timeElapsed < time)
+        if (!beingEaten)
         {
-            timeElapsed += Time.deltaTime;
-            transform.position = Vector3.Lerp(transform.position, GameObject.FindWithTag("Player").transform.position, timeElapsed / time);
-            if (transform.localScale.x > 0.25f) { 
-                transform.localScale -= new Vector3(0.9f, 0.9f, 0.9f) * Time.deltaTime; 
-            }
-            yield return null;
-        }
-        yield return new WaitForSeconds(0.5f);
+            beingEaten = true;
 
-        Destroy(gameObject);
+            float timeElapsed = 0f;
+            float time = 2f;
+
+            player.UpdateSkill(skill);
+            // Moves entity towards center of player whilst reducing it's scale.
+            while (timeElapsed < time)
+            {
+                timeElapsed += Time.deltaTime;
+                transform.position = Vector3.Lerp(transform.position, GameObject.FindWithTag("Player").transform.position, timeElapsed / time);
+                if (transform.localScale.x > 0.25f)
+                {
+                    transform.localScale -= new Vector3(0.9f, 0.9f, 0.9f) * Time.deltaTime;
+                }
+                yield return null;
+            }
+            yield return new WaitForSeconds(0.5f);
+
+            Destroy(gameObject);
+        }
     }
 
     void FixedUpdate()
