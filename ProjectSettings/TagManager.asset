@@ -16,6 +16,8 @@ TagManager:
   - DamageController
   - SkillUsageController
   - Treasure
+  - EntityIgnore
+  - MenuController
   layers:
   - Default
   - TransparentFX
