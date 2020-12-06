@@ -6,6 +6,7 @@ public class IceShard : MonoBehaviour
 {
     private AudioSource audioSource;
     public AudioClip iceCharge;
+    public AudioClip iceBreak;
     // Start is called before the first frame update
     void Start()
     {
@@ -14,5 +15,10 @@ public class IceShard : MonoBehaviour
 
     public void ChargeSound() {
         audioSource.PlayOneShot(iceCharge, 1f);
+    }
+
+    public void BreakSound() {
+        Debug.Log("No");
+        audioSource.PlayOneShot(iceBreak, 0.6f);
     }
 }
