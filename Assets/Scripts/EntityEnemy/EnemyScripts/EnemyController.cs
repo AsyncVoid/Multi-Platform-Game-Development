@@ -54,6 +54,7 @@ public class EnemyController : MonoBehaviour
         // Checks if enemy is dead and player in eatable state.
         if (collision.gameObject.GetComponent<PlayerController>().ReturnState() && enemy.ReturnDeathStatus())
         {
+            DisableCollisions();
             StartCoroutine(EntityEaten());
         }
     }
@@ -94,7 +95,7 @@ public class EnemyController : MonoBehaviour
             }
             yield return null;
         }
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.1f);
 
         Destroy(gameObject);
     }
