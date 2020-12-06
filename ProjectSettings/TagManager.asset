@@ -16,8 +16,10 @@ TagManager:
   - DamageController
   - SkillUsageController
   - Treasure
-  - EntityIgnore
   - MenuController
+  - ActiveSkills
+  - SkillsMenu
+  - HotKeyMenu
   layers:
   - Default
   - TransparentFX
@@ -25,32 +27,32 @@ TagManager:
   - 
   - Water
   - UI
-  -
-  -
+  - 
+  - 
   - Ground
-  -
-  -
-  -
-  -
-  -
-  -
-  -
-  -
-  -
-  -
-  -
-  -
-  -
-  -
-  -
-  -
-  -
-  -
-  -
-  -
-  -
-  -
-  -
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
   m_SortingLayers:
   - name: Default
     uniqueID: 0
