@@ -25,7 +25,6 @@ public class SkillDropdown : MonoBehaviour
         playerSkills = player.skills;
 
         skillDropdown = GetComponent<Dropdown>();
-
         UpdateDropdown();
     }
 
