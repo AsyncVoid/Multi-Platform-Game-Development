@@ -20,6 +20,10 @@ TagManager:
   - ActiveSkills
   - SkillsMenu
   - HotKeyMenu
+  - EntityIgnore
+  - Dropdown
+  - SkillItem
+  - SceneHandler
   layers:
   - Default
   - TransparentFX

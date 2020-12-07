@@ -105,7 +105,7 @@ public class Knight : MonoBehaviour
 
             if (playerDistance < 2f)
             {
-                if (m_animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f)
+                if (m_animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f && !player.GetComponent<Player>().ReturnDeathStatus())
                 {
                     m_animator.SetBool("Attack", false);
                 }
@@ -113,7 +113,13 @@ public class Knight : MonoBehaviour
                 {
                     m_animator.SetBool("Attack", true);
                 }
+                
             }
+            /*
+            else if(player.GetComponent<Player>().ReturnDeathStatus()){
+                m_combatIdle = true;
+            }
+            */
             else
             {
                 m_combatIdle = false;

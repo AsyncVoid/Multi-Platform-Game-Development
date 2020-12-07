@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : Unit
 
@@ -10,14 +11,31 @@ public class Player : Unit
     public float matterRegenRate;
 
     public SkillList skills;
+	public float delay = 15f;
+    private GameObject playerModel;
+    private PlayerController playerController;
+    public Animator animator;
+    private SceneHandler sceneHandler;
 
     void Start() 
     {
+        sceneHandler = GameObject.FindGameObjectWithTag("SceneHandler").GetComponent<SceneHandler>();
+        playerModel = GameObject.FindWithTag("PlayerModel");
+        playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+
         maxMatter = 10;
         matter = 0;
         matterRegenRate = 5.0f;
 
         StartCoroutine(MatterRegeneration());
+
+    }
+
+    void Update()
+    {
+        if(ReturnDeathStatus()){
+            Death();
+        }
     }
 
     public int ReturnMaxMatter() {
@@ -54,5 +72,37 @@ public class Player : Unit
         yield return new WaitForSeconds(matterRegenRate);
         StartCoroutine(MatterRegeneration());
     }
+
+    void Death()
+    {
+        if(animator.GetBool("leftHeld")){
+            animator.SetBool("leftHeld", false);
+            animator.SetTrigger("animationEnd");
+
+        }
+        else if(animator.GetBool("rightHeld")){
+            animator.SetBool("rightHeld", false);
+            animator.SetTrigger("animationEnd");
+        }
+        else{
+            animator.SetBool("leftHeld", false);
+            animator.SetBool("rightHeld", false);
+            animator.SetTrigger("animationEnd");
+        }
+        animator.SetBool("dead", true);
+        StartCoroutine(deathAnimation());
+
+        //Debug.Log("You have died.");
+        sceneHandler.DeathScene();
+        
+
+    }
+
+    IEnumerator deathAnimation() 
+    {
+        yield return new WaitForSeconds(15f);
+
+    }
+
 }
 
