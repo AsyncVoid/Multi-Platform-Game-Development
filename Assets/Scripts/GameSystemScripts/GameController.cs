@@ -39,9 +39,8 @@ public class GameController : MonoBehaviour
         worldDifficulty.text = "World Difficulty: " + difficultyController.GetWorldDifficulty().ToString();
 
         if (player.ReturnDeathStatus()) {
-            overText.enabled = true;
+            overText.text = "You died with score: " + playerScore.ToString() + "     Press 'L' to restart.";
             Time.timeScale = 0f;
-            overText.text = "You died with score: " + playerScore.ToString() + "Press 'L' to restart.";
         }
 
         if (Input.GetKeyDown(KeyCode.L)) {
@@ -54,7 +53,7 @@ public class GameController : MonoBehaviour
             }
 
             player.skills.skills.Clear();
-
+            overText.text = "";
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
