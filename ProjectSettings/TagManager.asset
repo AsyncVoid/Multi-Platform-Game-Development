@@ -24,7 +24,6 @@ TagManager:
   - SkillItem
   - EntityIgnore
   - DifficultyController
-  - Decoration
   layers:
   - Default
   - TransparentFX

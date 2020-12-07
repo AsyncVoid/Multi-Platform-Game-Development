@@ -14,6 +14,7 @@
             <e p="Readme.txt" t="Include" />
           </e>
         </e>
+        <e p="DamageIndicator.cs" t="Include" />
         <e p="Materials" t="Include">
           <e p="Font" t="Include">
             <e p="press-start" t="Include">
@@ -22,31 +23,20 @@
           </e>
         </e>
         <e p="Scripts" t="Include">
+          <e p="Bandit.cs" t="Include" />
           <e p="Camera" t="Include">
             <e p="BackgroundSwitcher.cs" t="Include" />
             <e p="CameraController.cs" t="Include" />
             <e p="Parallax.cs" t="Include" />
           </e>
           <e p="EntityEnemy" t="Include">
-            <e p="EnemyScripts" t="Include">
-              <e p="AttackSensor.cs" t="Include" />
-              <e p="Bandit.cs" t="Include" />
-              <e p="EnemyController.cs" t="Include" />
-              <e p="Knight.cs" t="Include" />
-              <e p="Sensor_Bandit.cs" t="Include" />
-            </e>
-            <e p="Entity" t="Include">
-              <e p="EntityController.cs" t="Include" />
-              <e p="HealingWheat.cs" t="Include" />
-              <e p="LockXAxis.cs" t="Include" />
-              <e p="TreasureController.cs" t="Include" />
-            </e>
+            <e p="AttackSensor.cs" t="Include" />
+            <e p="EnemyController.cs" t="Include" />
+            <e p="EntityController.cs" t="Include" />
             <e p="EntitySpawner.cs" t="Include" />
           </e>
           <e p="GameSystemScripts" t="Include">
             <e p="DamageController.cs" t="Include" />
-            <e p="DamageIndicator.cs" t="Include" />
-            <e p="DifficultyController.cs" t="Include" />
             <e p="EnvironmentScripts" t="Include">
               <e p="EnvironmentController.cs" t="Include" />
               <e p="SpawnFloorSprite.cs" t="Include" />
@@ -60,33 +50,22 @@
             <e p="MapGenerator.cs" t="Include" />
           </e>
           <e p="Player" t="Include">
+            <e p="LockXAxis.cs" t="Include" />
             <e p="Player.cs" t="Include" />
-            <e p="PlayerAnimationSound.cs" t="Include" />
             <e p="PlayerController.cs" t="Include" />
             <e p="SkillList.cs" t="Include" />
             <e p="Walking.cs" t="Include" />
           </e>
+          <e p="Sensor_Bandit.cs" t="Include" />
           <e p="Skills" t="Include">
-            <e p="SkillBehaviour" t="Include">
-              <e p="FireSkill.cs" t="Include" />
-              <e p="IceShard.cs" t="Include" />
-              <e p="ISkill.cs" t="Include" />
-              <e p="MultiSlash.cs" t="Include" />
-              <e p="Projectile.cs" t="Include" />
-              <e p="Rejuvenate.cs" t="Include" />
-              <e p="Slash.cs" t="Include" />
-            </e>
+            <e p="ISkill.cs" t="Include" />
+            <e p="Projectile.cs" t="Include" />
+            <e p="Slash.cs" t="Include" />
           </e>
           <e p="UI" t="Include">
-            <e p="ActiveSkills.cs" t="Include" />
             <e p="HealthBar.cs" t="Include" />
-            <e p="HotkeyMenu.cs" t="Include" />
             <e p="MatterBar.cs" t="Include" />
-            <e p="MenuController.cs" t="Include" />
-            <e p="SkillDropdown.cs" t="Include" />
-            <e p="SkillItem.cs" t="Include" />
-            <e p="SkillSlot.cs" t="Include" />
-            <e p="SkillsMenu.cs" t="Include" />
+            <e p="SkillButton.cs" t="Include" />
           </e>
           <e p="Unit" t="Include">
             <e p="Enemy.cs" t="Include" />

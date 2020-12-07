@@ -20,17 +20,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="247ca1ea-a101-4552-9246-83c3417ad6ff" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Game/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Game/.idea/contentModel.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Game/.idea/indexLayout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Game/.idea/indexLayout.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Game/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Game/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Backgrounds/Taiga-Asset-Pack_v2_vnitti/PNG/Props.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Backgrounds/Taiga-Asset-Pack_v2_vnitti/PNG/Props.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Backgrounds/Taiga-Asset-Pack_v2_vnitti/PNG/Tileset.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Backgrounds/Taiga-Asset-Pack_v2_vnitti/PNG/Tileset.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefab/Entities/CampFire.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefab/Entities/CampFire.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefab/Entities/HealingWheat.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefab/Entities/HealingWheat.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/World.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/World.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Camera/Parallax.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Camera/Parallax.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefab/HeavyBandit.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefab/HeavyBandit.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefab/LightBandit.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefab/LightBandit.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefab/RedGem.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefab/RedGem.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/EntityEnemy/EntityController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/EntityEnemy/EntityController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameSystemScripts/DamageController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameSystemScripts/DamageController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Map/MapGenerator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Map/MapGenerator.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Sprites/Cainos/Pixel Art Platformer - Village Props/Texture/TX Village Props.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/Cainos/Pixel Art Platformer - Village Props/Texture/TX Village Props.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Sprites/CoinsGems/Gem.controller" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Sprites/CoinsGems/Gem.controller.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Sprites/CoinsGems/MonedaD.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/CoinsGems/MonedaD.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Sprites/CoinsGems/MonedaP.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/CoinsGems/MonedaP.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Sprites/CoinsGems/Red Gem Animation.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Sprites/CoinsGems/Red Gem Animation.anim.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Sprites/CoinsGems/spr_coin_ama.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/CoinsGems/spr_coin_ama.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Sprites/CoinsGems/spr_coin_azu.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/CoinsGems/spr_coin_azu.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Sprites/CoinsGems/spr_coin_gri.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/CoinsGems/spr_coin_gri.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Sprites/CoinsGems/spr_coin_strip4.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/CoinsGems/spr_coin_strip4.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packages/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packages/packages-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/packages-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectVersion.txt" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectVersion.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -51,9 +60,9 @@
       <list>
         <option value="$PROJECT_DIR$/Assets/Scripts/EntityEnemy/EntityController.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/GameSystemScripts/DamageController.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Camera/BackgroundSwitcher.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Camera/Parallax.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Map/MapGenerator.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Camera/BackgroundSwitcher.cs" />
       </list>
     </option>
   </component>
@@ -97,7 +106,6 @@
       <option name="presentableId" value="Default" />
       <updated>1607195099172</updated>
       <workItem from="1607195109998" duration="6417000" />
-      <workItem from="1607318256910" duration="7006000" />
     </task>
     <servers />
   </component>
@@ -116,7 +124,6 @@
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
@@ -132,13 +139,13 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Scripts/Map/MapGenerator.cs</url>
-          <line>371</line>
+          <line>253</line>
           <properties documentPath="D:\University\Multi-Platform Game Developement\Game\Assets\Scripts\Map\MapGenerator.cs" initialLine="253">
             <startOffsets>
-              <option value="14224" />
+              <option value="9388" />
             </startOffsets>
             <endOffsets>
-              <option value="14225" />
+              <option value="9389" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="1" />
