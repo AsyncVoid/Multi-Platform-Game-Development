@@ -21,7 +21,6 @@
   <component name="ChangeListManager">
     <list default="true" id="247ca1ea-a101-4552-9246-83c3417ad6ff" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Game/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Game/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Camera/Parallax.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Camera/Parallax.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -96,7 +95,7 @@
       <updated>1607195099172</updated>
       <workItem from="1607195109998" duration="6417000" />
       <workItem from="1607318256910" duration="8525000" />
-      <workItem from="1607332455694" duration="1104000" />
+      <workItem from="1607332455694" duration="2264000" />
     </task>
     <servers />
   </component>

@@ -781,11 +781,12 @@ MonoBehaviour:
   groundM: {fileID: 11400000, guid: 475f07e43f745b249a4f96f460c1ecfe, type: 2}
   groundT: {fileID: 11400000, guid: d26337cf2fc3dff4d9bed217dcb6f6a9, type: 2}
   screenTileWidth: 30
-  enemyChance: 0.42
-  enemyEvery: 16
+  enemyChance: 1
+  enemyEvery: 8
   enemies:
   - {fileID: 1689866831511430, guid: 2e2183501755a214591e802f3aff33d2, type: 3}
   - {fileID: 1463392086428580, guid: 3248535f6a2562c489a1223a75951ef2, type: 3}
+  - {fileID: 863898791}
   treasureChance: 0.2
   treasureEvery: 10
   treasures:
@@ -2010,6 +2011,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &863898791 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3498591127601227380, guid: 59a0af2550c262d47b6b7073ea04384c, type: 3}
+  m_PrefabInstance: {fileID: 140044223}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &907789816
 GameObject:
   m_ObjectHideFlags: 0
