@@ -63,7 +63,7 @@ public class PlayerController : MonoBehaviour
         rightToggle = false;
         leftToggle = false;
         
-        menuController = GameObject.FindGameObjectWithTag("MenuController").GetComponent<MenuController>();
+        menuController = GameObject.FindGameObjectWithTag("MenuController").GetComponent<MenuController>();        
     }
 
     // Update is called once per frame

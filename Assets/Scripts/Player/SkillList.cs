@@ -22,9 +22,5 @@ public class SkillList : ScriptableObject
             skills.Add(skill);
             skill.IncrementSkillProgression();
         }
-
-        Debug.Log(skill);
     }
-
-
 }
