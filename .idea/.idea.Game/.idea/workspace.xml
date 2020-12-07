@@ -20,18 +20,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="247ca1ea-a101-4552-9246-83c3417ad6ff" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Game/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Game/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Game/.idea/indexLayout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Game/.idea/indexLayout.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Game/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Game/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Backgrounds/Taiga-Asset-Pack_v2_vnitti/PNG/Props.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Backgrounds/Taiga-Asset-Pack_v2_vnitti/PNG/Props.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Backgrounds/Taiga-Asset-Pack_v2_vnitti/PNG/Tileset.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Backgrounds/Taiga-Asset-Pack_v2_vnitti/PNG/Tileset.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefab/Entities/CampFire.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefab/Entities/CampFire.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefab/Entities/HealingWheat.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefab/Entities/HealingWheat.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/World.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/World.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Camera/Parallax.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Camera/Parallax.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Map/MapGenerator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Map/MapGenerator.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Sprites/Cainos/Pixel Art Platformer - Village Props/Texture/TX Village Props.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/Cainos/Pixel Art Platformer - Village Props/Texture/TX Village Props.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Camera/BackgroundSwitcher.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Camera/BackgroundSwitcher.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Sprites/GoldenUI/FillBar.spriteatlas" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/GoldenUI/FillBar.spriteatlas" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,9 +43,9 @@
       <list>
         <option value="$PROJECT_DIR$/Assets/Scripts/EntityEnemy/EntityController.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/GameSystemScripts/DamageController.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Camera/BackgroundSwitcher.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Camera/Parallax.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Map/MapGenerator.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Camera/BackgroundSwitcher.cs" />
       </list>
     </option>
   </component>
@@ -69,6 +61,14 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
+    <configuration name="Standalone Player" type="RunUnityExe" factoryName="Unity Executable">
+      <option name="EXE_PATH" value="$PROJECT_DIR$/Build_Windows\New Unity Project (1).exe" />
+      <option name="PROGRAM_PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="D:\University\Multi-Platform Game Developement\Game\Build_Windows" />
+      <option name="PASS_PARENT_ENVS" value="1" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <method v="2" />
+    </configuration>
     <configuration name="Attach to Unity Editor &amp; Play" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="UNITY_ATTACH_AND_PLAY" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
@@ -97,7 +97,7 @@
       <option name="presentableId" value="Default" />
       <updated>1607195099172</updated>
       <workItem from="1607195109998" duration="6417000" />
-      <workItem from="1607318256910" duration="7006000" />
+      <workItem from="1607318256910" duration="8525000" />
     </task>
     <servers />
   </component>

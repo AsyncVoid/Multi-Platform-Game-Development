@@ -25,6 +25,8 @@
       <Path>.git</Path>
       <Path>.idea</Path>
       <Path>.vscode</Path>
+      <Path>Build_WebGL</Path>
+      <Path>Build_Windows</Path>
       <Path>Library</Path>
       <Path>Logs</Path>
       <Path>Temp</Path>
