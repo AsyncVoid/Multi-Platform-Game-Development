@@ -19,6 +19,14 @@ public class DamageController : MonoBehaviour
 
     }
 
+    // For the basic slime attack.
+    public void BasicDamageEnemy(Enemy enemy) {
+        enemy.TakeDamage(player.ReturnDmg());
+
+        DamageIndicator dmg = Instantiate(dmgIndicator, enemy.transform.position, Quaternion.identity);
+        dmg.GetComponent<DamageIndicator>().SetText(player.ReturnDmg().ToString());
+    }
+
     // Method to be used if skill hits an enemy.
     public void DamageEnemy(Skill skill, Enemy enemy)
     {

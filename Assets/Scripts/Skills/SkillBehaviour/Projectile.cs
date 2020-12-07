@@ -43,7 +43,10 @@ public class Projectile : MonoBehaviour, ISkill
             if (!charged)
             {
                 // If start up animation is not finished, moves the animation with the player when they move.
-                transform.position = sourceObject.transform.position;
+                if (sourceObject.tag == "Player")
+                {
+                    transform.position = sourceObject.transform.position;
+                }
             }
 
             // Checks if animation has finished. If there's a flying animation after the start up animation, we'll have to change this code.
@@ -54,7 +57,7 @@ public class Projectile : MonoBehaviour, ISkill
                 transform.position = transform.position + projectileDirection * Time.deltaTime * projectileSpeed;
 
                 // Ensures the projectile keeps facing the right direction.
-                projectileDirection = new Vector3(projectileDirection.x, projectileDirection.y - -projectileDropOff * Time.deltaTime, projectileDirection.z);
+                projectileDirection = new Vector3(projectileDirection.x, projectileDirection.y + projectileDropOff * Time.deltaTime, projectileDirection.z);
 
                 // Tells us the animation has ended.
                 charged = true;
@@ -99,12 +102,26 @@ public class Projectile : MonoBehaviour, ISkill
 
     // Method for the interface ISkill, Put logic to start up a prefab of the skill.
     public void UseSkill(Skill skillUsed, GameObject entity, Vector3 targetDirection) {
-        Projectile selfRef = Instantiate(this, entity.transform.position, Quaternion.identity);
+        if (entity.tag == "Enemy")
+        {
+            // Witch has projectile spell.
+            Projectile selfRef = Instantiate(this, entity.transform.Find("Staff").position, Quaternion.identity);
 
-        // Needs to assign variables this way to the initialised prefab.
-        selfRef.GetComponent<Projectile>().skill = skillUsed;
-        selfRef.GetComponent<Projectile>().projectileDirection = targetDirection;
-        selfRef.GetComponent<Projectile>().sourceObject = entity;
+            // Needs to assign variables this way to the initialised prefab.
+            selfRef.GetComponent<Projectile>().projectileDropOff = 0f;
+            selfRef.GetComponent<Projectile>().skill = skillUsed;
+            selfRef.GetComponent<Projectile>().projectileDirection = targetDirection;
+            selfRef.GetComponent<Projectile>().sourceObject = entity;
+        }
+        else
+        {
+            Projectile selfRef = Instantiate(this, entity.transform.position, Quaternion.identity);
+
+            // Needs to assign variables this way to the initialised prefab.
+            selfRef.GetComponent<Projectile>().skill = skillUsed;
+            selfRef.GetComponent<Projectile>().projectileDirection = targetDirection;
+            selfRef.GetComponent<Projectile>().sourceObject = entity;
+        }
     }
 
     // Projectile hit method.

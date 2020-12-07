@@ -16,6 +16,7 @@ public class EnemyController : MonoBehaviour
 
     private Enemy enemy;
     private Animator animator;
+    private DamageController damageController;
 
     // Start is called before the first frame update
     void Start()
@@ -23,6 +24,7 @@ public class EnemyController : MonoBehaviour
         difficultyController = GameObject.FindWithTag("DifficultyController").GetComponent<DifficultyController>();
         animator = GetComponent<Animator>();
         enemy = GetComponent<Enemy>();
+        damageController = GameObject.FindWithTag("DamageController").GetComponent<DamageController>();
 
         // Increase enemy difficulty.
         int worldDifficulty = difficultyController.GetWorldDifficulty();
@@ -46,7 +48,7 @@ public class EnemyController : MonoBehaviour
             {
                 GameObject player = collision.gameObject;
 
-                enemy.TakeDamage(collision.gameObject.GetComponent<Player>().ReturnDmg());
+                damageController.BasicDamageEnemy(enemy);
 
                 Vector3 playerDirection = (player.transform.position - transform.position).normalized;
                 float direction = Vector3.Dot(playerDirection, Vector3.right);
