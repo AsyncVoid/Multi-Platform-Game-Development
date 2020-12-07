@@ -65,7 +65,7 @@ public class EnemyController : MonoBehaviour
     void OnTriggerStay2D(Collider2D collider)
     {
         if (collider.gameObject.tag != "Player") { return; }
-        else if (collider.gameObject.GetComponent<PlayerController>().ReturnState())
+        else if (collider.gameObject.GetComponent<PlayerController>().ReturnState() && enemy.ReturnDeathStatus())
         {
             StartCoroutine(EntityEaten());
         }
