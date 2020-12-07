@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using Object = System.Object;
@@ -31,8 +32,22 @@ public class MapGenerator : MonoBehaviour
     private FastNoiseLite biomeNoise = null;
     private FastNoiseLite treasureNoise = null;
     private FastNoiseLite enemyNoise = null;
+    private FastNoiseLite decorationNoise = null;
     private Tilemap tileMap;
     private Transform trackingTransform;
+    
+    public GameObject tree1;
+    public GameObject tree2;
+    public GameObject tree3;
+    public GameObject bush1;
+    public GameObject bush2;
+    public GameObject bush3;
+    public GameObject rock1;
+    public GameObject rock2;
+    public GameObject rock3;
+    public GameObject gravestone1;
+    public GameObject sunflower1;
+    public GameObject sunflower2;
 
     private void OnEnable()
     {
@@ -70,11 +85,18 @@ public class MapGenerator : MonoBehaviour
         treasureNoise.SetFractalGain(0.5f);
         enemyNoise = new FastNoiseLite(~seed);
         enemyNoise.SetNoiseType(FastNoiseLite.NoiseType.Value);
-        treasureNoise.SetFractalType(FastNoiseLite.FractalType.None);
+        enemyNoise.SetFractalType(FastNoiseLite.FractalType.None);
         enemyNoise.SetFrequency(0.2f);
         enemyNoise.SetFractalOctaves(2);
         enemyNoise.SetFractalLacunarity(2f);
         enemyNoise.SetFractalGain(0.5f);
+        decorationNoise = new FastNoiseLite(seed + 64);
+        decorationNoise.SetNoiseType(FastNoiseLite.NoiseType.Value);
+        decorationNoise.SetFractalType(FastNoiseLite.FractalType.FBm);
+        decorationNoise.SetFrequency(0.25f);
+        decorationNoise.SetFractalOctaves(3);
+        decorationNoise.SetFractalLacunarity(2f);
+        decorationNoise.SetFractalGain(0.5f);
     }
 
     // Start is called before the first frame update
@@ -135,6 +157,7 @@ public class MapGenerator : MonoBehaviour
         }
         doTreasure(x, height + 1);
         doEnemySpawn(x, height + 1);
+        doDecoration(x, height);
     }
 
     public enum BlockType
@@ -189,7 +212,7 @@ public class MapGenerator : MonoBehaviour
         //Debug.Log("BiomeId: " + biomeId);
         return (BiomeType)values.GetValue(biomeId);*/
         
-        int biomeId = (int)(((biomeNoise.GetNoise(x, 0) + 1f) / 2f) * biomeTypeValuesLength);
+        int biomeId = (int)Math.Floor(((biomeNoise.GetNoise(x, 0) + 1f) / 2f) * biomeTypeValuesLength);
         //Debug.Log("BiomeId: " + biomeId);
         return (BiomeType)biomeTypeValues.GetValue(biomeId);
     }
@@ -199,6 +222,19 @@ public class MapGenerator : MonoBehaviour
         for (int y = min; y <= max; y++)
         {
              tileMap.SetTile(new Vector3Int(x, y, 0), null);
+        }
+        
+        string[] removeTags = {"Treasure", "Decoration", "Enemy"};
+        foreach(string tag in removeTags)
+        {
+            GameObject[] items = GameObject.FindGameObjectsWithTag(tag);
+            foreach (var tI in items)
+            {
+                Vector3 position = tI.transform.position;
+                if((int)position.x == x) {
+                    Destroy(tI);
+                }
+            }
         }
     }
 
@@ -241,6 +277,88 @@ public class MapGenerator : MonoBehaviour
         }
     }
 
+    void doDecoration(int x, int y)
+    {
+        float noise = decorationNoise.GetNoise(x, y);
+        int test = (int) (noise * 100) % 3;
+        if (noise > 0 && test != 2)
+        {
+            BiomeType biomeType =  GetBiomeType(x, y);
+            int index = (int) (noise * 20);
+            switch (biomeType)
+            {
+                case BiomeType.PLAINS:
+                    switch (index)
+                    {
+                        case 0:
+                            Instantiate(rock1, new Vector3(x+0.5f, y+1f, 0.5f), Quaternion.identity);
+                            break;
+                        case 1:
+                            Instantiate(bush1, new Vector3(x+0.5f, y+1f, 0.5f), Quaternion.identity);
+                            break;
+                        case 2:
+                            Instantiate(rock2, new Vector3(x+0.5f, y+1f, 0.5f), Quaternion.identity);
+                            break;
+                        case 3:
+                            Instantiate(bush2, new Vector3(x+0.5f, y+1f, 0.5f), Quaternion.identity);
+                            break;
+                        case 4:
+                            Instantiate(rock3, new Vector3(x+0.5f, y+1f, 0.5f), Quaternion.identity);
+                            break;
+                    }
+                    break;
+                case BiomeType.TAIGA:
+                    switch (index)
+                    {
+                        case 0:
+                        case 1: 
+                        case 2:
+                        case 3:
+                        case 4:
+                            Instantiate(tree3, new Vector3(x+0.5f, y+1f, 0.5f), Quaternion.identity);
+                            break;
+                    }
+                    break;
+                case BiomeType.SWAMP:
+                    switch (index)
+                    {
+                        case 0:
+                            Instantiate(bush1, new Vector3(x+0.5f, y+1f, 0.5f), Quaternion.identity);
+                            break;
+                        case 1: 
+                            Instantiate(tree1, new Vector3(x+0.5f, y+1f, 0.5f), Quaternion.identity);
+                            break;
+                        case 2:
+                            Instantiate(tree2, new Vector3(x+0.5f, y+1f, 0.5f), Quaternion.identity); 
+                            break;
+                        case 3:
+                            Instantiate(bush2, new Vector3(x+0.5f, y+1f, 0.5f), Quaternion.identity);
+                            break;
+                        case 4:
+                            Instantiate(bush3, new Vector3(x+0.5f, y+1f, 0.5f), Quaternion.identity);
+                            break;
+                    }
+                    break;
+                case BiomeType.DESERT:
+                    switch (index)
+                    {
+                        case 0:
+                            Instantiate(gravestone1, new Vector3(x+0.5f, y+1f, 0.5f), Quaternion.identity);
+                            break;
+                        case 1:
+                            Instantiate(sunflower1, new Vector3(x+0.5f, y+1f, 0.5f), Quaternion.identity);
+                            break;
+                        case 2:
+                            Instantiate(sunflower2, new Vector3(x+0.5f, y+1f, 0.5f), Quaternion.identity);
+                            break;
+                    }
+                    break;
+            }
+            
+            //tileMap.SetTile(new Vector3Int(x, y, -1), tree1);
+        }
+    }
+
     private int lastX = 0;
     private float lastRemove = 0;
 
@@ -268,20 +386,16 @@ public class MapGenerator : MonoBehaviour
 
     void removeFallen()
     {
-        GameObject[] treasureItems = GameObject.FindGameObjectsWithTag("Treasure");
-        foreach (var tI in treasureItems)
+        string[] removeTags = {"Treasure", "Decoration", "Enemy"};
+        foreach(string tag in removeTags)
         {
-            Transform tra = tI.GetComponent<Transform>();
-            if(tra.position.y < min - 10) {
-                Destroy(tI);
-            }
-        }
-        GameObject[] allEnemies = GameObject.FindGameObjectsWithTag("Enemy");
-        foreach (var enemy in allEnemies)
-        {
-            Transform tra = enemy.GetComponent<Transform>();
-            if(tra.position.y < min - 10) {
-                Destroy(enemy);
+            GameObject[] items = GameObject.FindGameObjectsWithTag(tag);
+            foreach (var tI in items)
+            {
+                Vector3 position = tI.GetComponent<Transform>().position;
+                if(position.y < min - 10) {
+                    Destroy(tI);
+                }
             }
         }
     }
