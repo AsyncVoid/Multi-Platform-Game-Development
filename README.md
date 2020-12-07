@@ -3,7 +3,6 @@ Credits for Multi-Platform Game Development<br/>
 Assets/Sprites/Bandits-Pixel Art - https://assetstore.unity.com/packages/2d/characters/bandits-pixel-art-104130<br/>
 Assets/Sprites/Cainos/ - https://assetstore.unity.com/packages/2d/environments/pixel-art-platformer-village-props-166114 <br/>
 Assets/Sprites/CoinsGems - https://laredgames.itch.io/gems-coins-free <br/>
-Assets/Sprites/Enemies - https://craftpix.net/freebies/free-swamp-bosses-pixel-art-character-pack/ <br/>
 Assets/Sprites/GameFXexport - https://ppeldo.itch.io/2d-pixel-art-game-spellmagic-fx<br/>
 Assets/Sprites/GoldenUI - https://opengameart.org/content/golden-ui-bigger-than-ever-edition<br/>
 Assets/Sprites/PlayerAnimation - https://stealthix.itch.io/animated-slimes <br/>
