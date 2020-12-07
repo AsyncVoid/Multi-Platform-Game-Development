@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillName: MultiSlash
   skillTier: 1
-  skillProgression: 1
+  skillProgression: 4
   skillType: 1
   skillSprite: {fileID: 6985626698306143173, guid: 1b28bbb384f1642bc892e7e20120d3e8, type: 3}
-  skillBase: 1
-  matterUsage: 5
+  skillBase: 2
+  matterUsage: 3
   skillPrefab: {fileID: 1147086269756925699, guid: b71252e1aea156e46a08329e77423ec6, type: 3}

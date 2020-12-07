@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Fire
   m_EditorClassIdentifier: 
   skillName: Fire
-  skillTier: 0
-  skillProgression: 0
+  skillTier: 2
+  skillProgression: 6
   skillType: 0
   skillSprite: {fileID: -6420534950463556919, guid: 1b28bbb384f1642bc892e7e20120d3e8, type: 3}
-  skillBase: 2
+  skillBase: 3
   matterUsage: 3
   skillPrefab: {fileID: 1409617832233749289, guid: 4e01dc20708fff049b81567e31aeb475, type: 3}
