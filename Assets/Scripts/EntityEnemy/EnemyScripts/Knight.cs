@@ -23,6 +23,9 @@ public class Knight : MonoBehaviour
     private float inputX;
     private RaycastHit2D hit;
 
+    private AudioSource audioSource;
+    public AudioClip step;
+
     private Vector3 oldPos;
     // Use this for initialization
     void Start()
@@ -39,6 +42,8 @@ public class Knight : MonoBehaviour
         enemy = GetComponent<Enemy>();
         inputX = 0f;
         oldPos = transform.position;
+
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -217,4 +222,7 @@ public class Knight : MonoBehaviour
         }
     }
 
+    public void Walk() {
+        audioSource.PlayOneShot(step, 0.2f);
+    }
 }
