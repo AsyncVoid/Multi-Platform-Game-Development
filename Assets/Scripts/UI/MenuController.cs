@@ -38,8 +38,6 @@ public class MenuController : MonoBehaviour
                 PauseGame();
                 SkillsMenu.gameObject.SetActive(true);
                 HotkeyMenu.gameObject.SetActive(true);
-                
-                
             }
                 
             else{

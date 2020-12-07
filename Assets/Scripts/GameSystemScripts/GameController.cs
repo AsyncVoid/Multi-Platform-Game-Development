@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class GameController : MonoBehaviour
 
     public Text score;
     public Text worldDifficulty;
+    public Text overText;
 
     public int playerScore;
     private Player player;
@@ -36,7 +38,24 @@ public class GameController : MonoBehaviour
         score.text = "Score: " + playerScore.ToString();
         worldDifficulty.text = "World Difficulty: " + difficultyController.GetWorldDifficulty().ToString();
 
-        //if (player.ReturnDeathStatus()) {
-                 //  }
+        if (player.ReturnDeathStatus()) {
+            overText.enabled = true;
+            Time.timeScale = 0f;
+            overText.text = "You died with score: " + playerScore.ToString() + "Press 'L' to restart.";
+        }
+
+        if (Input.GetKeyDown(KeyCode.L)) {
+            Time.timeScale = 1f;
+
+            foreach (Skill skill in player.skills.skills)
+            {
+                skill.skillTier = 0;
+                skill.skillProgression = 0;
+            }
+
+            player.skills.skills.Clear();
+
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
     }
 }
