@@ -8,10 +8,14 @@ public class DifficultyController : MonoBehaviour
     private int progressCounter;
     private Player player;
 
+    void Awake() {
+        worldDifficulty = 1;
+    }
+
+
     // Start is called before the first frame update
     void Start()
     {
-        worldDifficulty = 1;
         player = GameObject.FindWithTag("Player").GetComponent<Player>();
         progressCounter = 0;
     }

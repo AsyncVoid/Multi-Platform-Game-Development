@@ -9,6 +9,7 @@ Assets/Sprites/GoldenUI - https://opengameart.org/content/golden-ui-bigger-than-
 Assets/Sprites/PlayerAnimation - https://stealthix.itch.io/animated-slimes <br/>
 Assets/Sprites/RPG Icons - https://opengameart.org/content/700-rpg-icons<br/>
 Assets/Sprites/Skills/IceShard - https://kvsr.itch.io/ice-shard<br/>
+Assets/Sprites/Witch - https://pipoya.itch.io/pipoya-free-2d-game-character-sprites<br/>
 <br/>
 Assets/Backgrounds/Grassy_Mountains_Parallax_Background - https://vnitti.itch.io/grassy-mountains-parallax-background<br/>
 Assets/Backgrounds/Taiga-Asset-Pack_v2_vnitti - https://vnitti.itch.io/taiga-asset-pack<br/>
