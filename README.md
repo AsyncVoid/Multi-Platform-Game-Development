@@ -3,7 +3,6 @@ Credits for Multi-Platform Game Development<br/>
 Assets/Sprites/Bandits-Pixel Art - https://assetstore.unity.com/packages/2d/characters/bandits-pixel-art-104130<br/>
 Assets/Sprites/Cainos/ - https://assetstore.unity.com/packages/2d/environments/pixel-art-platformer-village-props-166114 <br/>
 Assets/Sprites/CoinsGems - https://laredgames.itch.io/gems-coins-free <br/>
-Assets/Sprites/Enemies - https://craftpix.net/freebies/free-swamp-bosses-pixel-art-character-pack/ <br/>
 Assets/Sprites/GameFXexport - https://ppeldo.itch.io/2d-pixel-art-game-spellmagic-fx<br/>
 Assets/Sprites/GoldenUI - https://opengameart.org/content/golden-ui-bigger-than-ever-edition<br/>
 Assets/Sprites/PlayerAnimation - https://stealthix.itch.io/animated-slimes <br/>
@@ -23,3 +22,5 @@ Assets/Sounds/IceShard/IceBreak - https://www.zapsplat.com/sound-effect-category
 Assets/Sounds/Player/Walk - https://freesound.org/people/plasterbrain/sounds/396196/<br/>
 Assets/Sounds/Enemy - https://www.zapsplat.com/page/10/?s=grass&post_type=music&sound-effect-category-id<br/>
 Assets/Sounds/Background - https://www.zapsplat.com/page/4/?s=grass&post_type=music&sound-effect-category-id<br/>
+<br/>
+Assets/Materials/Font - http://www.zone38.net<br/>
