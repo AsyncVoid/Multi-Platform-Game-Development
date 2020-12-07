@@ -38,7 +38,6 @@ public class MapGenerator : MonoBehaviour
     
     public GameObject tree1;
     public GameObject tree2;
-    public GameObject tree3;
     public GameObject bush1;
     public GameObject bush2;
     public GameObject bush3;
@@ -99,6 +98,9 @@ public class MapGenerator : MonoBehaviour
         decorationNoise.SetFractalGain(0.5f);
     }
 
+    void Awake() {
+        seed = UnityEngine.Random.Range(0, 99999);
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -316,7 +318,6 @@ public class MapGenerator : MonoBehaviour
                         case 2:
                         case 3:
                         case 4:
-                            Instantiate(tree3, new Vector3(x+0.5f, y+1f, 0.5f), Quaternion.identity);
                             break;
                     }
                     break;
