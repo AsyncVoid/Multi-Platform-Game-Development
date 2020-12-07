@@ -28,6 +28,17 @@ public class Player : Unit
         return matter;
     }
 
+    public void IncreaseMaxMatter(int matterIncrease) {
+        maxMatter += matterIncrease;
+    }
+
+    public void IncreaseMatter(int matterIncrease) {
+        matter += matterIncrease;
+        if (matter > maxMatter) {
+            matter = maxMatter;
+        }
+    }
+
     // For using skills, matter is consumed. Returns false if not enough matter is present.
     public bool UseMatter(int matterUsage) {
         if (matter < matterUsage)

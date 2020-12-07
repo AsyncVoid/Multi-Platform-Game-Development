@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: IceShard
   m_EditorClassIdentifier: 
   skillName: IceShard
-  skillTier: 1
-  skillProgression: 1
+  skillTier: 0
+  skillProgression: 0
   skillType: 0
   skillSprite: {fileID: -5005236045991921821, guid: 1b28bbb384f1642bc892e7e20120d3e8, type: 3}
   skillBase: 1

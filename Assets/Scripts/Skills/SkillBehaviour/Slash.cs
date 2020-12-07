@@ -13,10 +13,14 @@ public class Slash : MonoBehaviour, ISkill
     private GameObject sourceObject;
     private DamageController damageController;
 
+    public AudioSource audioSource;
+    public float volume = 0.5f;
+
     void Start()
     {
         hitConfirm = false;
         damageController = GameObject.FindWithTag("DamageController").GetComponent<DamageController>();
+        audioSource.PlayOneShot(audioSource.clip, volume);
         StartCoroutine(DestroySelfAfterTime());
     }
 

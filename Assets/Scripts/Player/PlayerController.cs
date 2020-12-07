@@ -38,6 +38,8 @@ public class PlayerController : MonoBehaviour
     private Player player;
 
     public Skill skill;
+    private MenuController menuController;
+    private Dictionary<string, Skill> hm;
 
     // Start is called before the first frame update
     void Start()
@@ -60,11 +62,14 @@ public class PlayerController : MonoBehaviour
 
         rightToggle = false;
         leftToggle = false;
+        
+        menuController = GameObject.FindGameObjectWithTag("MenuController").GetComponent<MenuController>();        
     }
 
     // Update is called once per frame
     void Update()
     {
+        hm = menuController.hotkeyDict;
         // Basic Attack
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
@@ -74,6 +79,49 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+        else if (Input.GetKeyDown(KeyCode.Alpha2)) {
+            skill = hm["2"];
+        }
+
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            skill = hm["3"];
+        }
+
+        else if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            skill = hm["4"];
+        }
+
+        //Check for mouse click to use skill.
+
+        if (Input.GetMouseButtonDown(0)) {
+            if (!(skill is null))
+            {
+                if (player.UseMatter(skill.GetMatterUsage()))
+                {
+                    // Get component which contains the interface for using a skill.
+                    ISkill skillInterface = skill.GetPrefab().GetComponent<ISkill>();
+
+                    // Get mouse pointer position.
+                    Vector2 screenPosition = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+                    Vector2 worldPosition = Camera.main.ScreenToWorldPoint(screenPosition);
+
+                    Vector3 targetPosition = new Vector3(worldPosition.x, worldPosition.y, 0.0f);
+                    Vector3 targetDirection = (targetPosition - transform.position).normalized;
+
+                    // Calls the interface method to trigger using a skill. If there's no target just send a random vector3 into the last parameter.
+                    skillInterface.UseSkill(skill, gameObject, targetDirection);
+                }
+                else
+                {
+                    // No matter left so can't use skill.
+                    Debug.Log("Out of matter!");
+                }
+            }
+        }
+
+        /*
         if (Input.GetKeyDown(KeyCode.Alpha2)) {
 
             // Prep on click to fire skill slotted into slot 2. aka skill = skill inside slot 2.
@@ -98,6 +146,7 @@ public class PlayerController : MonoBehaviour
                 Debug.Log("Out of matter!");
             }
         }
+        */
 
         //Check for keyboard inputs and assign the correct player movements and state changes.
         if (Input.GetKeyDown("space"))

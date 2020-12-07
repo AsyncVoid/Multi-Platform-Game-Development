@@ -10,5 +10,4 @@ public class Enemy : Unit
     {
         return enemySkill;
     }
-
 }

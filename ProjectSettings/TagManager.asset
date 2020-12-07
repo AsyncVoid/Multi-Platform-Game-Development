@@ -16,6 +16,14 @@ TagManager:
   - DamageController
   - SkillUsageController
   - Treasure
+  - MenuController
+  - ActiveSkills
+  - SkillsMenu
+  - HotKeyMenu
+  - Dropdown
+  - SkillItem
+  - EntityIgnore
+  - DifficultyController
   layers:
   - Default
   - TransparentFX

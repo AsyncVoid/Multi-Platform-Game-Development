@@ -5,13 +5,14 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    private float Speed;
-    private EnvironmentController environmentController;
+    private float speed;
+    private DifficultyController difficultyController;
 
-    private float PlayerHitCooldown;
-    private bool PlayerHitOffCooldown;
+    private float playerHitCooldown;
+    private bool playerHitOffCooldown;
 
     private bool isDmged;
+    private bool beingEaten;
 
     private Enemy enemy;
     private Animator animator;
@@ -19,13 +20,20 @@ public class EnemyController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GameObject environment = GameObject.FindGameObjectWithTag("EnvironmentController");
-        environmentController = environment.GetComponent<EnvironmentController>();
+        difficultyController = GameObject.FindWithTag("DifficultyController").GetComponent<DifficultyController>();
         animator = GetComponent<Animator>();
-
         enemy = GetComponent<Enemy>();
-        PlayerHitCooldown = 2f;
-        PlayerHitOffCooldown = true;
+
+        // Increase enemy difficulty.
+        int worldDifficulty = difficultyController.GetWorldDifficulty();
+
+        enemy.SetDmg(worldDifficulty * enemy.ReturnDmg());
+        enemy.IncreaseMaxHealth((int) Mathf.Round(worldDifficulty * enemy.ReturnMaxHP() * 0.4f));
+
+        playerHitCooldown = 2f;
+        playerHitOffCooldown = true;
+
+        beingEaten = false;
     }
 
     void OnCollisionEnter2D(Collision2D collision)
@@ -34,7 +42,7 @@ public class EnemyController : MonoBehaviour
         if (collision.gameObject.tag != "Player") { return; }
         else
         {
-            if (collision.gameObject.GetComponent<PlayerController>().GetAttackState() && PlayerHitOffCooldown)
+            if (collision.gameObject.GetComponent<PlayerController>().GetAttackState() && playerHitOffCooldown)
             {
                 GameObject player = collision.gameObject;
 
@@ -51,8 +59,18 @@ public class EnemyController : MonoBehaviour
             }
         }
 
-        // Checks if enemy is dead and player in eatable state.
-        if (collision.gameObject.GetComponent<PlayerController>().ReturnState() && enemy.ReturnDeathStatus())
+        // Checks if enemy is dead.
+        if (enemy.ReturnDeathStatus())
+        {
+            GetComponent<Rigidbody2D>().isKinematic = true;
+            GetComponent<Collider2D>().isTrigger = true;
+        }
+    }
+
+    void OnTriggerStay2D(Collider2D collider)
+    {
+        if (collider.gameObject.tag != "Player") { return; }
+        else if (collider.gameObject.GetComponent<PlayerController>().ReturnState() && enemy.ReturnDeathStatus())
         {
             StartCoroutine(EntityEaten());
         }
@@ -73,53 +91,47 @@ public class EnemyController : MonoBehaviour
 
     IEnumerator EntityEaten()
     {
-        float timeElapsed = 0f;
-        float time = 2f;
-
-        // Gains skill.
-        Player player = GameObject.FindWithTag("Player").GetComponent<Player>();
-        player.UpdateSkill(enemy.ReturnSkill());
-
-        // Moves entity towards center of player whilst reducing it's scale.
-        while (timeElapsed < time)
+        if (!beingEaten)
         {
-            timeElapsed += Time.deltaTime;
-            transform.position = Vector3.Lerp(transform.position, GameObject.FindWithTag("Player").transform.position, timeElapsed / time);
-            if (transform.localScale.x > 0.25f)
-            {
-                transform.localScale -= new Vector3(0.9f, 0.9f, 0.9f) * Time.deltaTime;
-            }
-            else if (transform.localScale.x < -0.25f) {
-                transform.localScale -= new Vector3(-0.9f, 0.9f, 0.9f) * Time.deltaTime;
-            }
-            yield return null;
-        }
-        yield return new WaitForSeconds(0.5f);
+            beingEaten = true;
+            float timeElapsed = 0f;
+            float time = 2f;
 
-        Destroy(gameObject);
+            // Gains skill.
+            Player player = GameObject.FindWithTag("Player").GetComponent<Player>();
+            player.UpdateSkill(enemy.ReturnSkill());
+
+            // Moves entity towards center of player whilst reducing it's scale.
+            while (timeElapsed < time)
+            {
+                timeElapsed += Time.deltaTime;
+                transform.position = Vector3.Lerp(transform.position, GameObject.FindWithTag("Player").transform.position, timeElapsed / time);
+                if (transform.localScale.x > 0.25f)
+                {
+                    transform.localScale -= new Vector3(0.9f, 0.9f, 0.9f) * Time.deltaTime;
+                }
+                else if (transform.localScale.x < -0.25f)
+                {
+                    transform.localScale -= new Vector3(-0.9f, 0.9f, 0.9f) * Time.deltaTime;
+                }
+                yield return null;
+            }
+            yield return new WaitForSeconds(0.1f);
+
+            Destroy(gameObject);
+        }
     }
 
     // Prevents multiple attacks from one attack.
     IEnumerator BasicAttackInvulnerability()
     {
         ChangeBasicInvulState();
-        yield return new WaitForSeconds(PlayerHitCooldown);
+        yield return new WaitForSeconds(playerHitCooldown);
         ChangeBasicInvulState();
     }
 
     private void ChangeBasicInvulState()
     {
-        PlayerHitOffCooldown ^= true;
+        playerHitOffCooldown ^= true;
     }
-
-    public void DisableCollisions()
-    {
-        GetComponent<Rigidbody2D>().simulated = false;
-    }
-
-    public void RestoreCollisions()
-    {
-        GetComponent<Rigidbody2D>().simulated = true;
-    }
-
 }
