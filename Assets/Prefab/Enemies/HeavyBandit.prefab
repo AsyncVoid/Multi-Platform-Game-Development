@@ -149,7 +149,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unitName: Knight
   damage: 2
-  maxHP: 10
+  maxHP: 6
   isDead: 0
   enemySkill: {fileID: 11400000, guid: dc710a05e8bf3d740b7c58706c33f3a0, type: 2}
 --- !u!95 &95734438044755836
