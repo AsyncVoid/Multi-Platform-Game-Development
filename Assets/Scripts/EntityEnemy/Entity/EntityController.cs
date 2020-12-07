@@ -57,6 +57,7 @@ public class EntityController : MonoBehaviour
             float time = 2f;
 
             player.UpdateSkill(skill);
+            player.IncreaseMatter(2);
             // Moves entity towards center of player whilst reducing it's scale.
             while (timeElapsed < time)
             {

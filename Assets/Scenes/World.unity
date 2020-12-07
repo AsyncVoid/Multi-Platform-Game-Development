@@ -715,7 +715,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2eaf57f737648464c96ab873979f2650, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  seed: 1
+  seed: 5
   frequency: 0.0056
   min: -20
   max: 3
@@ -724,12 +724,13 @@ MonoBehaviour:
   groundM: {fileID: 11400000, guid: 475f07e43f745b249a4f96f460c1ecfe, type: 2}
   groundT: {fileID: 11400000, guid: d26337cf2fc3dff4d9bed217dcb6f6a9, type: 2}
   screenTileWidth: 30
-  enemyChance: 0.42
+  enemyChance: 0.11
   enemyEvery: 16
   enemies:
   - {fileID: 1689866831511430, guid: 2e2183501755a214591e802f3aff33d2, type: 3}
+  - {fileID: 3498591127601227380, guid: 59a0af2550c262d47b6b7073ea04384c, type: 3}
   - {fileID: 1463392086428580, guid: 3248535f6a2562c489a1223a75951ef2, type: 3}
-  treasureChance: 0.2
+  treasureChance: 0.34
   treasureEvery: 10
   treasures:
   - {fileID: 7784451606173225095, guid: 5292c078b439f914c80f517059b47e74, type: 3}
@@ -3172,11 +3173,11 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: ff54307134b60b54d9a7dd44ffa1b59b, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.7
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -3188,7 +3189,7 @@ AudioSource:
   rolloffMode: 0
   BypassEffects: 0
   BypassListenerEffects: 0
-  BypassReverbZones: 0
+  BypassReverbZones: 1
   rolloffCustomCurve:
     serializedVersion: 2
     m_Curve:

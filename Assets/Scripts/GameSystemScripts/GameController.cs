@@ -35,6 +35,8 @@ public class GameController : MonoBehaviour
 
         score.text = "Score: " + playerScore.ToString();
         worldDifficulty.text = "World Difficulty: " + difficultyController.GetWorldDifficulty().ToString();
-    }
 
+        //if (player.ReturnDeathStatus()) {
+                 //  }
+    }
 }
