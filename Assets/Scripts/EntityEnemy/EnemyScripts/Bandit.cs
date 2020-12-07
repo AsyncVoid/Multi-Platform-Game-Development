@@ -23,6 +23,10 @@ public class Bandit : MonoBehaviour
     private float inputX;
     private RaycastHit2D hit;
 
+    private AudioSource audioSource;
+    public AudioClip step;
+    public AudioClip slash;
+
     private Vector3 oldPos;
     // Use this for initialization
     void Start()
@@ -39,6 +43,8 @@ public class Bandit : MonoBehaviour
         enemy = GetComponent<Enemy>();
         inputX = 0f;
         oldPos = transform.position;
+
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -192,6 +198,8 @@ public class Bandit : MonoBehaviour
     }
 
     public void Attack() {
+        audioSource.PlayOneShot(slash, 0.4f);
+
         if (attackSensor.AttackConfirm())
         {
             damageController.DamagePlayer(enemy);
@@ -202,6 +210,10 @@ public class Bandit : MonoBehaviour
 
             player.GetComponent<Rigidbody2D>().AddForce(new Vector3(5f * direction, 0f, 0f), ForceMode2D.Impulse);
         }
+    }
+
+    public void Walk() {
+        audioSource.PlayOneShot(step, 0.7f);
     }
 
 }

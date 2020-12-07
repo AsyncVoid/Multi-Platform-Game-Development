@@ -5,11 +5,11 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    private float Speed;
-    private EnvironmentController environmentController;
+    private float speed;
+    private DifficultyController difficultyController;
 
-    private float PlayerHitCooldown;
-    private bool PlayerHitOffCooldown;
+    private float playerHitCooldown;
+    private bool playerHitOffCooldown;
 
     private bool isDmged;
     private bool beingEaten;
@@ -20,13 +20,18 @@ public class EnemyController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GameObject environment = GameObject.FindGameObjectWithTag("EnvironmentController");
-        environmentController = environment.GetComponent<EnvironmentController>();
+        difficultyController = GameObject.FindWithTag("DifficultyController").GetComponent<DifficultyController>();
         animator = GetComponent<Animator>();
-
         enemy = GetComponent<Enemy>();
-        PlayerHitCooldown = 2f;
-        PlayerHitOffCooldown = true;
+
+        // Increase enemy difficulty.
+        int worldDifficulty = difficultyController.GetWorldDifficulty();
+
+        enemy.SetDmg(worldDifficulty * enemy.ReturnDmg());
+        enemy.IncreaseMaxHealth((int) Mathf.Round(worldDifficulty * enemy.ReturnMaxHP() * 0.4f));
+
+        playerHitCooldown = 2f;
+        playerHitOffCooldown = true;
 
         beingEaten = false;
     }
@@ -37,7 +42,7 @@ public class EnemyController : MonoBehaviour
         if (collision.gameObject.tag != "Player") { return; }
         else
         {
-            if (collision.gameObject.GetComponent<PlayerController>().GetAttackState() && PlayerHitOffCooldown)
+            if (collision.gameObject.GetComponent<PlayerController>().GetAttackState() && playerHitOffCooldown)
             {
                 GameObject player = collision.gameObject;
 
@@ -121,12 +126,12 @@ public class EnemyController : MonoBehaviour
     IEnumerator BasicAttackInvulnerability()
     {
         ChangeBasicInvulState();
-        yield return new WaitForSeconds(PlayerHitCooldown);
+        yield return new WaitForSeconds(playerHitCooldown);
         ChangeBasicInvulState();
     }
 
     private void ChangeBasicInvulState()
     {
-        PlayerHitOffCooldown ^= true;
+        playerHitOffCooldown ^= true;
     }
 }

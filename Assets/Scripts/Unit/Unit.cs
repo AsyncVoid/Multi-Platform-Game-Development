@@ -61,4 +61,8 @@ public class Unit : MonoBehaviour
 	{
 		return maxHP;
 	}
+
+	public void SetDmg(int dmg) {
+		damage = dmg;
+	}
 }
