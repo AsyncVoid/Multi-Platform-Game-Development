@@ -267,7 +267,8 @@ public class MapGenerator : MonoBehaviour
         {
             int scope = (int) (enemies.Length / enemyChance);
             float normalised = ((enemyNoise.GetNoise(x, y) + 1f) / 2f); //0-1
-            int enemyResult = (int)(normalised * scope);
+            float chanced = normalised * normalised;
+            int enemyResult = (int)Math.Floor(chanced * scope);
             if(enemyResult < 0 || enemyResult >= enemies.Length)
                 return;
             int enemyId = enemyResult;

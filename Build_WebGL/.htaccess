@@ -1,0 +1,12 @@
+<Files *.datagz>
+ForceType application/octet-stream
+</Files>
+<Files *.jsgz>
+ForceType application/javascript
+</Files>
+<Files *.memgz>
+ForceType application/octet-stream
+</Files>
+<Files *.unity3dgz>
+ForceType application/octet-stream
+</Files> 
