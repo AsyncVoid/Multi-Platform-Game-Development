@@ -33,13 +33,11 @@ public class MenuController : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.M)){
+        if(Input.GetKeyDown(KeyCode.E)){
             if(!SkillsMenu.gameObject.activeSelf && !HotkeyMenu.gameObject.activeSelf){
                 PauseGame();
                 SkillsMenu.gameObject.SetActive(true);
                 HotkeyMenu.gameObject.SetActive(true);
-                
-                
             }
                 
             else{

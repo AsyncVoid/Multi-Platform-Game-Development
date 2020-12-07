@@ -3,59 +3,58 @@ using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
 
-    private GameObject player;
-    public GameObject Entity;
+    private DifficultyController difficultyController;
 
-    public Text playerStateText;
-    public Text playerCoolDownText;
-    public Text playerSkillsText;
+    public Text score;
+    public Text worldDifficulty;
+    public Text overText;
 
-    private Player playerComponent;
+    public int playerScore;
+    private Player player;
 
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.FindWithTag("Player");
-        playerComponent = player.GetComponent<Player>();
+        difficultyController = GameObject.FindWithTag("DifficultyController").GetComponent<DifficultyController>();
+        player = GameObject.FindWithTag("Player").GetComponent<Player>();
     }
 
     // Update is called once per frame
-    void FixedUpdate()
-    {
-        // Update debug UI texts.
-        if (player.GetComponent<PlayerController>().ReturnState())
+    void Update() {
+        int progressCounter = 0;
+
+        foreach (Skill skill in player.skills.skills)
         {
-            playerStateText.text = "State: Liquid";
-        }
-        else
-        {
-            playerStateText.text = "State: Normal";
+            progressCounter += skill.skillProgression;
         }
 
-        if (player.GetComponent<PlayerController>().ReturnCooldown())
-        {
-            playerCoolDownText.text = "Cooldown Inactive";
-        }
-        else
-        {
-            playerCoolDownText.text = "Cooldown Active";
+        playerScore = progressCounter * (player.ReturnMaxHP() + player.ReturnMaxMatter());
+
+        score.text = "Score: " + playerScore.ToString();
+        worldDifficulty.text = "World Difficulty: " + difficultyController.GetWorldDifficulty().ToString();
+
+        if (player.ReturnDeathStatus()) {
+            overText.text = "You died with score: " + playerScore.ToString() + "     Press 'L' to restart.";
+            Time.timeScale = 0f;
         }
 
-        StringBuilder sb = new StringBuilder();
-        sb.Append("Skills: { ");
-        // foreach(Skill skill in playerComponent.skills)
-       // {
-           // if (skill == null || skill.skillName == null) // Why tf is this happening lol
-           //     continue; 
-            // sb.Append(skill.skillName + ", ");
-        //}
-        sb.Remove(sb.Length - 2, 2);
-        sb.Append(" }");
-        // playerSkillsText.text = sb.ToString();
+        if (Input.GetKeyDown(KeyCode.L)) {
+            Time.timeScale = 1f;
+
+            foreach (Skill skill in player.skills.skills)
+            {
+                skill.skillTier = 0;
+                skill.skillProgression = 0;
+            }
+
+            player.skills.skills.Clear();
+            overText.text = "";
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
     }
-
 }

@@ -102,6 +102,7 @@ public class EnemyController : MonoBehaviour
             // Gains skill.
             Player player = GameObject.FindWithTag("Player").GetComponent<Player>();
             player.UpdateSkill(enemy.ReturnSkill());
+            player.IncreaseMatter(2);
 
             // Moves entity towards center of player whilst reducing it's scale.
             while (timeElapsed < time)

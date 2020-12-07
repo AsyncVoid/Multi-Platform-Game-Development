@@ -144,9 +144,17 @@ public class Projectile : MonoBehaviour, ISkill
             // If an enemy uses this skill and hits a player, following is ran.
             else if (entityHit.tag == "Player")
             {
-                StartCoroutine(DestroySelfCollision());
-                damageController.DamagePlayer(sourceObject.GetComponent<Enemy>());
-                hitConfirm = true;
+                if (entityHit.gameObject.GetComponent<PlayerController>().ReturnState())
+                {
+                    StartCoroutine(Eaten());
+                    hitConfirm = true;
+                }
+                else
+                {
+                    StartCoroutine(DestroySelfCollision());
+                    damageController.DamagePlayer(sourceObject.GetComponent<Enemy>());
+                    hitConfirm = true;
+                }
             }
 
             // If player hits enemy (potential enemy friendly fire).
@@ -165,5 +173,34 @@ public class Projectile : MonoBehaviour, ISkill
             GetComponent<Rigidbody2D>().isKinematic = false;
             GetComponent<Collider2D>().isTrigger = false;
         }
+    }
+
+    private void OnTriggerStay2D(Collider2D other) {
+        if (other.gameObject.tag == "Tilemap") {
+            StartCoroutine(DestroySelfCollision());
+        }
+    }
+
+    IEnumerator Eaten() {
+        float timeElapsed = 0f;
+        float time = 2f;
+
+        GetComponent<Rigidbody2D>().isKinematic = true;
+        GetComponent<Collider2D>().isTrigger = true;
+
+        GameObject.FindWithTag("Player").GetComponent<Player>().IncreaseMatter(2);
+        // Moves entity towards center of player whilst reducing it's scale.
+        while (timeElapsed < time)
+        {
+            timeElapsed += Time.deltaTime;
+            transform.position = Vector3.Lerp(transform.position, GameObject.FindWithTag("Player").transform.position, timeElapsed / time);
+            if (transform.localScale.x > 0.25f)
+            {
+                transform.localScale -= new Vector3(0.9f, 0.9f, 0.9f) * Time.deltaTime;
+            }
+            yield return null;
+        }
+
+        Destroy(gameObject);
     }
 }

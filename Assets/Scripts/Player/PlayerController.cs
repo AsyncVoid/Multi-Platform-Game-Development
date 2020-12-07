@@ -113,40 +113,8 @@ public class PlayerController : MonoBehaviour
                     // Calls the interface method to trigger using a skill. If there's no target just send a random vector3 into the last parameter.
                     skillInterface.UseSkill(skill, gameObject, targetDirection);
                 }
-                else
-                {
-                    // No matter left so can't use skill.
-                    Debug.Log("Out of matter!");
-                }
             }
         }
-
-        /*
-        if (Input.GetKeyDown(KeyCode.Alpha2)) {
-
-            // Prep on click to fire skill slotted into slot 2. aka skill = skill inside slot 2.
-
-            // Move this code onto an onclick event.
-            if (player.UseMatter(skill.GetMatterUsage())){
-                // Get component which contains the interface for using a skill.
-                ISkill skillInterface = skill.GetPrefab().GetComponent<ISkill>();
-
-                // Get mouse pointer position.
-                Vector2 screenPosition = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
-                Vector2 worldPosition = Camera.main.ScreenToWorldPoint(screenPosition);
-
-                Vector3 targetPosition = new Vector3(worldPosition.x, worldPosition.y, 0.0f);
-                Vector3 targetDirection = (targetPosition - transform.position).normalized;
-
-                // Calls the interface method to trigger using a skill. If there's no target just send a random vector3 into the last parameter.
-                skillInterface.UseSkill(skill, gameObject, targetDirection);
-            }
-            else {
-                // No matter left so can't use skill.
-                Debug.Log("Out of matter!");
-            }
-        }
-        */
 
         //Check for keyboard inputs and assign the correct player movements and state changes.
         if (Input.GetKeyDown("space"))
@@ -173,6 +141,12 @@ public class PlayerController : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A)) {
             leftToggle ^= true;
             rightToggle = false;
+        }
+
+        if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S))
+        {
+            rightToggle = false;
+            leftToggle = false;
         }
 
         // If right or left movement toggled, it will play the animation which also controls the movement.

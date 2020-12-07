@@ -71,6 +71,9 @@ public class TreasureController : MonoBehaviour
                 default:
                     break;
             }
+
+            player.IncreaseMatter(2);
+
             // Moves entity towards center of player whilst reducing it's scale.
             while (timeElapsed < time)
             {
