@@ -730,6 +730,7 @@ MonoBehaviour:
   - {fileID: 1689866831511430, guid: 2e2183501755a214591e802f3aff33d2, type: 3}
   - {fileID: 3498591127601227380, guid: 59a0af2550c262d47b6b7073ea04384c, type: 3}
   - {fileID: 1463392086428580, guid: 3248535f6a2562c489a1223a75951ef2, type: 3}
+  - {fileID: 863898791}
   treasureChance: 0.28
   treasureEvery: 10
   treasures:
@@ -1953,6 +1954,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &863898791 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3498591127601227380, guid: 59a0af2550c262d47b6b7073ea04384c, type: 3}
+  m_PrefabInstance: {fileID: 140044223}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &907789816
 GameObject:
   m_ObjectHideFlags: 0

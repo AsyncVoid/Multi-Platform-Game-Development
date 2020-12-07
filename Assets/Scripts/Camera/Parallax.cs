@@ -18,7 +18,7 @@ public class Parallax : MonoBehaviour
         cameraTransform = mainCamera.GetComponent<Transform>();
     }
 
-    void FixedUpdate()
+    void Update()
     {
         Vector3 cameraPos = cameraTransform.position;
         float tempX = (cameraPos.x * (1 - parallaxEffect));
