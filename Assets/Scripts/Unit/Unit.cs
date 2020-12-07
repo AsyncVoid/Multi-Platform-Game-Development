@@ -30,6 +30,11 @@ public class Unit : MonoBehaviour
 			return false;
 	}
 
+	public void IncreaseMaxHealth(int healthIncrease) {
+		maxHP += healthIncrease;
+		Heal(healthIncrease);
+	}
+
 	public void Heal(int health) {
 		currentHP += health;
 
